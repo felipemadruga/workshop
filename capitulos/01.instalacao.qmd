@@ -1,0 +1,23 @@
+# Instalações Necessárias
+
+Nessa primeira parte vamos fazer a instalação dos programas necessários para rodar o R e fazer as análises que serão vistas nas demais sessões desse material. Serão dois programas necessários: o primeiro é o próprio programa **R**, que embora não seja utilizado diretamente, será preciso tê-lo instalado; o segundo é o **RStudio**, que representa uma *interface* na qual vamos executar os códigos que o R vai interpretar.
+
+Para fazer a instalação de cada um desses programas podemos entrar no site da [Posit](https://posit.co/download/rstudio-desktop/) para sermos direcionados ao download de cada um dos programas necessários, como indica a @fig-download_1.
+
+![Baixando os softwares necessários](/imagens_apostila/download_1.png){#fig-download_1 fig-align="center"}
+
+Precisamos começar por baixar o próprio programa R, clicando no botão *Download and Install R*, @fig-download_1, que vai nos direcionar para o site onde é disponibilizado o R para fazermos o seu download, @fig-download_2, onde vamos precisar escolher baixar o R de acordo com o sistema operacioal compatível com nosso computador.
+
+![Site para baixar o R](/imagens_apostila/download2.png){#fig-download_2}
+
+Uma vez escolhido o sistema operacional, seremos direcionados para uma nova página, @fig-download_3, onde precisamos clicar em *install R for the first time*, fazendo com que na próxima página possamos pedir para baixar o arquivo executável em nosso computador, @fig-download_4. Devemos executar esse arquivo e seguir as recomendações padrões sugeridas por ele, e então o R estará instalado em nossa máquina.
+
+![Baixando o arquivo executável](/imagens_apostila/download3.png){#fig-download_3 fig-align="center"}
+
+![Baixando o arquivo executável (cont)](/imagens_apostila/download4.png){#fig-download_4 fig-align="center"}
+
+O último passo é baixarmos o RStudio, onde como indica a @fig-download_1, precisamos clicar em *Download RStudio Desktop for Windowns*, na qual baixará um arquivo executável para nosso computador, e onde vamos apenas seguir as orientações padrões sugeridas por ele.
+
+Se tudo ocorreu como esperado, deveremos ter um novo ícone do **RStudio** em nosso computador, no qual ao clicarmos uma tela muito próxima a da que está sendo mostrada na @fig-rstudio_ide deverá estar sendo mostrada. Será nela que vamos inserir funções responsáveis por manipular banco de dados, fazendo com que possamos realizar análises desses dados, algo que faremos nas próximas sessões.
+
+![Janela do RStudio](/imagens_apostila/rstudio.png){#fig-rstudio_ide fig-align="center"}

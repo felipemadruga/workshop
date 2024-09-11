@@ -1,0 +1,274 @@
+# Construindo Medidas Resumo
+
+Vamos nesse capítulo procurar extrair informações das variáveis de nosso banco de dados. Dentro dessas informações será muito útil duas funções: `count()` e `summarise()`. A primeira delas serve para contar o número de observações de uma variável, muito útil em várias situações, em especial quando nossa variável é qualitativa. No caso da segunda, poderemos realizar diversos cálculos de medidas descritivas úteis, típicas de análises de variáveis quantitativas.
+
+Além disso, nessa parte vamos trabalhar bastante um conceito que ainda não foi mencionado em nossas análise, os valores `NA`, que indicam valores ausentes em alguma de nossas variáveis e que podem causar problemas se não forem tratados.
+
+```{r}
+#| include: false
+
+# carregando o pacote tidyverse
+library(tidyverse)
+
+# baixando nossa primeira base de dados
+filmes <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-10-23/movie_profit.csv")
+  
+```
+
+## Função `count()`
+
+A partir de nossa base `filmes`[^04.resumindo_dados-1] podemos utilizar a variável `count()` para contar os valores de algumas de nossas variáveis qualitativas, por exemplo, `genre` e `mpaa_rating` e `distributor`. Vejamos a sintaxe da função a partir de um exemplo mostrado abaixo:
+
+[^04.resumindo_dados-1]: Lembre-se que você precisa carregar os dados por meio de uma função que pertence ao pacote `tidyverse`.
+
+```{r}
+#| eval: false
+filmes |> 
+  count(genre)
+```
+
+Podemos perceber que a resposta é uma tabela com a frequência absoluta do número de ocorrências de cada um dos valores de nossa variável. Se adicionarmos um argumento na função acima poderemos ter esses valores ordenados, como indicado no próximo código:
+
+```{r}
+#| eval: false
+filmes |> 
+  count(genre, sort = TRUE)
+```
+
+O argumento `sort = TRUE` fez o mesmo papel de nossa função `arrange(desc())`, o que sem dúvida é algo útil porque nos poupa de aplicarmos mais uma linha de código. A função ainda possui outro argumento, `name`, na qual permite que mudemos o nome da coluna que foi criada com os valores de frequência.
+
+```{r}
+#| eval: false
+filmes |> 
+  count(genre, sort = T, name = "total")
+```
+
+Vejamos mais alguns exemplos aplicados ao longo das outras variáveis:
+
+```{r}
+#| eval: false
+# aplicando a função count na variável mpaa_rating
+filmes |> 
+  count(mpaa_rating, sort = T)
+
+# contando o número de observações da variável distriuidor
+filmes |> 
+  count(distributor, sort = T) 
+```
+
+## Valores `NA` {#sec-valores-na}
+
+Nos códigos anteriores, na primeira contagem feita, onde pedimos para contar as categorias de indicativos etários, apareceu um valor chamado `NA`. Esse já é um momento adequado para trabalharmos esse conceito, dado que esse *'valor'* vai aparecer muito em nossas análises, simplesmente indicando um valor ausente para a variável considerada. No contexto de nossos dados, apenas nos diz que alguns filmes não contém essa informação para a variável, ou seja, não possuem qual a indicação etária sugerida.
+
+Como tratamos dados ausêntes? No geral a resposta seria desconsiderar, mas a resposta vai depender da análise sendo feita, sendo muito pessoal a decisão do que fazer. Independente disso, podemos lidar com valores ausêntes a partir de duas funções: `filter()` e `drop_na()`.
+
+### Filtrando os valores `NA`
+
+Uma maneira muito útil de lidar com variáveis `NA` é utilizando a função `filter()`, onde podemos identificar os valores `NA` e decidirmos se mantemos em nossa base de dados ou eliminamos. Para identificar os valores `NA` em uma coluna de nossa base aplicarmos a função `is.na()` dentro de nossa função `filter()`, como mostrado no código abaixo:
+
+```{r}
+#| eval: false
+filmes |> 
+  filter(is.na(mpaa_rating))
+```
+
+O resultado é o retorno apenas dos filmes que não possuem classificação indicativa, que são ao todo `{r} nrow(filmes |> filter(is.na(mpaa_rating)))` filmes. O termo `is.na()` utilizado faz com que o nosso filtro busque apenas as ocorrência lógicas verdadeiras, ou seja, que fazem com que os valores da variável procurada tenham valores ausentes.
+
+Poderíamos agora pensar em excluir esses filmes, se os mesmos não fossem importantes ou se isso não produzisse algum tipo de prejuízo em nossa análise. Para isso, basta modificarmos um pouco o nosso código acima, como indicamos na sequência.
+
+```{r}
+#| eval: false
+filmes |> 
+  filter(!is.na(mpaa_rating))
+```
+
+O resultado é que agora nossa base não possui mais valores ausêntes na variável `mpaa_rating`, podemos confirmar isso aplicando novamente a função `count()` para verificar os valores dessa variável.
+
+```{r}
+#| eval: false
+filmes |> 
+  filter(!is.na(mpaa_rating)) |> 
+  count(mpaa_rating, sort = T)
+```
+
+O termo `!` já foi apresentado quando estudamos alguns dos operadores que poderíamos utilizar dentro da função `filter()`. Naquela situação, tinhamos utilizado em conjunto com `=`, ou seja, `!=`, para indicar que gostaríamos de *filtrar tudo que não fosse igual a tal critério*. Aqui ele está fazendo a mesma coisa, só que agora ele vai indicar que *não queremos valores ausentes*, `!is.na()`.
+
+### Função `drop_na()`
+
+A outra função que podemos utilizar para tratar desse problema é a função `drop_na()`. Ela pode ser utilizada tanto em uma variável específica, como `mpaa_rating`, ou deixada sem argumento, que fará com que qualquer valor ausente seja eliminado, independente da variável.
+
+```{r}
+#| eval: false
+# eliminando valores ausentes da variável mpaa_rating
+filmes |> 
+  drop_na(mpaa_rating)
+
+# eliminando qualquer valor ausente
+filmes |> 
+  drop_na()
+```
+
+A diferença é que no primeiro caso a base de dados resultante ficou com `{r} nrow(filmes |> drop_na(mpaa_rating))` linhas, enquanto que na última, os dados foram reduzidos para `{r} nrow(filmes |> drop_na())` linhas.
+
+Cabe destacar que é sempre útil aplicar a função `summary()` em nossos dados, para identificarmos quais variáveis possuem valores `NA`, entre outras estatísticas. É uma maneira simples de conhecermos nossa base de dados, como destacado na.
+
+## Função `distinct()`
+
+Uma função também muito útil é a função `distinct()`, muito próxima da ideia da função `count()`, mas que permite verificar quais são os valores distintos dentro de uma variável. Vejamos sua aplicação nas variáveis anteriormente trabalhadas.
+
+```{r}
+#| eval: false
+
+# obtendo os valores distintos dos ratings
+filmes |> 
+  distinct(mpaa_rating)
+
+# obtendo o número de distribuidores de filmes
+filmes |> 
+  distinct(distributor)
+
+# quais os generos dos filmes 
+filmes |> 
+  distinct(genre)
+```
+
+Essa função é muito interessante para conhecermos melhor nossa base de dados, inclusive para identificar quais os valores poderão ser utilizados em filtros. Em nosso próximo passo para analisar os dados, faremos uso da função `summarise()` para construir medidas resumo das variáveis quantitativas.
+
+## Função `summarise()`
+
+Para que possamos entender como utilizar a função `summarise()` vamos partir da ideia de que nosso objetivo fosse o de descobrir o total arrecadado pelos filmes com sua bilheteria internacinal. Para fazer isso, vamos utilizar o próximo código:
+
+```{r}
+#| eval: false
+filmes |> 
+  summarise(
+    arrecadacao = sum(worldwide_gross)
+  )
+
+
+```
+
+No comando anterior foi preciso adicionar algumas coisas a mais do que apenas a função `summarise()`, vamos então entender melhor cada uma delas:
+
+1.  Quando utilizamos a função `summarise()` será importante darmos um nome para nossa medida a ser calculada, como foi feito ao indicarmos que estamos calculando a `arrecadacao`[^04.resumindo_dados-2];
+2.  O valor da `arrecadacao` foi calculado pela função auxiliar sum() aplicada sobre a variável de interesse, no caso `worldwide_gross`.
+
+[^04.resumindo_dados-2]: Lembre-se de não utilizar acentos e outras letras características do português!!
+
+Assim, sempre para utilizar a função `summarise()` vamos precisar também de alguma função auxiliar, como foi o caso de `sum()`, mas poderia ter sido `mean()`, `median()`, etc...[^04.resumindo_dados-3].
+
+[^04.resumindo_dados-3]: Essas funções auxiliares não são instaladas pelo pacote `tidyverse` porque elas já são funcões que são disponibilizadas pelo próprio R no momento da instalação do programa.
+
+Nossa base de dados não possui muitas opções para realizarmos cálculos, dado que apenas três variáveis quantitativas estão presentes: `production_budget`, `domestic_gross` e `worldwide_gross`. Contudo, vamos ver mais alguns exemplos, começando pelo cálculo da média arrecadada.
+
+```{r}
+#| eval: false
+filmes |> 
+  summarise(
+    # arrecadação média em vendas domésticas
+    receita_media_domestica = mean(domestic_gross), 
+    # arrecadação média em vendas internacionais
+    receita_media_internacional = mean(worldwide_gross)
+  )
+```
+
+Na linha anterior é possível perceber que podemos realizar mais de uma cálculo dentro da função `summarise()` bastando para isso que separemos com vírgula cada um dos cálculos. Vejamos mais alguns exemplos:
+
+```{r}
+#| eval: false
+filmes |> 
+  summarise(
+    r_total_domestica = sum(domestic_gross), 
+    arrecadacao_maxima = max(domestic_gross), 
+    media_arrecadacao_domestica = mean(domestic_gross), 
+    desvio_padrao_domestica = sd(domestic_gross)
+  )
+```
+
+Embora nenhuma de nossas variáveis numéricas possui valores `NA`, precisaríamos ter o cuidado no caso delas estarem presentes, isso porque, quando existem valores `NA` o resultado de qualquer cálculo com a função `summarise()` será `NA`. Para evitar isso podemos dentro da função summarise() utilizar o argumento adicional `na.rm = TRUE`.
+
+```{r}
+#| eval: false
+filmes |> 
+  summarise(
+    r_total_domestica = sum(domestic_gross, na.rm = TRUE)
+  )
+```
+
+Ao utilizar esse argumento adicional dentro de cada uma das funções auxiliares que entram no cálculo da `summarise()`, essa função vai automaticamente desconsiderar esses valores quando ela indentificar um valor `NA`.
+
+Infelizmente, para o propósito de exemplo, a base de dados `filmes` não possui nenhum valor ausente para indicarmos aqui, contudo, já sabemos como o ChatGPT pode ser utilizado como ferramenta de estudos. Então, como um exercício, você pode pedir para que ele explique como os valores `NA` podem atrapalhar seu cálculo quando estamos utilizando a função `summarise()`, pedindo incluise para que ele construa um exemplo simples para você reproduzir no R.
+
+## Agrupando dados com a função `group_by()`
+
+Os cálculos anterior realizados resumiram toda uma coluna de dados, ou seja, em um dos exemplos calculamos qual foi a receita mundial de todos os filmes de nossa amostra. Contudo, em determinadas situações, seria interessante ter esse cálculo agrupado para determinados valores, como por exemplo, qual foi a arrecadação por tipo de gênero.
+
+Para que isso seja possível é que precisamos antes agrupar os dados, e isso será feito com a função `group_by()`, como é mostrado no próximo código.
+
+```{r}
+#| eval: false
+filmes |> 
+  group_by(genre) |> 
+  summarise(
+    receita = sum(worldwide_gross)
+  )
+```
+
+No código anterior, antes de utilizar a função `summarise()` para calcular a soma, simplesmente aplicamos a função `group_by()` com o nome da variável cujos valores serão agrupados, no caso `genre`. Poderíamos utilizar essa mesma lógica para outras variáveis que gostaríamos de aplicar o agrupamento, como por exemplo, separando por classificação indicativa, como mostrado na sequência.
+
+```{r}
+#| eval: false
+filmes |> 
+  group_by(mpaa_rating) |> 
+  summarise(
+    receita = sum(worldwide_gross)
+  )
+```
+
+Em nosso exemplo anterior é possível perceber que muitos filmes não possuem a classificação, o que implicou que no resultado o valor `NA` aparecesse como um de nossos valores, caso esse valor não fosse necessário, como visto anteriormente na @sec-valores-na, poderíamos ter eliminado ele em uma etapa antes.
+
+O processo de calcular valores para determinados grupos dos nossos dados é tão comum que até mesmo a função `summarise()` possui um argumento adicional que permite indicar qual será o grupo. Esse agrupamento é chamado de `.by` e podemos ver sua aplicação por meio do código abaixo que mostra um código muito mais limpo e resumido:
+
+```{r}
+#| eval: false
+filmes |> 
+  summarise(
+    receita = sum(worldwide_gross), 
+    .by = genre # variável a ser agrupada
+  )
+```
+
+Além dos agrupamentos feitos aqui, é possível agrupar para mais de uma variável, para isso, basta especificar o vetor de variáveis que queremos que sejam agrupados dentro do `c()`. Vejamos um exemplo onde agrupamos tanto por gênero do filme quanto sua classificação indicativa:
+
+```{r}
+#| eval: false
+filmes |> 
+  group_by(genre, mpaa_rating) |> 
+  summarise(
+    receita = sum(worldwide_gross)
+  )
+```
+
+Ou como visto anteriormente, sem utilizar a função `group_by()` e passando os argumentos diretamente dentro da função `summarise()` no argumento `.by`:
+
+```{r}
+#| eval: false
+filmes |> 
+  summarise(
+    receita = sum(worldwide_gross), 
+    .by = c(genre, mpaa_rating) # variável a ser agrupada
+  )
+```
+
+Importante lembrar que a ordem na qual passamos as variáveis a serem agrupadas altera a disposição final do resultado mostrado, embora os valores sejam os mesmos. Por exemplo, com nossos dados anteriores, invertendo os agrupamentos:
+
+```{r}
+#| eval: false
+filmes |> 
+  summarise(
+    receita = sum(worldwide_gross), 
+    .by = c(mpaa_rating, genre) # variável a ser agrupada
+  )
+```
+
+Após termos visto o processo de contar e resumir informações de nossas variáveis, vamos na próxima sessão mostrar como é possível realizar mais cálculos com nossa base de dados por meio da função `mutate()`, outra função que é muito utilizada em qualquer análise que façamos com dados dentro do R.

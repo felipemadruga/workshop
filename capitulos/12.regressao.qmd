@@ -1,0 +1,5 @@
+# Análise de Regressão
+
+Essa parte vai servir para apresentar rapidamente como poderíamos representar um modelo de análise de regressão simples, mostrando a possível relação primeiro a partir de um gráfico de dispersão, depois aplicando a fórmula para rodar a regressão, depois resumindo tudo por meio de uma tabela formatada a partir dos resultados.
+
+A ideia aqui é mostrar que o R foi pensado primeiramente como um software estatístico.

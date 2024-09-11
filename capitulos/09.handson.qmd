@@ -1,0 +1,5 @@
+# Atividade Prática
+
+Nessa parte vamos buscar utilizar as funções anteriormente aprendidas por meio de exemplos práticos em algumas bases de dados.
+
+Aqui, vai ser interessante criar a possibilidade para que o aluno possa baixar as bases a partir de algum link do googledrive.

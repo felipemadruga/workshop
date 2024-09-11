@@ -1,0 +1,311 @@
+# Noções Iniciais
+
+Aqui vamos dar início ao uso da linguagem do R para fazer análises a partir de dados. Inicialmente, vamos conhecer melhor algumas das funcionalidades do programa baixado anteriormente, como por exemplo, definir onde será escrito nossos códigos com os comandos a serem executados. Na sequência, vamos definir o conceito de *objeto* dentro do `R`, conceito esse que nada mais é do que a maneira como vamos definir variáveis e banco de dados, aprendendo como definir e manipular objetos. Uma vez entendido esses conceitos, vamos dar proceguimento ao instalarmos nosso primeiro pacote dentro do R, pacotes esses que vão conter as funções que servirão para manipularmos nossas bases de dados, nessa parte vamos importar nosso primeiro banco de dados que servirá para realizarmos exercícios e aprendermos as diversas funções que manipulam os dados, começando pelas mais elementares.
+
+```{r}
+#| echo: true
+#| include: false
+# lista de pacotes a serem carregados e bases de dados
+library(tidyverse)
+
+# base de dados que será utilizada nos exemplos
+filmes <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-10-23/movie_profit.csv")
+```
+
+## Criando um **script**
+
+No **RStudio**, todo comando que precisamos executar é feito via *Console*, por exemplo, se quisermos fazer uma simples soma, `1 + 1`, basta digitar esse comando na aba *Console* e clicarmos em **Enter**, como mostrado na @fig-primeiro_codigo.
+
+![Executando nosso primeiro código no R](/imagens_apostila/imagens_criada_material8.png){#fig-primeiro_codigo fig-align="center"}
+
+Esse, contudo, não será o método que vamos utilizar, dado que para deixar nossas análises mais claras e simples, faremos uso de um *script*! Um script nada mais é do que um arquivo onde vamos escrever e salvar todas as nossas linhas de códigos em qualquer análise que fizermos dentro do **RStudio**.
+
+Para criarmos um script podemos seguir um dos seguintes métodos:
+
+1.  Na barra de navegação principal siga `File > New File > R Script` , como mostra a @fig-script1.
+
+    ![Criando nosso Script](/imagens_apostila/imagens_criada_material5.png){#fig-script1}
+
+2.  Clicando no seguinte ícone mostrado na @fig-script2:
+
+    ![Segunda maneira de criarmos nosso script](/imagens_apostila/imagens_criada_material6.png){#fig-script2}
+
+3.  Utilizando um atalho no teclado: `Ctrl + Shift + N`
+
+Quando criamos um Script, ele automaticamente adiciona um novo painel ao RStudio, @fig-scriptfinal.
+
+![Nosso primeiro script dentro do RStudio](/imagens_apostila/imagens_criada_material7.png){#fig-scriptfinal fig-align="center"}
+
+Após termos nosso script criado, podemos realizar todos os nossos cálculos dentro do R escrevendo nesse script as linhas de código que serão executadas no Console, @fig-codigo_script. Lembrando que para que o nosso código seja executado quando ele está no script temos duas opções: ou clicamos no ícone `Run` dentro do nosso script; podemos utilizar um atalho `CTRL + Enter`[^02.nocoes_iniciais-1].
+
+[^02.nocoes_iniciais-1]: Esse atalho para executar um código que está em nosso script é um dos atalhos que vale a penas gravar!!
+
+![Executando o código em nosso script](/imagens_apostila/imagens_criada_material9.png){#fig-codigo_script fig-align="center"}
+
+Agora que já temos nosso script carregado, podemos então avançar na próxima sessão aprendendo como podemos criar uma variável, como fazer operações com essas variáveis e quais os tipos de variáveis mais comuns.
+
+## Primeiras variáveis e seus tipos
+
+Dando sequência ao nosso processo de conhecer o R, vamos agora definir variáveis e realizar operações com elas para irmos nos acostumando com a linguagem utilizada pelo R. Na sequência, vamos criar essas variáveis sempre em nosso *script*, embora aqui vamos estar mostrando apenas o código que produz essa variável.
+
+Nossa primeira variável[^02.nocoes_iniciais-2] no **R**, que vamos chamar de `a`, será apenas um número e vamos criar por meio da seguinte linha de código:
+
+[^02.nocoes_iniciais-2]: Tecnicamente, qualquer variável que é criada no R é chamada de um *objeto*. Contudo, para uma facilidade de explicação, variável e objeto serão tratados como sinônimos. Quando necessário fazer a distinção entre variável e objeto, isso será feito no texto.
+
+```{r}
+#| eval: true
+#| output: false
+a <- 3
+```
+
+Poderíamos ler o seguinte código como: *estamos associando o número `3` a variável `a`*, ou, *estamos criando a variável `a` e a ela será associada ao número `3`*. Algumas coisas importantes de observarmos na variável anteriormente construída:
+
+1.  O nome é totalmente arbitrário, poderia ter sido qualquer outro que quisessemos ter escolhido[^02.nocoes_iniciais-3];
+2.  Precisamos utilizar `<-` para criarmos variáveis no **R**[^02.nocoes_iniciais-4].
+
+[^02.nocoes_iniciais-3]: O bom senso aqui deve se impor!! Algumas regras deveriam ser seguidas: prefira nomes curtos e claros, que descrevam bem seus dados; se os nomes forem compostos, utilize " `_` *"*, exemplo, `meus_dados`, e não `meus dados`; não escolha nomes com letras maiúsculas ou acentos; nunca use números no início do nome, exemplo, `1dados`, embora `dados_1` é permitido.
+
+[^02.nocoes_iniciais-4]: Existe um segundo atalho que você deveria decorar, o que criar o símbolo `<-`: `Alt -`
+
+Essa variável que foi criada ficará disponível no Environment do RStudio, podendo ser acessada ao digitarmos seu nome no script ou Console:
+
+```{r}
+a
+```
+
+Podemos a partir de uma variável realizar cálculos, como por exemplo, as quatro operações básicas: `+`, `-`, `/` (divisão) e `^` (multiplicação):
+
+```{r}
+#| eval: false
+# somando um valor qualquer a nossa variável
+a + 2
+# multiplicando um valor qualquer pela nossa variável
+a^2
+# subtraindo um valor qualquer de nossa variável
+a - 2
+# dividindo um valor qualquer de nossa variável
+a/2
+```
+
+No código acima, também fizemos uso de comentários para deixar nosso código mais intuitivo por meio dos símbolos `#`. Qualquer coisa que vier depois desse símbolo não será executado pelo R, por isso podemos ir comentando nosso script a medida que fomos executando os códigos, algo que facilita muito nosso processo de aprendizagem.
+
+Além das operações básicas, podemos utilizar funções sobre nossa variável, como por exemplo, calcular o logarítimo `log()`:
+
+```{r}
+# calculando o logarítimo de nossa variável
+log(a)
+```
+
+Veremos ainda algumas outras funções, por hora, vamos deixar as coisas mais interessantes ao modificarmos nossa variável `a`. Até o momento, essa variável tem apenas um elemento, mas podemos transformar a variável `a` em um pequeno vetor por meio de outra função que vamos utilizar muito, `c()`, vejamos um exemplo no código seguinte:
+
+```{r}
+#| eval: true
+#| output: false
+# aumentando o número de elementos de nosso vetor
+a <- c(2,4,6,8)
+```
+
+Algumas coisas quando temos um vetor construído por meio da função `c()`:
+
+1.  A variável criada com ele transformou nossa variável original em um vetor com mais elementos, logo, nosso vetor original não mais existe;[^02.nocoes_iniciais-5]
+2.  Todas as funções anteriormente ainda podem ser aplicadas[^02.nocoes_iniciais-6], com a única diferença que agora teremos as operações aplicadas elemento a elemento, como na álgebra matemática de vetores.
+
+[^02.nocoes_iniciais-5]: Isso é algo que você precisará tomar muito cuidado, pois se salvar uma base de dados sobre outra, a original será perdida! Evite fazer isso colocando nomes diferentes nas variáveis e bancos de dados que for criar dentro do R.
+
+[^02.nocoes_iniciais-6]: Faça o teste!
+
+Podemos criar outro vetor e fazermos operações com nosso vetor original para comprovar isso. Por exemplo, no código abaixo vamos criar um vetor chamado `dados_2` e somar com nossa variável `a`.
+
+```{r}
+#| eval: true
+dados_2 <- c(20,14,8,1.4)
+
+# fazendo a soma dos dois vetores
+dados_2 + a
+
+# aplicando uma função ao vetor e depois somando
+log(dados_2) + a
+
+# calculando a média por meio da função mean()
+mean(dados_2)
+```
+
+Uma outra observação que vai nos ajudar ao longo do aprendizado, no R, qualquer número com casas decimais deverá ser separado por "`.`", não por vírgula como estamos acostumados no Brasil. A vírgula, dentro de um vetor como `dados_2` e `a`, serve apenas para separar os elementos desse vetor.
+
+Nossos vetores até aqui foram claramente numéricos, pois foi possível realizar operações matemáticas com eles. Contudo, vamos observar que diversas variáveis podem ser não numéricas, e no R todas serão definidas entre aspas em um vetor, como no código a seguir.
+
+```{r}
+#| eval: true
+nomes <- c("Felipe", "Tatiane", "Paula", "Carlos")
+```
+
+Se tentarmos fazer operações entre um vetor numérico e uma função matemática anterior, ou operações entre vetores que deveriam ter dois vetores numéricos, teremos naturalmente um erro.
+
+```{r}
+#| eval: false
+dados_2 + nomes
+```
+
+Um cuidado extra, dado que estamos começando, é observar que não podemos misturar em um mesmo vetor (variável) valores de diferentes tipos, numéricos e não numéricos, pois isso fará com que o vetor seja transformado em valores não numéricos.
+
+```{r}
+#| eval: false
+# esse vetor está com problemas
+nao_sou_numero <- c("1", "2", "3")
+
+# esse também
+vai_dar_erro <- c(1, 2, "Três")
+```
+
+Embora simples, vetores são um primeiro passo para entendermos o processo de manipulação de dados dentro da linguagem R. Na sequência, vamos importar nosso primeiro banco de dados, que nada mais será do que um conjunto de variáveis (vetores) na sua forma retangular, mas que cada uma deverá possuir um único tipo, ou seja, ou a variável deverá ser numérica ou então não numérica.
+
+Antes, porém, vamos precisar ter acesso a uma função para conseguir ler esses dados e importar para dentro do R, e isso será feito por meio de um pacote chamado `tidyverse` que precisará ser instalado e carregado, nossos próximos passos.
+
+## Instalando e Carregando um Pacote no R {#sec-instalando-e-carregando-um-pacote-no-r}
+
+Muitas das melhores funções não fazem parte do núcleo do `R`, não estando portanto, disponíveis no momento que instalamos o programa. Isso é feito de maneira proposital, dado que cada função atende a um proprósito específico, e instalar previamente todas essas funções apenas faria com que o programa se tornasse pesado e grande para ser baixado, e de pouca utilidade se não precisassemos da maioria dessas funções.
+
+Para contornar esse tipo de problemas é que o `R` se utiliza dos chamados *pacotes* que são estruturas que contém algumas funções que realizam tarefas específicas. Esses pacotes são então baixados e carregados no `R` para que possamos utilizar tais funções, algo muito mais lógico se nosso objetivo é utilizar funções que realizam tarefas específicas dentro de nosso trabalho com os dados. Por exemplo, existem pacotes que são disponibilizados para instalar um tipo específico de extensão de arquivo, para realizar um tipo de análise estatística, construír um tipo específico de visualização, entre tantas outras tarefas. *A ideia básica é então instalar e carregar em nossa máquina, apenas as ferramentas que serão de fato utilizadas em nossa análise, não precisando carregar material desnecessário que não será utilizado.*
+
+### Instalando pacotes: `install.packages()` {#sec-instalando_pacotes}
+
+Para fazermos uso desses pacotes[^02.nocoes_iniciais-7], precisamos primeiro fazer sua instalação, o que é claro, será feito com o uso de um função!! A função utilizada para instalar os pacotes no `R` é chamada `install.packages()`, sendo que o argumento que usamos dentro dela é o nomes do pacote a ser instalado, sempre entre aspas, como por exemplo, `install.packages("pacote")`.
+
+[^02.nocoes_iniciais-7]: Para termos uma noção da quantidade de pacotes disponíveis, enquanto escrevo existem cerca de 21132 pacotes para serem utilizados no R. Para saber quantos pacotes existem no momento em que lê esse material, você pode acessar o repositório de pacotes do R, chamado cran, pelo seguinte endereço: <https://cran.r-project.org/web/packages/>
+
+Vamos na sequência fazer a instalação de um dos pacotes que mais vamos utilizar para trabalhar com dados, chamado `tidyverse`. Para isso, podemos escrever a seguinte linha de código em nosso script:
+
+```{r}
+#| eval: false
+# instalando meu primeiro pacote
+install.packages("tidyverse")
+```
+
+O processo de instalação de qualquer pacote vai sempre produzir algumas menssagens no Console do R, , @fig-primeira_instalacao, indicando por exemplo, as etapas que o pacote está realizando para poder operar sem erro, ou se está realizando a instalação de pacotes adicionais que ele precisa. No geral é um processo pouco complexo, sendo difícil apresentar algum problema nessa etapa.
+
+![Instalando nosso primeiro pacote](/imagens_apostila/imagens_criada_material2.png){#fig-primeira_instalacao fig-align="center"}
+
+Alternativamente, principalmente nas primeiras vezes que você estiver utilizando o R, pode ser possível instalar os pacotes indo na aba "Packages", @fig-pacotes_alternativo, clicando em *Install,* que faz aparecer uma nova janela na tela do RStudio onde podemos indicar o pacote a ser instalado.
+
+![Instalando um pacote via aba "Packages"](/imagens_apostila/imagens_criada_material3.png){#fig-pacotes_alternativo}
+
+Outro ponto que precisamos já aprender ao utilizarmos pacotes dentro do R é que eles precisam ser instalados uma única vez, por isso, uma dica muito importante é não manter no script o passo que fizemos anteriormente, ou seja, `install.packages("tidyverse")`, porque caso nos descuidemos podemos pedir para ele ser instalado novamente.
+
+Uma alternativa é sempre que instalamos algum pacote, logo após ele ter sido instalado, comentarmos a linha onde aparece o código, como mostrado abaixo. Assim, o R sempre vai considerar aquela linha de código como um comentário e vai ignorar.
+
+```{r}
+# instalando meu primeiro pacote
+# install.packages("tidyverse")
+```
+
+### Carregando pacotes: `library()`
+
+Uma vez que o pacote tenha sido baixado e instalado, as funções que ele possui são instaladas em nossas máquina, contudo, isso não implica que já podemos utilizar essas funções. Para poder utilizar as funções de um pacote, precisamos sempre carregar esse pacote, e isso é feito com mais uma função, chamada `library(nome_do_pacote)`. Como podemos ver na próxima linha de código e @fig-carregando_pacote, podemos carregar o pacote `tidyverse` da seguinte maneira:
+
+```{r}
+#| eval: false
+# carregando nosso pacote tidyverse
+library(tidyverse)
+```
+
+![Carregando nosso pacote](/imagens_apostila/imagens_criada_material4.png){#fig-carregando_pacote fig-align="center"}
+
+Ao carregarmos nosso pacote, também é comum aparecerem mensagens na tela do *Console*, @fig-carregando_pacote, mas isso não é motivo para pânico, na maioria dos casos é apenas para indicar possíveis conflitos entre funções de pacotes diferentes, mas que em nada vão prejudicar nossas análises, por isso, podemos desconsiderar por enquanto essas mensagens.
+
+*Importante destacar que para utilizar uma função de um pacote é sempre preciso carregar ele, ou seja, ao fecharmos o R em nosso computador, quando abrirmos novamente será preciso carregar esse pacote para que as funções estejam disponíveis, embora não mais seja preciso instalar o pacote. Além disso, não esqueça que não precisamos utilizar as aspas quando carregamos um pacote!!*
+
+Agora com nosso pacote `tidyverse`, instalado e carregado, podemos utilizar uma de suas funções para importarmos nossa primeira base de dados para o `R`, o que será feito na próxima sessão.
+
+### Exemplo prático: carregando nossas primeiras bases de dados
+
+Aqui, como uma maneira de já irmos nos acostumando com o uso de funções dentro do `R`, vamos utilizar a função presente no `tidyverse` chamada `read_csv()` para importarmos a seguinte base de dados que está nesse [link](https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-10-23/movie_profit.csv)[^02.nocoes_iniciais-8].
+
+[^02.nocoes_iniciais-8]: Essa base de dados faz parte do projeto [*Tidytuesday*](https://github.com/rfordatascience/tidytuesday/tree/master), que semanalmente oferece uma temática em forma de dados para que a comunidade de usuários do R possa treinar suas habilidade e/ou produza algum tipo de visualização.
+
+Para importarmos a base basta indicarmos a sua **URL** dentro da função `read_csv()`, entre aspas, e indicarmos qual nome gostaríamos de dar para essa base de dado dentro do `R`, no caso vamos escolher o nome filmes, como indicado na linha de código abaixo e mostrado na @fig-primeira_base.
+
+```{r}
+#| eval: false
+#| message: false
+#| warning: false
+#| output: false
+
+# baixando nossa primeira base de dados
+filmes <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-10-23/movie_profit.csv")
+```
+
+![Carregando nossa primeira base de dados](/imagens_apostila/imagens_criada_material.png){#fig-primeira_base fig-align="center"}
+
+Importante notar algumas coisa a respeito do que fizemos:
+
+1.  O objeto criado, *filmes*, ficará sempre visível na aba Environment e poderia ter sido qualquer nome, mas lembre de utilizar nomes pequenos e nunca utilizar espaços em branco[^02.nocoes_iniciais-9];
+2.  Sempre utilize o `<-` para criar um objeto que desejamos manter na memória do R e ser possível acessar ao longo da análise, caso contrário, ele somente será mostrado uma única vez na tela do *Console*;
+3.  O nome da **URL** ficou entre parêntes! Depois, quando importarmos um arquivo de nosso próprio computador, o diretório também deverá ser especificado entre aspas.
+4.  Não se preocupe com as mensagens que são produzidas no *Console* do RStudio, pois elas não indicam que algo de errado aconteceu, apenas algumas informações sobre como a função `read_csv()` decidiu formatar as colunas de nossa base de dados. *Caso algo tivesse dado errado, provavelmente a base não teria sido salva no Environment!*
+
+[^02.nocoes_iniciais-9]: Prefira dar nomes como: `dados`, `meus_dados` ou `d.1`. Nunca deixe espaço em um nome composto nem use um numeral na frente do nomes escolhido: `meus dados` ou `1dados`!
+
+Agora que temos nossa primeira base de dados, vamos na sequência verificar como podemos acessar suas variáveis e valores.
+
+## Conhecendo nosso Banco de Dados {#sec-conhecendo-nosso-banco-de-dados}
+
+Aqui vamos aprender a retirar informações iniciais de nossa base de dados, começando por acessar a mesma[^02.nocoes_iniciais-10]. Para isso, podemos fazer de duas maneiras:
+
+[^02.nocoes_iniciais-10]: Nosso objetivo aqui é meramente o de conhecer a nossa base de dados depois de ela ter sido importada. Uma análise dos dados no sentido mais completa será feita depois que tivermos conhecimento de outras funções presente no pacote `tidyverse`.
+
+1.  ao clicar com o mouse no ícone que aparece junto com a base dos dados na aba *Environment*, como mostrado na @fig-acessando_dados1, fazendo com que uma nova aba com os dados surja ao lado de nosso *script* @fig-acessando_dados_2;
+
+    ![Acessando nossos dados](/imagens_apostila/imagens_criada_material10.png){#fig-acessando_dados1}
+
+2.  ou podemos utilizar linhas de códigos, como por exemplo, digitando o próprio nome da base em nosso *script* ou utilizando a função `view(filmes)`., que também fará com que os dados surjam em uma nova aba do RStudio próxima ao script @fig-acessando_dados_2.
+
+```{r}
+#| eval: false
+# verificando nossa base de dado
+view(filmes)
+```
+
+![Nossos dados em uma nova aba](/imagens_apostila/imagens_criada_material11.png){#fig-acessando_dados_2 fig-align="center"}
+
+É possível ainda ter a opção de destacar os dados em uma nova janela no PC. Para isso, basta clicarmos no ícone mostrado na @fig-acessando_dados_2 fazendo com que os dados possam ser verificados em nova janela, @fig-dados_janela.
+
+![Mostrando os dados em uma nova janela](/imagens_apostila/imagens_criada_material12.png){#fig-dados_janela fig-align="center"}
+
+Algumas funções podem ser úteis no processo de conhecer nossa base de dados. Uma delas é a função `summary()` que permite que tenhamos um pequeno estatística de nossos dados. Podemos executar ela pelo seguinte código:
+
+```{r}
+summary(filmes)
+```
+
+Essa função é uma das muitas que já são internas ao R, ou seja, são instaladas no momento que baixamos o programa e instalamos em nossa máquina, não exigindo pacotes. Como pode ser percebido, ela indica as cinco estatísticas resumo para alguma de nossas variáveis, somente as variáveis de tipo numerico, tais como o mínimo e o máximo. No caso das variáveis não numericas, não é mostrado esse tipo de informação!
+
+Outra função útil é a função `names()`, que apenas descreve o nome das colunas (variáveis) de nosso banco de dados. Ela pode ser útil em casos onde tenhamos esquecido o nome de alguma das variáveis[^02.nocoes_iniciais-11], cuja execução pode ser feita pelo seguinte código:
+
+[^02.nocoes_iniciais-11]: Importante já destacar aqui que temos uma coluna chamada `1`, que na verdade não possui informação alguma. Na próxima sessão veremos como nos livrar de variáveis como essa por meio de outras funções.
+
+```{r}
+names(filmes)
+```
+
+Outra função muito útil, que nos mostra qual o tipo de dado foi associado a cada variável é a função `glimpse()`, função essa que é carregada do pacote tidyverse. Sua execução pode ser feita pelo seguinte comando e pela @fig-tipos_variaveis.
+
+```{r}
+#| eval: false
+glimpse(filmes)
+```
+
+![Tipos das variáveis](/imagens_apostila/imagens_criada_material13.png){#fig-tipos_variaveis fig-align="center"}
+
+Nesse processo de aprender a linguagem, basta para nós identificarmos que as variáveis que são não numéricas vão estar com o tipo definido como `<chr>`, referência a *character*, enquanto que as numéricas vão estar com o tipo `<dbl>`, fazendo a referência a *double*. Outro sinal de que uma variável é não numérica é seus valores sempre estarão representados entre aspas. Além disso, a função `glimpse()` permite ainda ter a informação sobre o tamanho da base de dados, como o número de linhas e o número de colunas.
+
+## Salvando nosso **script**
+
+Após termos feito nossa análises, em nosso caso ter carregado um pacote e feito a importação de uma base de dados, o próximo passo é darmos segurança ao nosso trabalho e salvarmos o script que criamos e que colocamos nossos primeiros códigos. Para isso, podemos fazer como mostrado na @fig-salvando_script.
+
+![Salvando um script em nosso computador](/imagens_apostila/salvando_script.png){#fig-salvando_script fig-align="center"}
+
+Depois que fecharmos o script, podemos novamente abrir por meio dos passos descritos na @fig-abrir_script. Dessa maneira nosso material será novamente aberto para que possamos acrescentar mais linhas de códigos e sempre que terminarmos de adicionar algo útil, podemos novamente salvar ao clicar no ícone descrito na @fig-salvando_script.
+
+![Abrindo nosso script](/imagens_apostila/abrir_script.png){#fig-abrir_script fig-align="right"}
+
+Agora que sabemos carregar um pacote, uma base de dados, salvar nosso script e abri-lo novamente, já podemos partir para voos mais altos e começarmos a modificar essa nossa base de dados para criarmos algum tipo de análise. Essa será nosso foco na segunda parte desse material, onde vamos mais a fundo conhecer as muitas funções que estão presentes no pacote `tidyverse`.

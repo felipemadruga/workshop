@@ -1,0 +1,346 @@
+# Adicionando Colunas
+
+Aqui, nosso objetivo será o de aprender como construir uma nova variável em nosso banco de dados. Para isso, vamos fazer uso da função conhecida como `mutate()`.
+
+```{r}
+#| include: false
+
+# carregando o pacote tidyverse
+library(tidyverse)
+
+# baixando nossa primeira base de dados
+filmes <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-10-23/movie_profit.csv")
+
+maiores_bilheterias <- 
+  filmes |> 
+  slice_max(domestic_gross, n = 10) |> 
+  select(movie, domestic_gross, worldwide_gross, production_budget)
+
+options(scipen = 999)
+  
+```
+
+## Conhecendo a sintaxe
+
+Vamos aprender como construir uma variável em nosso banco de dados a partir de um exemplo simples, apenas para aprendermos o funcionamento da função `mutate()`. Para isso, na próxima linha de código vamos primeiro criar uma amostra de valores a partir dos dez filmes com maior faturamento no mercado doméstico, o qual vamos chamar de `maiores_bilheterias`:
+
+```{r}
+#| eval: false
+maiores_bilheterias <- 
+  filmes |> 
+  slice_max(domestic_gross, n = 10) |> 
+  select(movie, domestic_gross, worldwide_gross, production_budget)
+```
+
+```{r}
+#| echo: false
+maiores_bilheterias |> 
+  gt::gt() |> 
+  gt::tab_header(title = "10 maiores bilheterias domésticas")
+```
+
+Agora que já temos uma base mais reduzida para trabalharmos, podemos então partir para usar nossa função `mutate()`. Como comentado, essa função serve para nos ajudar a construir novas colunas, ou seja, adicionar variáveis a nossa base de dados. Digamos que essa nova variável que gostaríamos de acrescentar fosse a receita total de cada um dos 10 filmes, ou seja, nossa nova variável deveria ser a soma das receitas com bilheterias doméstica e estrangeira. Com a `mutate()`, seu código deveria ser o seguinte:
+
+```{r}
+#| eval: false
+maiores_bilheterias |> 
+  mutate(
+    # construindo nossa nova variável receita_total
+    receita_total = domestic_gross + worldwide_gross
+  )
+```
+
+Pelo código acima, podemos perceber que agora temos uma quinta variável em nosso banco de dados, `receita_total`, que foi criada com a função `mutate()` pela soma das variáveis `domestic_gross` e `worldwide_gross`. Em geral, a sintaxe da função `mutate()` será sempre essa:
+
+1.  Chamamos a função `mutate()`;
+2.  Dentro dela construímos o cálculo, primeiro dizendo um nome para a variável a ser criada, segundo indicando como ela será criada (com quais operações matemáticas, por exemplo),
+
+Podemos construir quantas variáveis necessitamos dentro da `mutate()`, por exemplo, agora que sabemos a receita total, podemos calcular o lucro total de cada um desses filmes. Para isso, basta subtraírmos da receita total seus custos de produção, dados pela variável `production_budget`, como mostra o próximo código.
+
+```{r}
+#| eval: false
+maiores_bilheterias |> 
+  mutate(
+    # construindo nossa nova variável receita_total
+    receita_total = domestic_gross + worldwide_gross, 
+    # lucro de cada um dos filmes
+    lucro = receita_total - production_budget
+  ) 
+```
+
+Um detalhe que precisamos observar do código acima é fundamental: cada nova variável a ser construída, deverá ser separada por vírgulas dentro da `mutate()`, caso isso não seja feito, teremos uma mensagem de erro.
+
+Para uma melhor visualização, vamos mostrar o mesmo resultado apenas com o filme e seu respectivo lucro:
+
+```{r}
+#| eval: false
+maiores_bilheterias |> 
+  mutate(
+    # construindo nossa nova variável receita_total
+    receita_total = domestic_gross + worldwide_gross, 
+    # lucro de cada um dos filmes
+    lucro = receita_total - production_budget
+  ) |> 
+  select(filme = movie, lucro)
+```
+
+Um detalhe apareceu nessa última representação dos dados, embora a amostra de filmes tivesse sido obtida por meio da seleção das 10 maiores receitas domésticas, e esses filmes viessem ordenados dessa maneira, agora que sabemos o valor do lucro para cada um deles, não temos mais a tabela em sua ordem correta. Isso não é problema porque como sabemos, podemos utilizar a função `arrange()` para ordenar os dados, como é mostrado a seguir.
+
+```{r}
+#| eval: false
+maiores_bilheterias |> 
+  mutate(
+    # construindo nossa nova variável receita_total
+    receita_total = domestic_gross + worldwide_gross, 
+    # lucro de cada um dos filmes
+    lucro = receita_total - production_budget
+  ) |> 
+  select(filme = movie, lucro) |> 
+  arrange(desc(lucro))
+```
+
+## Outros exemplos de cálculos
+
+Conhecendo o funcionamento da função `mutate()` podemos realizar mais alguns exemplos para fixar melhor seu uso. Digamos que gostaríamos de deixar os valores dos lucros em milhões de dólares, e não como é mostrado na tabela. Poderíamos apenas aplicar uma nova escala a esses valores por meio da multiplicação por $\frac{1}{1000000}$ dentro da função `mutate()` como é visto na sequência.
+
+```{r}
+#| eval: false
+maiores_bilheterias |> 
+  mutate(
+    # construindo nossa nova variável receita_total
+    receita_total = domestic_gross + worldwide_gross, 
+    # lucro de cada um dos filmes
+    lucro = receita_total - production_budget, 
+    # transformando os valores
+    lucro_1 = lucro*(1/1000000)
+  ) |> 
+  select(filme = movie, lucro, lucro_1) |> 
+  arrange(desc(lucro))
+```
+
+Algumas considerações sobre o código anterior. A primeira delas é a de que fiz a representação de duas variáveis para a mesma informação, `lucro` e `lucro_1`, apenas para melhor entendimento do que estava sendo feito e para deixar evidente que os valores mostrados em milhões de dólares são mais interessantes de visualizar.
+
+A segunda observação é quanto ao código, no geral, você não precisa utilizar uma linha de código adicional, dado que você poderia fazer essa mudança na escala dos dados já no momento que calculou o lucro, como mostrado no código abaixo:
+
+```{r}
+#| eval: false
+maiores_bilheterias |> 
+  mutate(
+    # construindo nossa nova variável receita_total
+    receita_total = domestic_gross + worldwide_gross, 
+    # lucro de cada um dos filmes
+    lucro = (receita_total - production_budget)*1/1000000
+  ) |> 
+  select(filme = movie, lucro) |> 
+  arrange(desc(lucro))
+```
+
+Outra função que vamos utilizar com certa frequência é `round()` que ajuda no processo de arredondamento dos dados. Por exemplo, no código anterior vimos que os valores ficaram com casas decimais. Para eliminar isso podemos utilizar essa função `round()` na variável lucro, como mostra o código seguinte:
+
+```{r}
+#| eval: false
+maiores_bilheterias |> 
+  mutate(
+    # construindo nossa nova variável receita_total
+    receita_total = domestic_gross + worldwide_gross, 
+    # lucro de cada um dos filmes
+    lucro = (receita_total - production_budget)*1/1000000, 
+    lucro_1 = round(lucro)
+  ) |> 
+  select(filme = movie, lucro, lucro_1) |> 
+  arrange(desc(lucro))
+```
+
+Novamente aqui, apenas para observarmos a diferença, construi a variável duas vezes. A função `round()` possui um argumento que indica o número de casas decimais, `digits =`, cujo valor padrão é zero, para não ter casas decimais. O código mais limpo seria algo como:
+
+```{r}
+#| eval: false
+maiores_bilheterias |> 
+  mutate(
+    # construindo nossa nova variável receita_total
+    receita_total = domestic_gross + worldwide_gross, 
+    # lucro de cada um dos filmes
+    lucro = round((receita_total - production_budget)*1/1000000), 
+  ) |> 
+  select(filme = movie, lucro) |> 
+  arrange(desc(lucro))
+```
+
+Voltando a nossa tabela original de filmes sabemos que existe uma variável que indica o gênero dos filmes. Vimos que a função `count()` pode nos fornecer informações sobre quantos filmes estão em cada categoria, como mostrado no seguinte código:
+
+```{r}
+#| eval: false
+filmes |> 
+  select(movie, genre) |> 
+  count(genre, sort = T)
+```
+
+Poderia ser do nosso interesse calcular além da frequência absoluta, a frequência relativa dos valores da variável `genre`. Para isso, precisamos criar uma outra coluna em nosso banco de dados com a função `mutate()`. Vejamos como ficaria o código e voltamos para analisar o que foi feito:
+
+```{r}
+#| eval: false
+filmes |> 
+  select(movie, genre) |> 
+  count(genre, sort = T) |> 
+  mutate(
+    # construindo a frequencia relativa
+    fr_relativa = n/3401 # numero total de filmes
+  )
+```
+
+No código acima, pegamos cada valor que indicava a quantidade de filmes para uma categoria, e dividimos pelo total de filmes em nossa base, `{r} nrow(filmes)` para chegar até a participação relativa do gênero na base. Contudo, o modo como foi feito acima não é o mais adequado, porque caso nossa base de dados tivesse mudado, por exemplo, por meio do acrescimo de filmes, teriamos que modificar manualmente nosso código, e a ideia de utilizar uma linguagem de programação é deixar essas tarefas o mais automatizadas possíveis.
+
+Como forma de corrigir esse problema podemos refazer o código acima com uma pequena modificação:
+
+```{r}
+#| eval: false
+filmes |> 
+  select(movie, genre) |> 
+  count(genre, sort = T) |> 
+  mutate(
+    # construindo a frequencia relativa
+    fr_relativa = n/sum(n) 
+  )
+```
+
+A divisão por `sum(n)` calcula o total de filmes que estão na coluna anterior n. Assim, não precisamos nos preocupar em saber qual é o total de filmes, pois essa função calcula e o valor calculado será utilizado como o denominador em cada uma das frequências relativas.
+
+Poderíamos ainda modificar o exemplo anterior para mostrar esse valor em percentual, para isso, bastaria multiplicar por 100 o cálculo feito antes:
+
+```{r}
+#| eval: false
+filmes |> 
+  select(movie, genre) |> 
+  count(genre, sort = T) |> 
+  mutate(
+    # construindo a frequencia relativa
+    fr_relativa = round((n/sum(n))*100, digits = 2)
+  )
+```
+
+Embora não faça sentido para os dados acima, poderíamos calcular a frequencia acumulada também, algo que é muito comum em determinadas aplicações. Isso é feito, como mostra o código seguinte, utilizando a função `cumsum()`.
+
+```{r}
+#| eval: false
+filmes |> 
+  select(movie, genre) |> 
+  count(genre, sort = T) |> 
+  mutate(
+    # construindo a frequencia relativa
+    fr_relativa = round((n/sum(n))*100, digits = 2), 
+    # frequencia absoluta acumulada
+    f_acumulada = cumsum(n)
+  )
+```
+
+E podemos também calcular a frequencia relativa acumulada[^05.adicionando_colunas-1]:
+
+[^05.adicionando_colunas-1]: O último valor da frequência relativa acumulada percentual não fechou em 100% devido aos arredondamentos. Caso na função `round()` definirmos o parâmetro `digits = 0`, o valor fecha nos 100%.
+
+```{r}
+#| eval: false
+filmes |> 
+  select(movie, genre) |> 
+  count(genre, sort = T) |> 
+  mutate(
+    # construindo a frequencia relativa
+    fr_relativa = round((n/sum(n))*100, digits = 2), 
+    # frequencia absoluta acumulada
+    f_acumulada = cumsum(n), 
+    # frequencia relativa acumulada
+    fr_acumulada = cumsum(fr_relativa)
+  )
+```
+
+Com a função `mutate()` podemos inserir valores constantes como por exemplo:
+
+```{r}
+#| eval: false
+filmes |> 
+  select(movie, domestic_gross) |> 
+  slice_max(domestic_gross, n = 10) |> 
+  mutate(
+    # adicionando um valor qualquer
+    variavel_3 = 1, 
+    # adicionando um texto
+    variavel_4 = "Texto aqui!!"  
+  )
+```
+
+Naturalmente o que fizemos antes não faz sentido nesse contexto, mas apenas para lembrar que a função `mutate()` constrói colunas, e o tipo de coluna que precisamos construir pode ser muito diferente de aplicação para aplicação, mas que podem ser cobertos dentro do `mutate()`. Uma ultima advertência, no momento que estivermos dando nome as variáveis a serem criadas, as mesmas recomendações anteriormente citadas são válidas aqui.
+
+Na próxima sessão vamos poder presenciar o uso da função `mutate()` mais uma vez, mas agora aplicada a um outro contexto, no qual vamos analisar uma coluna com condições do tipo: *Se o valor da variável for tal, então realizamos esse cálculo!*
+
+## Função `if_else()` e `case_when()`
+
+Um dos usos mais comuns da função `mutate()` é em conjunto com a função `if_else()`. Para entender essa aplicação, digamos que em nossa base de dados, queremos retornar uma nova coluna na qual os filmes estejam separados apenas entre *comédia* e *demais gêneros*. Da maneira como estão os valores da variável, genre isso não seria possível, porque os dados possuem cinco gêneros, como mostrado no código abaixo:
+
+```{r}
+#| eval: false
+filmes |> 
+  distinct(genre)
+```
+
+Podemos utilizar a função `if_else()` para modificar essa variável e colocar apenas esses dois rótulos, comédia e demais gêneros. Para isso, vamos fazer uso dessa função dentro da função `mutate()` como indicado no código seguinte:
+
+```{r}
+#| eval: false
+filmes |> 
+  select(movie, genre) |> 
+  mutate(
+    novo_genero = if_else(
+      # condição lógica a ser analisada
+      genre == "Comedy",
+      # valor se verdadeiro
+      "Comédia", 
+      # valor se falso
+      "Demais generos"
+    )
+  )
+```
+
+No código acima, dentro da função `if_else()` o que temos é uma condição lógica sendo analisada, e os valores que queremos que ela retorne quando tal condição for *verdadeira* e quando for *falsa*. Por exemplo, `genre == "Comedy"` faz com que a função `if_else()` olhe cada valor da variável `genre` e observe quando o valor é igual a `Comedy`. Quando ele identifica o valor igual a condição, ele associa o valor verdadeiro definido, *"Comédia"*, mas se o gênero do filme for outro, vai associar o rótulo *"Demais generos"*.
+
+Além disso, como estamos passando esse código dentro da função `mutate()`, ela vai criar uma nova coluna em nosso banco de dados, no caso, pedimos para dar o nome para essa nova coluna como `novo_genero`.
+
+Aqui uma observação, poderíamos ter dado o mesmo nome da coluna genre, contudo, se isso fosse feito teríamos escrito os valores sobre a variável original, como mostrado no código seguinte:
+
+```{r}
+#| eval: false
+filmes |> 
+  select(movie, genre) |> 
+  mutate(
+    genre = if_else(
+      # condição lógica a ser analisada
+      genre == "Comedy",
+      # valor se verdadeiro
+      "Comédia", 
+      # valor se falso
+      "Demais generos"
+    )
+  )
+```
+
+A função `if_else()` possui a limitação de conseguir analisar apenas as duas condições por vez, se o valor for verdadeiro então ela associa algum valor definido, mas se for falso, associa outro. Contudo, existe a função `case_when()` na qual podemos analisar mais condições.
+
+Digamos que queremos classificar as distribuidoras segundo a quantidade de filmes, para isso, a partir do código abaixo podemos utilizar a função `case_when()` para fazer essas classificações, por exemplo, associando "Top 200+" para as distribruidoras com mais de 200 filmes distribuidos; "Top 100+" para as distribuidoras com mais de 100 filmes, mas menos de 200 filmes distribuidos; "Top 50+" para mais de 50 filmes distribuidos e "Demais distribuidoras".
+
+```{r}
+#| eval: false
+filmes |> 
+  count(distributor, sort = T) |> 
+  mutate(
+    classificacao = case_when(
+      n >= 200 ~ "Top 200+", 
+      n >= 100 ~ "Top 100+", 
+      n >= 50 ~ "Top 50+", 
+      .default = "Demais distribuidoras"
+    )
+  ) 
+```
+
+A *sintaxe* dessa função é apenas indicar cada uma das nossas condições lógicas que devem ser atendidas, sendo que se o valor a ser associado a cada condição deve ser indicado depois do símbolo `~`; Além disso, no exemplo acima na última opção não foi preciso indicar algo como `n >= 0 ~ "Demais distribuidoras"`, bastou apenas utilizar a opção `.default` que serve para indicar qual valor deve ser associado se nenhuma das condições anteriores foi atendida.
+
+Naturalmente, muitas outras possibilidade de uso dessas duas funções podem ser pensadas, contudo, para um primeiro momento o que você deve fixar é a maneira como devemos passar os valores que serão associados a cada um dos testes lógicos que as funções estão avaliando.
+
+Isso fecha a primeira parte de nosso material, na próxima parte vamos aprender a como fazer importação de diferentes tipos de arquivos, bem como mais algumas coisas úteis em nosso início de jornada na linguagem R.

@@ -1,0 +1,3 @@
+# Construindo Gráficos
+
+Esta parte é reservada para rapidamente indicar como seria a criação de gráficos no R. A princípio, para que não ocupe muito tempo, apenas apresentar as funções e deixar um exercício no próprio arquivo para que o aluno possa tentar realizar.

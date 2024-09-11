@@ -1,0 +1,3 @@
+# Gerando Tabelas
+
+Esta parte é para apresentar as funções contidas no pacote gt() que servem para construir tabelas de maneira rápida e organizadas. Aqui também deverá ser um conteúdo explicado apenas no slide e deixando um exercício para ser feito ao final do respectivo capítulo.

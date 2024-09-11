@@ -1,0 +1,40 @@
+---
+title: "Workshop em R"
+format: 
+  revealjs:
+    theme: simple
+    code-overflow: wrap
+    code-block-height: 700px
+---
+
+```{r}
+#| echo: false
+library(tidyverse)
+```
+
+# Função `summarise()`
+
+Serve para resumir os dados de uma coluna da nossa base em uma *estatística*, como por exemplo a média.
+
+## `summarise()` {.smaller}
+
+Precisamos definir três coisas no momento de utilizar nossa função `summarise()`: a base de dados que contém a variável a ser resumida; a variável de interesse do banco de dados; qual a função estatítica a ser empregada nessa variável, por exemplo, a média, mediana, desvio padrão entre outras. *Além disso, podemos dar um nome para a estatística que foi criada!*
+
+Syntaxe: 
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: "|1|2|3"
+
+
+meus_dados |> 
+  summarise( minha_estatistica = mean(minha_variavel) )
+
+```
+
+
+Vamos praticar um exemplo!
+
+
+## 

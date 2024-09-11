@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Workshop em R - 3&nbsp; Manipulando Colunas e Linhas</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../capitulos/04.resumindo_dados.html" rel="next">
+<link href="../capitulos/02.nocoes_iniciais.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../capitulos/03.colunas_linhas.html">PARTE 2</a></li><li class="breadcrumb-item"><a href="../capitulos/03.colunas_linhas.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manipulando Colunas e Linhas</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Workshop em R</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Alternar modo de leitor">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Procurar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bem-Vindo!!</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">PARTE 1</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/01.instalacao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Instalações Necessárias</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/02.nocoes_iniciais.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Noções Iniciais</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">PARTE 2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/03.colunas_linhas.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manipulando Colunas e Linhas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/04.resumindo_dados.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Construindo Medidas Resumo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/05.adicionando_colunas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Adicionando Colunas</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">PARTE 3</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/08.pipeline.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Criando um Projeto e Importando Dados</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/07.unindo_base_de_dados.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">União de Bases de Dados</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/09.handson.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Atividade Prática</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">PARTE 4</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/10.graficos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Construindo Gráficos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/11.tabelas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Gerando Tabelas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/12.regressao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Análise de Regressão</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/13.apis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Utilizando APIs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/14.vamos_pro_quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Vamos Mudar para o Quarto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/15.e_agora.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">E agora?</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Índice do Conteúdo</h2>
+   
+  <ul>
+  <li><a href="#instruções-iniciais" id="toc-instruções-iniciais" class="nav-link active" data-scroll-target="#instruções-iniciais"><span class="header-section-number">3.1</span> Instruções Iniciais</a></li>
+  <li><a href="#função-select-e-o-uso-do-operador-pipe--" id="toc-função-select-e-o-uso-do-operador-pipe--" class="nav-link" data-scroll-target="#função-select-e-o-uso-do-operador-pipe--"><span class="header-section-number">3.2</span> Função <code>select()</code> e o uso do <em>Operador Pipe</em> - <code>|&gt;</code></a>
+  <ul class="collapse">
+  <li><a href="#selecionando-algumas-colunas-1" id="toc-selecionando-algumas-colunas-1" class="nav-link" data-scroll-target="#selecionando-algumas-colunas-1"><span class="header-section-number">3.2.1</span> Selecionando algumas colunas 1</a></li>
+  <li><a href="#salvando-nossa-seleção-de-colunas" id="toc-salvando-nossa-seleção-de-colunas" class="nav-link" data-scroll-target="#salvando-nossa-seleção-de-colunas"><span class="header-section-number">3.2.2</span> Salvando nossa seleção de colunas</a></li>
+  <li><a href="#selecionando-algumas-colunas-2" id="toc-selecionando-algumas-colunas-2" class="nav-link" data-scroll-target="#selecionando-algumas-colunas-2"><span class="header-section-number">3.2.3</span> Selecionando algumas colunas 2</a></li>
+  <li><a href="#selecionando-algumas-colunas-3" id="toc-selecionando-algumas-colunas-3" class="nav-link" data-scroll-target="#selecionando-algumas-colunas-3"><span class="header-section-number">3.2.4</span> Selecionando algumas colunas 3</a></li>
+  </ul></li>
+  <li><a href="#modificando-o-nome-das-colunas" id="toc-modificando-o-nome-das-colunas" class="nav-link" data-scroll-target="#modificando-o-nome-das-colunas"><span class="header-section-number">3.3</span> Modificando o nome das colunas</a></li>
+  <li><a href="#pedindo-ajuda-para-o-chatgpt" id="toc-pedindo-ajuda-para-o-chatgpt" class="nav-link" data-scroll-target="#pedindo-ajuda-para-o-chatgpt"><span class="header-section-number">3.4</span> Pedindo ajuda para o <strong>chatGPT</strong></a></li>
+  <li><a href="#função-arrange-slice-e-suas-derivações" id="toc-função-arrange-slice-e-suas-derivações" class="nav-link" data-scroll-target="#função-arrange-slice-e-suas-derivações"><span class="header-section-number">3.5</span> Função <code>arrange()</code>, <code>slice()</code> e suas derivações</a>
+  <ul class="collapse">
+  <li><a href="#selecionando-linhas-1" id="toc-selecionando-linhas-1" class="nav-link" data-scroll-target="#selecionando-linhas-1"><span class="header-section-number">3.5.1</span> Selecionando linhas 1</a></li>
+  <li><a href="#ordenando-os-dados" id="toc-ordenando-os-dados" class="nav-link" data-scroll-target="#ordenando-os-dados"><span class="header-section-number">3.5.2</span> Ordenando os dados</a></li>
+  <li><a href="#selecionando-linhas-2" id="toc-selecionando-linhas-2" class="nav-link" data-scroll-target="#selecionando-linhas-2"><span class="header-section-number">3.5.3</span> Selecionando linhas 2</a></li>
+  </ul></li>
+  <li><a href="#função-filter" id="toc-função-filter" class="nav-link" data-scroll-target="#função-filter"><span class="header-section-number">3.6</span> Função <code>filter()</code></a>
+  <ul class="collapse">
+  <li><a href="#filtrando-linhas-com-o-uso-do" id="toc-filtrando-linhas-com-o-uso-do" class="nav-link" data-scroll-target="#filtrando-linhas-com-o-uso-do"><span class="header-section-number">3.6.1</span> Filtrando linhas com o uso do <code>&amp;</code></a></li>
+  <li><a href="#filtrando-valores-com-between" id="toc-filtrando-valores-com-between" class="nav-link" data-scroll-target="#filtrando-valores-com-between"><span class="header-section-number">3.6.2</span> Filtrando valores com <code>between()</code></a></li>
+  <li><a href="#filtrando-valores-com-e-in" id="toc-filtrando-valores-com-e-in" class="nav-link" data-scroll-target="#filtrando-valores-com-e-in"><span class="header-section-number">3.6.3</span> Filtrando valores com <code>|</code> e <code>%in%</code></a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../capitulos/03.colunas_linhas.html">PARTE 2</a></li><li class="breadcrumb-item"><a href="../capitulos/03.colunas_linhas.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manipulando Colunas e Linhas</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Manipulando Colunas e Linhas</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Vamos aqui dar início ao nosso processo de manipulação de um banco de dados utilizando as ferramentas disponíveis no <code>R</code> por meio do pacote chamado <code>tidyverse</code>. Esse pacote é um dos melhores para que possamos fazer todo o processamento de dados dentro do R, desde a importação dos dados, nas mais diferentes extensões, possíveis <em>limpezas</em> em nossos dados após a importação e por fim as manipulações de linhas e colunas necessárias para que tenhamos capacidade de retornar respostas a uma determinada pergunta, ou mesmo apenas deixar a base de dados pronta para construção de gráficos ou estimação de modelos estatísticos/econométricos.</p>
+<p>Nesse pequeno tutorial para apresentar as principais funções do pacote <code>tidyverse</code> para manipulação de dados, vamos assumir que nossas bases de dados não vão precisar de nenhum processo de limpeza após a sua importação, ou seja, essas bases por um motivo de facilidade já vão estar <em>prontas</em> para utilizarmos as funções que vamos aprender na sequência. Contudo, quando trabalhamos com dados é quase impossível no momento em que faremos uma análise não ser necessário esse procedimento de limpeza, um dos mais importantes e um dos que mais toma tempo do analista de dados. Embora não será objeto de nosso estudo, o próprio pacote <code>tidyverse</code> conta com diversas dessas funções para que possamos deixar uma base bagunçada em uma base pronta para qualquer análise.</p>
+<p>Nas próximas sessões, nosso foco estará em como utilizar algumas das funções responsáveis por reduzir nosso banco de dados, eliminando linhas e colunas desnecessárias, bem como a aplicação de filtros com diferentes condições aplicados a valores de uma determinada variável. Embora como mencionado em nossa introdução, o foco aqui não é o de limpar os dados, vamos ter um gostinho disso aprendendo uma importante função presente no pacote <code>janitor</code> para corrigir os nomes de nossas variáveis. Por fim, aqui ainda vamos ver a importância do chamado operador <em>pipe</em> para deixar nossos códigos elegantes e mais eficientes.</p>
+<section id="instruções-iniciais" class="level2 page-columns page-full" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="instruções-iniciais"><span class="header-section-number">3.1</span> Instruções Iniciais</h2>
+<p>Cada uma das próximas sessões será destinada a ensinar uma das funções presente no pacote <code>tidyverse</code>, começando pela função <code>select()</code>, que veremos, servirá para selecionar determinadas colunas da base de dados.</p>
+<p>Com o básico que vimos sobre o <code>R</code> até aqui, já é preciso saber que para usar uma função de um pacote qualquer precisamos sempre de duas coisas: primeiro, carregar previamente esse pacote para termos acesso as funções; segundo, caso ainda não tenhamos utilizado o pacote, precisamos instalar o pacote em nossa máquina<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Portanto, o que precisamos fazer será apenas carregar esse pacote novamente, como indicado na linha de código abaixo por meio da função <code>library()</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>:</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Como visto na <a href="02.nocoes_iniciais.html#sec-instalando_pacotes" class="quarto-xref"><span>Seção 2.3.1</span></a>, somente precisamos instalar nosso pacote uma única vez.</p></div><div id="fn2"><p><sup>2</sup>&nbsp;Não é necessário colocar o nome do pacote entre aspas quando estamos carregando o mesmo! Caso tenha dúvidas ainda sobre essa parte, volte e revise os pontos apresentados sobre instalação e carregamento de pacotes descritos na <a href="02.nocoes_iniciais.html#sec-instalando-e-carregando-um-pacote-no-r" class="quarto-xref"><span>Seção 2.3</span></a>.</p></div></div><div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># carregando o pacote tidyverse</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Além do pacote que carregamos, carregaremos novamente a base de dados que vamos utilizar para esse estudo como indicado na linha de código a seguir<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>:</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;Não será aqui indicado como podemos acessar a base de dados que carregamos, pois isso já foi trabalhado na <a href="02.nocoes_iniciais.html#sec-conhecendo-nosso-banco-de-dados" class="quarto-xref"><span>Seção 2.4</span></a>. Caso precise, volte e revise esse conteúdo!</p></div></div><div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># baixando nossa primeira base de dados</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>filmes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-10-23/movie_profit.csv"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Com nosso pacote e banco de dados carregado, podemos agora aprender a selecionar as colunas por meio da função <code>select()</code>.</p>
+</section>
+<section id="função-select-e-o-uso-do-operador-pipe--" class="level2 page-columns page-full" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="função-select-e-o-uso-do-operador-pipe--"><span class="header-section-number">3.2</span> Função <code>select()</code> e o uso do <em>Operador Pipe</em> - <code>|&gt;</code></h2>
+<p>Em muito casos práticos, quando estamos começando a trabalhar com nossa base de dados, embora ao fazermos o processo de importação tenhamos a disposição todas as colunas (variáveis) desse banco de dados, nem todas elas serão de nosso interesse. Por isso, aprender a selecionar apenas as variáveis que vamos utilizar é algo desejável, já que quanto menor o banco de dados, ou seja, com menos variáveis desnecessárias ela continver, menor será a exigência computacional de nossa máquina e mais rápida será nossa análise.</p>
+<section id="selecionando-algumas-colunas-1" class="level3 page-columns page-full" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="selecionando-algumas-colunas-1"><span class="header-section-number">3.2.1</span> Selecionando algumas colunas 1</h3>
+<p>Para selecionarmos as colunas de um banco de dados, que contém ao todo 9 linhas, podemos fazer uso da função <code>select()</code> cujos argumentos inseridos nela vão especificar <em>quais colunas gostaríamos de trabalhar de nossa base de dados, ou qual gostaríamos de excluir</em>.</p>
+<p>Digamos que gostaríamos apenas de selecionar as seguintes variáveis da base filmes: <code>movies</code>, <code>genre</code>, <code>release_date</code>, <code>mpaa_rating</code>. Poderíamos fazer isso utilizando a seguinte linha de código cujo resultado será mostrado na tela do <em>Console</em> do R<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>:</p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;Não estaremos mostrando os resultados dos demais códigos que forem executados nessa parte apenas por uma questão de comodidade, mas lembre que todos vão aparecer na tela do Console do RStudio!</p></div></div><div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># selecionando algumas colunas de nossa base de dados</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(movie, genre, release_date, mpaa_rating)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3,401 × 4
+   movie                               genre     release_date mpaa_rating
+   &lt;chr&gt;                               &lt;chr&gt;     &lt;chr&gt;        &lt;chr&gt;      
+ 1 Evan Almighty                       Comedy    6/22/2007    PG         
+ 2 Waterworld                          Action    7/28/1995    PG-13      
+ 3 King Arthur: Legend of the Sword    Adventure 5/12/2017    PG-13      
+ 4 47 Ronin                            Action    12/25/2013   PG-13      
+ 5 Jurassic World: Fallen Kingdom      Action    6/22/2018    PG-13      
+ 6 Guardians of the Galaxy             Action    8/1/2014     PG-13      
+ 7 Iron Man 2                          Action    5/7/2010     PG-13      
+ 8 Captain America: The Winter Soldier Action    4/4/2014     PG-13      
+ 9 Dawn of the Planet of the Apes      Adventure 7/11/2014    PG-13      
+10 The Polar Express                   Adventure 11/10/2004   G          
+# ℹ 3,391 more rows</code></pre>
+</div>
+</div>
+<p>Algumas coisas precisam ser ditas aqui antes de aprofundarmos mais na função <code>select()</code>, talvez sendo a primera delas referente ao próprio código utilizado, em especial ao símbolo que apareceu: <code>|&gt;</code><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;Existe um atalho para que possamos criar esse símbolo sem ter que digitar: <code>Ctrl + Shift + M</code>!!</p></div></div><p>Esse símbolo, chamado <em>pipe</em>, é uma maneira de dizermos de onde devem vir os insumos de nossa função. Por exemplo, na função <code>select()</code> queremos selecionar as variáveis <code>movie</code>, <code>genre</code>, <code>release_date</code>, <code>mpaa_rating</code>, que foram descritas dentro dela. De onde virão essas variáveis? Virão de nossa base de dados chamada <code>filmes</code> que foi escrita à esquerda do <em>pipe</em>.</p>
+<p>Logo, o <em>pipe</em> pode ser entendido como: <em>aplique a função que está à direita do pipe, utilizando os insumos que estão à esquerda do pipe</em>! No caso do exemplo acima, selecione as variáveis indicadas na função <code>select()</code>, que foi escrita à direita do pipe, que virão da base de dados chamada <code>filmes</code>, que foi escrita à esquerda do pipe.</p>
+<p>Outra consideração sobre o código descrito acima é a de que ele foi escrito em linhas separadas, mas isso não é uma regra, apenas uma maneira de deixarmos nosso código mais organizado, ele poderia ser sido escrito como no código abaixo, embora a recomendação para que os códigos sejam mais claros, é que cada função deverá vir em sua própria linha, algo que vamos observar ao longo do uso de mais funções.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># selecionando algumas colunas de nossa base de dados</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> <span class="fu">select</span>(movie, genre, release_date, mpaa_rating)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Voltando a função <code>select()</code>, é importante observar que a ordem na qual as colunas vão aparecer será a mesma que foi indicada dentro da função. Veja o resultado do seguinte código que seleciona as mesmas variáveis anteriores, apenas mudando a ordem na qual são indicadas dentro da função <code>select()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># modificando a ordem das variáveis em nosso banco de dados</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(genre, mpaa_rating, movie, release_date)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="salvando-nossa-seleção-de-colunas" class="level3 page-columns page-full" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="salvando-nossa-seleção-de-colunas"><span class="header-section-number">3.2.2</span> Salvando nossa seleção de colunas</h3>
+<p>Um coisa muito importante, no código anterior, as variáveis que foram selecionadas de nosso banco de dados filmes, não foram salvas no R, ou seja, elas foram apenas executadas uma única vez no Console. Para que elas fiquem salvas para serem utilizadas em outras funções, precisamos criar um <em>objeto</em>, uma segunda base de dados, que será evidentemente menor do que a original que foi importada. Para fazer isso, vamos novamente utilizar aquele operados <code>&lt;-</code>, como indicado na próxima linha de códigos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># salvando nossas quatro variáveis em um novo objeto</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>filmes2 <span class="ot">&lt;-</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  filmes <span class="sc">|&gt;</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(genre, mpaa_rating, movie, release_date)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Os novos dados, chamados de <code>filmes2</code>, foram agora salvos e estão disponíveis dentro do Environmet do R para serem utilizados<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;Utilize a função <code>view(filmes2)</code> para inspecionar esse objeto criado.</p></div><div id="fn7"><p><sup>7</sup>&nbsp;Quando digo que os dados foram salvas, quero dizer que eles estão disponíveis para serem utilizados enquanto o R estiver aberto. Veremos em momento oportuno que é possível também salvar nossos dados de maneira física, ou seja, no próprio computador em um fomato como o <code>.xlsx</code>. Porém, para nossos própositos, isso ainda não é necessário!</p></div></div><p>Uma observação também precisa ser feita aqui: <em>no geral, nunca salve um objeto com o nome de outro que já exista</em>. Por exemplo, caso tivesse criado a nova base de dados com o mesmo nome da original, você teria perdido as informações contidas na base de dados <code>filmes</code>. Observe que ao indicar outro nome, as duas bases permanecem disponíveis, <code>filmes</code>, a que foi primero baixada com todas as variáveis, e a segunda, <code>filmes2</code>, com apenas algumas colunas da base originalmente baixada<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>.</p>
+</section>
+<section id="selecionando-algumas-colunas-2" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="selecionando-algumas-colunas-2"><span class="header-section-number">3.2.3</span> Selecionando algumas colunas 2</h3>
+<p>Outra maneira de selecionarmos quais vairáveis de um banco de dados queremos é indicando com o sinal de <code>-</code> quais delas deverão ser descartadas. Por exemplo, digamos que em nossas análises futuras não precisamos das variáveis <code>release_date</code> e <code>distributor</code>, bastaria dentro da função <code>select()</code> indicar essas duas variáveis com o sinal de menos na frente, com mostrado na linha de código seguinte.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># eliminando as duas colunas indicadas abaixo</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span>  </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>release_date, <span class="sc">-</span>distributor)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ainda poderíamos ter escrito o código acima fazendo o uso da função <code>c()</code>, sendo uma maneira alternativa ao código acima:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># eliminando as duas colunas indicadas abaixo</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span>  </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(release_date, distributor))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>No codigo acima, o resultado é o mesmo, apenas estamos dizendo que não queremos todas as colunas descritas dentro de <code>c()</code>. Isso é muito útil quando temos varias colunas a serem eliminadas e queremos economizar no uso do <code>-</code>.</p>
+</section>
+<section id="selecionando-algumas-colunas-3" class="level3 page-columns page-full" data-number="3.2.4">
+<h3 data-number="3.2.4" class="anchored" data-anchor-id="selecionando-algumas-colunas-3"><span class="header-section-number">3.2.4</span> Selecionando algumas colunas 3</h3>
+<p>Por fim, podemos ainda utilizar as posições das variáveis em nosso banco de dados, indicadas por um valor numérico, dentro da função <code>select()</code>, tanto para manter variáveis, quanto para excluir variáveis.</p>
+<p>Digamos que queiramos manter as mesmas variáveis anteriormente trabalhadas, <code>movie</code>, <code>genre</code>, <code>release_date</code> e <code>mpaa_rating</code>. Essas variáveis ocupam as seguintes colunas da base de dados <code>filmes</code>: <em>2, 3, 8 e 9</em>. Se indicarmos esses números na função <code>select()</code>, teremos o mesmo resultado obtido anteriormente:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># selecionando por meio de posições das variáveis na base de dados</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">8</span>,<span class="dv">9</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Evidentemente, a ordem em que o valor numérico for indicado na função <code>select()</code> vai definir como as variáveis serão posicionadas.</p>
+<p>Nessa maneira de selecionarmos variáveis, será util utilizar o simbolo <code>:</code> para indicar que queremos selecionar intervalos de colunas, por exemplo, se quisermos selecionar as quatro primeiras variáveis do nosso banco de dados, ao inves de dentro da função <code>select()</code> indicamor <em>1,2,3,4</em>, podemos indicar <em>1:4</em>, como mostra o código abaixo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># selecionando por meio de posições das variáveis na base de dados</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A maneira numérica ainda é util quando queremos elimar uma variável que não tem uma informação útil, e que apresente um nome problemático, como é a primeira coluna de nossos dados. Podemos facilmente eliminarmos tal variável indicando <em>-1</em> dentro da função <code>select()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># eliminando variáveis por meio da sua posição numérica</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="dv">1</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Nesse último caso, poderíamos ter salvo o resultado utilizando o próprio nome original filmes, dado que a seleção não implicou perda de informação útil de nosso banco de dados. Se fossemos fazer isso, poderíamos utilizar o código abaixo<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>. <em>Mas lembre-se, tome cuidado ao fazer isso e certifique-se de que não está perdendo informação útil!!</em></p>
+<div class="no-row-height column-margin column-container"><div id="fn8"><p><sup>8</sup>&nbsp;Em outras partes desse material veremos como se livrar de variáveis inúteis no próprio momento que fazemos a importação dos dados, algo que vamos aprender quando estudarmos os argumentos possíveis da função <code>read_csv2()</code>.</p></div></div><div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filmes será o 'novo' banco de dados</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>filmes <span class="ot">&lt;-</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  filmes <span class="sc">|&gt;</span> <span class="co"># criado a partir do select aplicado em filmes</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="dv">1</span>) </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="modificando-o-nome-das-colunas" class="level2 page-columns page-full" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="modificando-o-nome-das-colunas"><span class="header-section-number">3.3</span> Modificando o nome das colunas</h2>
+<p>É possível modificarmos o nome das colunas de nosso banco de dados de duas maneiras, ou melhor, com o uso de duas funções do nosso pacote <code>tidyverse</code>. Vamos começar pela função <code>rename()</code> cujo nome já é bastante intuitivo.</p>
+<p>Contudo, antes de proceguir vale mencionar as regras para um bom nome de uma variável:</p>
+<ol type="1">
+<li>Todos os nomes em letra minúscula, curtos e descritivos;</li>
+<li>Nunca deixar espaços em branco em um nome, separe os nomes compostos com <code>_</code>;</li>
+<li>Nunca utilize <em>acentos</em> ou letras típicas do português, como <code>ç</code>. Prefira escrever com <code>c</code>!</li>
+</ol>
+<p>Na função <code>rename()</code> vamos indicar sempre o <em>novo nome</em> que queremos e o <em>nome original</em> da variável que será modificado. Digamos que nosso objetivo seja o de modificar o nome da variável <code>release_date</code> para <code>data_de_lancamento</code>, para isso bastaria aplicar o seguinte código:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">data_de_lancamento =</span> release_date)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>É possível também modificar o nome de uma variável por meio de sua posição, como mostra o próximo exemplo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data_de_lancamento =</span> release_date, </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">arrecadacao_mundial =</span> <span class="dv">6</span>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(data_de_lancamento, arrecadacao_mundial)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A outra maneira de modificarmos o nome da variável é quando utilizamos a função <code>select()</code>. Para isso, basta no momento de selecionarmos as colunas de nosso interesse já fazer a modificação do nome da variável. Vejamos o exemplo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">filme =</span> movie, <span class="at">arrecadacao_mundial =</span> <span class="dv">6</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Qualquer uma das maneiras fará com que o nome de uma coluna de nossa base de dados seja modificado<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn9"><p><sup>9</sup>&nbsp;Veremos ser possível modificar o nome da variável no momento em que fazemos a importação do dado, por meio de algum argumento na função <code>read_csv()</code>.</p></div></div></section>
+<section id="pedindo-ajuda-para-o-chatgpt" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="pedindo-ajuda-para-o-chatgpt"><span class="header-section-number">3.4</span> Pedindo ajuda para o <strong>chatGPT</strong></h2>
+<p>Essa parte vai ser destinada para que possamos aprender a utilizar o chatGPT para construir nossos códigos, Isso vai ajudar a termos um tutor que vá nos ajudando na tarefa de dominar a linguagem do R, de seus pacotes e nos ajudando a ficar mais confiantes em nosso avanço, reduzindo o custo de entrado no mundo do R, e de qualquer linguagem de programação.</p>
+<p>Para que o ChatGPT possa nos ajudar, o que precisamos fazer é basicamente dar uma descrição bastante detalhada do que estamos precisando fazer no R. Por exemplo, podemos utilizar a função <code>select()</code> e <code>rename()</code>, que já aprendemos, e pedir para ele nos ajudar como se estivessemos ainda aprendendo. Por exemplo, poderíamos indicar o seguinte prompt mostrado por meio da <a href="#fig-ajuda_gpt" class="quarto-xref">Figura&nbsp;<span>3.1</span></a>:</p>
+<div id="fig-ajuda_gpt" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-ajuda_gpt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.1: Pedindo ajuda ao ChatGPT
+</figcaption>
+<div aria-describedby="fig-ajuda_gpt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="..\imagens_apostila/ajuda_chat1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" data-glightbox="description: .lightbox-desc-1"><img src="..\imagens_apostila/ajuda_chat1.png" class="img-fluid figure-img"></a>
+</div>
+</figure>
+</div>
+<p>Outra ajuda que poderíamos procurar obter poderia ser para nos ajudar com o conceito do operador pipe <code>|&gt;</code>, o que poderíamos pedir para que ele utilizasse o contexto da conversa anterior, na qual pedimos para ajudar com <code>select()</code>, <a href="#fig-ajuda_chat2" class="quarto-xref">Figura&nbsp;<span>3.2</span></a>.</p>
+<div id="fig-ajuda_chat2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-ajuda_chat2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.2: Aprendendo sobre o pipe no ChatGPT
+</figcaption>
+<div aria-describedby="fig-ajuda_chat2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="..\imagens_apostila/ajuda_chat2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" data-glightbox="description: .lightbox-desc-2"><img src="..\imagens_apostila/ajuda_chat2.png" class="img-fluid figure-img"></a>
+</div>
+</figure>
+</div>
+<p>Utilizar o recurso do ChatGPT é um recurso valioso que podemos ter nos dias atuais, principalmente quando estamos começando na liguagem R, na qual ficarmos travados em algum ponto pode ser frustante, e infelizmente, um motivo de desistência para muitos iniciantes na linguagem.</p>
+</section>
+<section id="função-arrange-slice-e-suas-derivações" class="level2 page-columns page-full" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="função-arrange-slice-e-suas-derivações"><span class="header-section-number">3.5</span> Função <code>arrange()</code>, <code>slice()</code> e suas derivações</h2>
+<p>É possível dentro das funções do pacote <code>tidyverse</code> também fazer a seleção de linhas de nossa base de dados e não apenas colunas. Para isso, podemos utilizar a função <code>slice()</code> com argumentos que vão determinar o numero de linhas que deve ser retornado. Além disso, podemos facilmente fazer a classificação da nossa base de dados a partir de uma variável, tanto em ordem crescente quanto em ordem decrescente com o uso da função <code>arrange()</code>.</p>
+<section id="selecionando-linhas-1" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="selecionando-linhas-1"><span class="header-section-number">3.5.1</span> Selecionando linhas 1</h3>
+<p>A maneira que selecionamos as linhas de um base de dado é um processo bastante simples. Por exemplo, indicando as linhas de <em>1:10</em> dentro da função <code>slice()</code>, vai nos retonar as dez primeiras linhas do nosso banco de dados, como mostra o código abaixo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># selecionando as dez primeiras linhas</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Como é possível perceber, a base de dados <code>filmes</code> agora mostra apenas as dez primeiras linhas, com todas as suas variáveis. Caso nosso código tivesse sido indicado como <code>slice(10)</code>, teríamos apenas como resposta a décima linha do nosso banco de dados, como indicado no código abaixo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># selecionando as dez primeiras linhas</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">10</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Da mesma forma que <code>select()</code> pode ser utilizado com um sinal de menos indicando quais colunas queremos excluir, a função <code>slice()</code> vai excluir todas as linhas que forem indicadas com sinal de <code>-</code>, como mostra o código abaixo pedindo para eliminar a linha <em>10</em>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># selecionando as dez primeiras linhas</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="sc">-</span><span class="dv">10</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Podemos ainda selecionar linhas que não estejam interligadas, para isso, podemos utilizar a seguinte syntaxe:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># selecionando as dez primeiras linhas</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">30</span><span class="sc">:</span><span class="dv">40</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="ordenando-os-dados" class="level3 page-columns page-full" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="ordenando-os-dados"><span class="header-section-number">3.5.2</span> Ordenando os dados</h3>
+<p>Em nossa base de dados <code>filmes</code>, temos ao todo 3401 e dentro das variáveis temos uma que indica as receitas mundiais do respectivo filme chamada <code>worldwide_gross</code>. Digamos que nosso objetivo seja o de ordenar aqueles filmes que possuem a maior receita, para isso, podemos utilizar a função <code>arrange()</code> como mostrado no código abaixo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(worldwide_gross)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Uma coisa estranha aconteceu, como resultado, a base de dados agora mostra o filme do <em>Aquamen</em> como o primeiro, mas ele não possui receita mundial, apenas zero! O <em>‘problema’</em> com o código acima é que ele por <em>default</em> classifica uma variável em ordem crescente, ou seja, do menor valor para o maior. Para que os dados sejam classificados em ordem decrescente, do maior para o menor valor, precisamos aplicar a função <code>desc()</code> dentro da função <code>arrange()</code>, como mostra nosso próximo código:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(worldwide_gross))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Agora podemos perceber que o valor retornado foi o correto. Inclusive podemos para melhorar nossa visibilidade no Console do R, aplicarmos um pouco daquilo que já aprendemos. Por exemplo, se só nos interessa saber quais são os filmes com maior bilheteria no mundo, vamos selecionar apenas as variáveis que precisamos, como mostrado na sequência:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># quero utilizar a base de dados filmes nas próximas etapas</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sendo que quero selecionar as seguintes colunas:</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(movie, worldwide_gross) <span class="sc">|&gt;</span> </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># das quais quero que sejam classificadas em ordem decrescente</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(worldwide_gross))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Um resultado bem mais limpo de ver<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a>! Vale mencionar no código anterior as etapas que foram feitas, sendo que todas elas indicam uma operação sendo feita à direita do <em>pipe</em>, por exemplo, na primeira linha precisamos indicar de onde virão os dados, no caso, <code>filmes</code>; na segunda, indicamos que queremos selecionar as colunas <code>movie</code> e <code>worldwide</code>, que vieram dos dados que estão à esquerda do <em>pipe</em>; e por último, queremos <em>ordenar/classificar</em> nossos dados a partir da variável <code>worldwide_gross</code>, cujos dados nessa etapa já foram reduzidos para apenas duas colunas devido ao <em>pipe</em> anterior que foi feito.</p>
+<div class="no-row-height column-margin column-container"><div id="fn10"><p><sup>10</sup>&nbsp;Uma dica importante que dou é você fazer uso de comentários nas linhas de código, como as que foram feitas nesse exemplo. Isso vai ajudar você a aprender mais rápido quando voltar a utilizar o mesmo script ou deixar seu trabalho mais organizado, dados que você pode ir indicando as etapas que está fazendo.</p></div></div><p>Poderíamos na etapa anterior pedir para ficarmos com apenas as cinco maiores bilheterias mundias, para isso, poderíamos utilizar a função <code>slice(1:5)</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># quero utilizar a base de dados filmes nas próximas etapas</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sendo que quero selecionar as seguintes colunas:</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(movie, worldwide_gross) <span class="sc">|&gt;</span> </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># das quais quero que sejam classificadas em ordem decrescente</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(worldwide_gross)) <span class="sc">|&gt;</span> </span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># selecionado as cinco maiores bilheterias</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>É possível também fazer a classificação de variáveis nominais, cuja classificação será feita por ordem alfabética. Digamos que queremos classificar os filmes segundo seu gênero, poderíamos aplicar o seguinte código:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(movie, genre) <span class="sc">|&gt;</span> </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(genre)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>No código executado, o padrão para variáveis qualitativas também é o de mostrar do menor valor para o maior quando não indicado a função auxiliar <code>desc()</code>, no caso mostrando da letra A até a letra Z. Aqui vale ressaltar novamente que os ordenamentos feitos não alteram a base de dados original. Essas alterações só ficarão salvas se criarmos um novo <em>objeto</em>.</p>
+</section>
+<section id="selecionando-linhas-2" class="level3 page-columns page-full" data-number="3.5.3">
+<h3 data-number="3.5.3" class="anchored" data-anchor-id="selecionando-linhas-2"><span class="header-section-number">3.5.3</span> Selecionando linhas 2</h3>
+<p>Nas etapas onde ordenamos os dados com a função <code>arrange()</code>, em um dos casos nos pedimos para retornar as cinco primeiras linhas que correspondiam aos filmes com as maiores bilheterias. Esse é um procedimento bastante comum que podemos reduzir etapas se fizermos uso de variantes da função <code>slice()</code>, no caso a função <code>slice_max()</code> e <code>slice_min()</code><a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a>. Por exemplo, podemos pedir para que seja retornado o maior valor de bilheteria mundial com o seguinte código:</p>
+<div class="no-row-height column-margin column-container"><div id="fn11"><p><sup>11</sup>&nbsp;Ainda vão existir outras variações da função <code>slice()</code> que podem ser utilizadas, cada uma com algum proposito específico.</p></div></div><div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="at">order_by =</span> worldwide_gross)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>O resultado será o retorno de uma linha, já que estamos utilizando a função <code>slice()</code>, mas que retorna a linha que contém o maior valor da variável <code>worldwide_gross</code>, por isso aqui <code>slice_max()</code>.</p>
+<p>Importante destacar que dentro da função <code>slice_max()</code>, para fazermos o ordenamento utilizamos o termos <code>order_by = worldwide_gross</code>. Como já sabemos, <code>worldwide_gross</code> é o nome de uma das colunas de nosso banco de dados, mas o termo <code>order_by</code> ganha um nome especial, pois ele é um <strong>parâmetro</strong> da função <code>slice_max()</code>, no presente caso, aquele que precisa ser indicado para a função <code>slice_max()</code> saber sobre qual coluna ela deve buscar o valor máximo!</p>
+<p>Quase todas as funções vão possuir parâmetros, a própria função <code>slice_max()</code> possui mais parâmetros, como por exemplo o parâmetro <code>n</code> que é onde nós indicamos o número de linhas que devem ser retornadas, como mostra o próximo exemplo<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a>:</p>
+<div class="no-row-height column-margin column-container"><div id="fn12"><p><sup>12</sup>&nbsp;Neste exemplo, a maneira como organizei as linhas de código foi no sentido de deixar em cada linha separada um argumento da função slice_max(). Isso não é uma obrigação, mas deixa o código mais limpo, principalmente se precisamos utilizar muitos argumentos. Além disso, a dica segue muito útil, comente as etapas que estiver construindo no seu código!</p></div></div><div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># indicando a variável que a função deve classificar</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">order_by =</span> worldwide_gross, </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># o numero de linhas que ela deve retornar</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Como podemos saber o numero de parâmetros de uma função? O mais indicado, embora um pouco mais avançado seria procurar a documentação da função onde existe uma descrição da função que estamos utilizando construida por que criou o pacote. Podemos pedir ajuda por exemplo indicando o seguinte código:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>?slice_max</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>O código vai abrir a janela chamada <em>Help</em>, mostrando a documentação da função, com os argumentos possíveis como mostra a <a href="#fig-ajuda" class="quarto-xref">Figura&nbsp;<span>3.3</span></a>.</p>
+<div id="fig-ajuda" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-ajuda-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.3: Ajuda para identificar parâmetros de uma função
+</figcaption>
+<div aria-describedby="fig-ajuda-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="..\imagens_apostila/help.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" data-glightbox="description: .lightbox-desc-3"><img src="..\imagens_apostila/help.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+</div>
+</figure>
+</div>
+<p>Além do código <code>?slice_max</code>, poderíamos ter entrado diretamente na aba <em>Help</em> e digitado na busca <code>slice_max</code>, ou o nome de qualquer outra função que queremos conhecer melhor. Importante destacar que não devemos utilizar os parênteses <code>()</code> quando queremos pedir ajuda!</p>
+<p>Outra maneira útil de pedir ajuda como vimos é com o ChatGPT. Por exemplo, se criarmos um prompt como mostrado na <a href="#fig-slice_max_ajuda" class="quarto-xref">Figura&nbsp;<span>3.4</span></a>, poderemos ter uma excelente ajuda para sabermos quais são os parâmetros que a função <code>slice_max()</code> possui, bem como qualquer outra que gostaríamos.</p>
+<div id="fig-slice_max_ajuda" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-slice_max_ajuda-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.4: Pedindo ao ChatGPT para descrever os parâmetros de <code>slice_max()</code>
+</figcaption>
+<div aria-describedby="fig-slice_max_ajuda-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="..\imagens_apostila/chatgpt_slice_max_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" data-glightbox="description: .lightbox-desc-4"><img src="..\imagens_apostila/chatgpt_slice_max_1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+</div>
+</figure>
+</div>
+<p>Se nossa necessidade é o de obter os menores valores para uma variável na base de dados, podemos então utilizar a função <code>slice_min()</code>, cujos parâmetros são os mesmos da função <code>slice_max()</code>. No exemplo mostrado no código abaixo, vamos pedir para retornar os filmes que tiveram o menor faturamento mundial:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_min</span>(</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">order_by =</span> worldwide_gross, </span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="dv">10</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Outra possibilidade no uso das funções acima é o de apenas indicar os parâmetros, sem a indicação de <code>order_by</code> ou <code>n</code>. Contudo, isso pode ser fonte de erro e dúvidas em quem está começando a utilizar essas funções, embora em pessoas mais avançadas na linguagem o comum é que não se observe essa descrição mais detalhada. Sendo assim, os códigos seriam executados se tivessem sido escritos como:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(worldwide_gross, <span class="dv">10</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_min</span>(worldwide_gross, <span class="dv">10</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A única advertência é a de que os valores dos parâmetros sejam colocados na sua ordem certa, a ordem na qual a função <code>slice_</code> exige. <em>Se invertessemos, colocando antes o 10, teríamos um erro! Além disso, existem parâmetros que serão obrigatórios e outros que são opcionais, por exemplo, order_by será sempre um parâmetro obrigatório, dado que sem ele a função</em> <code>slice_</code> <em>não saberá o que retornar.</em></p>
+<p>Para concluir, nessa parte aprendemos como selecionar linhas de nossa base de dados com a função <code>slice()</code>, ou com suas variações que nos permitiram maior flexibilização na seleção das linhas a partir de critérios. Contudo, veremos que podemos utilizar a função <code>filter()</code> para também selecionar linhas, mas com um grau de sofisticação muito maior em termos de busca que podemos aplicar.</p>
+</section>
+</section>
+<section id="função-filter" class="level2 page-columns page-full" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="função-filter"><span class="header-section-number">3.6</span> Função <code>filter()</code></h2>
+<p>Começamos aqui o uso da função <code>filter()</code> cujo resultado será também eliminar linhas a partir de critérios escolhidos por nós. Nessa parte vamos fazer um intenso uso de critérios lógicos que permitirão que possamos selecionar linhas com critérios de colunas diferentes.</p>
+<p>Vamos começar com um exemplo simples, ainda aplicado somente a uma das colunas, pedindo para que sejam retornados todos os filmes com classificação igual a <em>R</em> de nossa variável <code>mpaa_rating</code><a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a>, como mostra o próximo código:</p>
+<div class="no-row-height column-margin column-container"><div id="fn13"><p><sup>13</sup>&nbsp;<code>mpaa_rating</code> é a variável que indica a classificação do filme criada pela <em>Motion Picture Association</em> de acordo com faixas, onde <strong>R</strong>, por exemplo, indica filmes que possuem algum tipo de restrição ao acesso.</p></div></div><div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mpaa_rating <span class="sc">==</span> <span class="st">"R"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Como podemos perceber, o nosso filtro retornou um total de 1514 linhas, que correspondem ao total de filmes que atenderam ao critério buscado dentro da função <code>filter()</code>.</p>
+<p>O critério passado dentro da função <code>filter()</code> é bastante intuitivo, ela nos diz para que a coluna que contém a variável <code>mpaa_rating</code> retorne todos os <em>critérios/valores</em> iguais a <code>R</code>, de nossa base de dados <code>filmes</code>, que como sabemos, está à esquerda do operador <em>pipe</em>.</p>
+<p>Duas observações aqui são importantes: 1. Quando queremos selecionar algo que seja exatamente igual a um critério, devemos utilizar <code>==</code>. Caso a busca for feita com apenas <code>=</code>, teremos uma mensagem de erro!! Segundo, todos os critérios que forem valores de uma variável qualitativa, devem vir entre aspas, como foi <code>"R"</code>, caso contrário também teremos um erro em nossa execução!!</p>
+<p>Os operadores possíveis são:</p>
+<ol type="1">
+<li>==, que como vimos retornar algo que seja exatamente igual ao critério pedido;</li>
+<li>&gt;, que retorna algo que seja <em>estritamente maior</em> do que o critério pedido;</li>
+<li>&gt;=, que retorna algo que seja maior ou igual ao critério pedido;</li>
+<li>&lt;, que retorna algo que seja <em>estritamente menor</em> do que o critério pedido;</li>
+<li>&lt;=, que retorna algo que seja menor ou igual ao critério pedido;</li>
+<li>!=, que retorna algo que não seja igual ao critério pedido;</li>
+</ol>
+<p>Alguns exemplos podem ser vistos nos códigos abaixo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># selecionando filmes com faturamento mundial maior do que 500 milhões</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(worldwide_gross <span class="sc">&gt;</span> <span class="dv">500000000</span>)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># selecionando todos os filmes que não sejam iguais a R</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mpaa_rating <span class="sc">!=</span> <span class="st">"R"</span>)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="co"># selecionando filmes com orçamento abaixo ou igual a 1 milhão</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(production_budget <span class="sc">&lt;=</span> <span class="dv">1000000</span>) </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="filtrando-linhas-com-o-uso-do" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="filtrando-linhas-com-o-uso-do"><span class="header-section-number">3.6.1</span> Filtrando linhas com o uso do <code>&amp;</code></h3>
+<p>Podemos utilizar duas variáveis para especificar critérios de busca, como por exemplo, filmes com classificação indicativa R e cujo orçamento de produção foi maior ou igual do que 200 milhões, como mostra o seguinte código:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mpaa_rating <span class="sc">==</span> <span class="st">"R"</span> <span class="sc">&amp;</span> production_budget <span class="sc">&gt;=</span> <span class="dv">200000000</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Como podemos ver pelo resultado, na busca não tivemos nenhum resultado encontrado, isso porque nenhum filme com a classificação R teve orçamento de produção tão alto, agora se refazermos o critério para buscar filmes com orçamento de 150 milhões, podemos ver que o resultado é uma lista com 7 filmes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mpaa_rating <span class="sc">==</span> <span class="st">"R"</span> <span class="sc">&amp;</span> production_budget <span class="sc">&gt;=</span> <span class="dv">150000000</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(movie, mpaa_rating, production_budget)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Poderíamos ainda buscar por filmes que são de comédia e cuja classificação foi <em>PG</em> como no código abaixo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mpaa_rating <span class="sc">==</span> <span class="st">"PG"</span> <span class="sc">&amp;</span> genre <span class="sc">==</span> <span class="st">"Comedy"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Em todos os códigos acima que buscaram comparar duas colunas diferentes, fizemos o uso do termos <code>&amp;</code>. É ele o responsável por comparar as duas colunas e retornar apenas aquelas que atendem aos dois critérios pedidos.</p>
+</section>
+<section id="filtrando-valores-com-between" class="level3" data-number="3.6.2">
+<h3 data-number="3.6.2" class="anchored" data-anchor-id="filtrando-valores-com-between"><span class="header-section-number">3.6.2</span> Filtrando valores com <code>between()</code></h3>
+<p>Na próxima situação vamos buscar comparar os filmes que tiveram um orçamento entre dois valores, por exemplo, entre 5 e 10 milhões. Poderíamos ter feito isso com base no que já aprendemos aqui como será mostrado no código a seguir:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(production_budget <span class="sc">&gt;=</span> <span class="dv">5000000</span> <span class="sc">&amp;</span> production_budget <span class="sc">&lt;=</span> <span class="dv">10000000</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Esse tipo de filtro pode ser feito com uma função auxiliar chamada <code>between()</code> muito interessante, que reduz a duplicação em nosso código. Vejamos sua aplicação:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">between</span>(production_budget, <span class="dv">5000000</span>, <span class="dv">10000000</span>)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A função <code>between()</code> vai possuir três argumentos que devem ser fornecidos, o primeiro deles é a variável na qual queremos obter o intervalo de valores, depois o limite inferior de nosso intervalo e posteriormente o limite superior. Lembrando que nessa função, ela sempre vai incluir os intervalos indicados!</p>
+</section>
+<section id="filtrando-valores-com-e-in" class="level3" data-number="3.6.3">
+<h3 data-number="3.6.3" class="anchored" data-anchor-id="filtrando-valores-com-e-in"><span class="header-section-number">3.6.3</span> Filtrando valores com <code>|</code> e <code>%in%</code></h3>
+<p>Outra situação muito comum de quem utiliza a função <code>filter()</code> é o de filtrar por mais de um valor. Digamos que nosso objetivo seja o de selecionar apenas os filmes que foram distribuídos pelas seguintes empresas: <em>Warner Bros.</em>, <em>Sony Pictures</em> e <em>MGM</em>. Poderíamos aplicar o seguinte filtro sobre a variável <code>distributor</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(distributor <span class="sc">==</span> <span class="st">"MGM"</span> <span class="sc">|</span> distributor <span class="sc">==</span> <span class="st">"Lionsgate"</span> <span class="sc">|</span> distributor <span class="sc">==</span> <span class="st">"Universal"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>No código acima a barra vertical <code>|</code> indica que queremos que o filtro aplicado sobre a vairável <code>distributor</code> retorne MGM <strong>ou</strong> Lionsgate <strong>ou</strong> Universal. Mesmo se uma das condições não é atendida, ele vai retornar as demais quando utilizamos o <code>|</code>, diferente do <code>&amp;</code> na qual as condições precisam ser todas verdadeiras. Contudo, existe uma maneira mais simples de obter os resultados acima, para isso podemos utilizar a seguinte expressão:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>filmes <span class="sc">|&gt;</span> </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(distributor <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"MGM"</span>, <span class="st">"Lionsgate"</span>, <span class="st">"Universal"</span>) )</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Com o uso do <code>%in%</code> basta especificarmos os valores que queremos filtrar para uma variável dentro do nosso vetor construído com <code>c()</code>, deixando o código muito mais simples e limpo.</p>
+<p>No próximo capítulo vamos trabalhar com mais funções do pacote <code>tidyverse</code> em nosso processo de aprendizado de como manipular bases de dados com o R. Contudo, antes de irmos para o próximo capítulo, deixo a mensagem de que pode ser muito útil no processo de entendimento das funções estudadas aqui, e de seu aprofundamento, contar com a ajuda do ChatGPT, seja para nos explicar os argumentos das funções, seja para nos fornecer exemplos. Se for utilizar essa ferramenta fantástica, procure deixar o mais claro possível o que está tentando realizar no R e que não conseguiu.</p>
+
+
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-1">Figura&nbsp;3.1: Pedindo ajuda ao ChatGPT</span>
+<span class="glightbox-desc lightbox-desc-2">Figura&nbsp;3.2: Aprendendo sobre o pipe no ChatGPT</span>
+<span class="glightbox-desc lightbox-desc-3">Figura&nbsp;3.3: Ajuda para identificar parâmetros de uma função</span>
+<span class="glightbox-desc lightbox-desc-4">Figura&nbsp;3.4: Pedindo ao ChatGPT para descrever os parâmetros de <code>slice_max()</code></span>
+</div>
+</section>
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiada");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiada");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../capitulos/02.nocoes_iniciais.html" class="pagination-link" aria-label="Noções Iniciais">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Noções Iniciais</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../capitulos/04.resumindo_dados.html" class="pagination-link" aria-label="Construindo Medidas Resumo">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Construindo Medidas Resumo</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","loop":false});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
+
+
+
+
+</body></html>

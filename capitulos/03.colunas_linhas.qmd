@@ -1,0 +1,532 @@
+# Manipulando Colunas e Linhas
+
+Vamos aqui dar início ao nosso processo de manipulação de um banco de dados utilizando as ferramentas disponíveis no `R` por meio do pacote chamado `tidyverse`. Esse pacote é um dos melhores para que possamos fazer todo o processamento de dados dentro do R, desde a importação dos dados, nas mais diferentes extensões, possíveis *limpezas* em nossos dados após a importação e por fim as manipulações de linhas e colunas necessárias para que tenhamos capacidade de retornar respostas a uma determinada pergunta, ou mesmo apenas deixar a base de dados pronta para construção de gráficos ou estimação de modelos estatísticos/econométricos.
+
+Nesse pequeno tutorial para apresentar as principais funções do pacote `tidyverse` para manipulação de dados, vamos assumir que nossas bases de dados não vão precisar de nenhum processo de limpeza após a sua importação, ou seja, essas bases por um motivo de facilidade já vão estar *prontas* para utilizarmos as funções que vamos aprender na sequência. Contudo, quando trabalhamos com dados é quase impossível no momento em que faremos uma análise não ser necessário esse procedimento de limpeza, um dos mais importantes e um dos que mais toma tempo do analista de dados. Embora não será objeto de nosso estudo, o próprio pacote `tidyverse` conta com diversas dessas funções para que possamos deixar uma base bagunçada em uma base pronta para qualquer análise.
+
+Nas próximas sessões, nosso foco estará em como utilizar algumas das funções responsáveis por reduzir nosso banco de dados, eliminando linhas e colunas desnecessárias, bem como a aplicação de filtros com diferentes condições aplicados a valores de uma determinada variável. Embora como mencionado em nossa introdução, o foco aqui não é o de limpar os dados, vamos ter um gostinho disso aprendendo uma importante função presente no pacote `janitor` para corrigir os nomes de nossas variáveis. Por fim, aqui ainda vamos ver a importância do chamado operador *pipe* para deixar nossos códigos elegantes e mais eficientes.
+
+## Instruções Iniciais
+
+Cada uma das próximas sessões será destinada a ensinar uma das funções presente no pacote `tidyverse`, começando pela função `select()`, que veremos, servirá para selecionar determinadas colunas da base de dados.
+
+Com o básico que vimos sobre o `R` até aqui, já é preciso saber que para usar uma função de um pacote qualquer precisamos sempre de duas coisas: primeiro, carregar previamente esse pacote para termos acesso as funções; segundo, caso ainda não tenhamos utilizado o pacote, precisamos instalar o pacote em nossa máquina[^03.colunas_linhas-1]. Portanto, o que precisamos fazer será apenas carregar esse pacote novamente, como indicado na linha de código abaixo por meio da função `library()`[^03.colunas_linhas-2]:
+
+[^03.colunas_linhas-1]: Como visto na @sec-instalando_pacotes, somente precisamos instalar nosso pacote uma única vez.
+
+[^03.colunas_linhas-2]: Não é necessário colocar o nome do pacote entre aspas quando estamos carregando o mesmo! Caso tenha dúvidas ainda sobre essa parte, volte e revise os pontos apresentados sobre instalação e carregamento de pacotes descritos na @sec-instalando-e-carregando-um-pacote-no-r.
+
+```{r}
+#| echo: true
+#| eval: true
+#| message: false
+#| warning: false
+# carregando o pacote tidyverse
+library(tidyverse)
+
+```
+
+Além do pacote que carregamos, carregaremos novamente a base de dados que vamos utilizar para esse estudo como indicado na linha de código a seguir[^03.colunas_linhas-3]:
+
+[^03.colunas_linhas-3]: Não será aqui indicado como podemos acessar a base de dados que carregamos, pois isso já foi trabalhado na @sec-conhecendo-nosso-banco-de-dados. Caso precise, volte e revise esse conteúdo!
+
+```{r}
+#| eval: true
+#| message: false
+#| warning: false
+#| output: false
+
+
+# baixando nossa primeira base de dados
+filmes <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-10-23/movie_profit.csv")
+
+```
+
+Com nosso pacote e banco de dados carregado, podemos agora aprender a selecionar as colunas por meio da função `select()`.
+
+## Função `select()` e o uso do *Operador Pipe* - `|>`
+
+Em muito casos práticos, quando estamos começando a trabalhar com nossa base de dados, embora ao fazermos o processo de importação tenhamos a disposição todas as colunas (variáveis) desse banco de dados, nem todas elas serão de nosso interesse. Por isso, aprender a selecionar apenas as variáveis que vamos utilizar é algo desejável, já que quanto menor o banco de dados, ou seja, com menos variáveis desnecessárias ela continver, menor será a exigência computacional de nossa máquina e mais rápida será nossa análise.
+
+### Selecionando algumas colunas 1
+
+Para selecionarmos as colunas de um banco de dados, que contém ao todo `{r} ncol(filmes)` linhas, podemos fazer uso da função `select()` cujos argumentos inseridos nela vão especificar *quais colunas gostaríamos de trabalhar de nossa base de dados, ou qual gostaríamos de excluir*.
+
+Digamos que gostaríamos apenas de selecionar as seguintes variáveis da base filmes: `movies`, `genre`, `release_date`, `mpaa_rating`. Poderíamos fazer isso utilizando a seguinte linha de código cujo resultado será mostrado na tela do *Console* do R[^03.colunas_linhas-4]:
+
+[^03.colunas_linhas-4]: Não estaremos mostrando os resultados dos demais códigos que forem executados nessa parte apenas por uma questão de comodidade, mas lembre que todos vão aparecer na tela do Console do RStudio!
+
+```{r}
+# selecionando algumas colunas de nossa base de dados
+filmes |> 
+  select(movie, genre, release_date, mpaa_rating)
+```
+
+Algumas coisas precisam ser ditas aqui antes de aprofundarmos mais na função `select()`, talvez sendo a primera delas referente ao próprio código utilizado, em especial ao símbolo que apareceu: `|>`[^03.colunas_linhas-5].
+
+[^03.colunas_linhas-5]: Existe um atalho para que possamos criar esse símbolo sem ter que digitar: `Ctrl + Shift + M`!!
+
+Esse símbolo, chamado *pipe*, é uma maneira de dizermos de onde devem vir os insumos de nossa função. Por exemplo, na função `select()` queremos selecionar as variáveis `movie`, `genre`, `release_date`, `mpaa_rating`, que foram descritas dentro dela. De onde virão essas variáveis? Virão de nossa base de dados chamada `filmes` que foi escrita à esquerda do *pipe*.
+
+Logo, o *pipe* pode ser entendido como: *aplique a função que está à direita do pipe, utilizando os insumos que estão à esquerda do pipe*! No caso do exemplo acima, selecione as variáveis indicadas na função `select()`, que foi escrita à direita do pipe, que virão da base de dados chamada `filmes`, que foi escrita à esquerda do pipe.
+
+Outra consideração sobre o código descrito acima é a de que ele foi escrito em linhas separadas, mas isso não é uma regra, apenas uma maneira de deixarmos nosso código mais organizado, ele poderia ser sido escrito como no código abaixo, embora a recomendação para que os códigos sejam mais claros, é que cada função deverá vir em sua própria linha, algo que vamos observar ao longo do uso de mais funções.
+
+```{r}
+#| eval: false
+# selecionando algumas colunas de nossa base de dados
+filmes |> select(movie, genre, release_date, mpaa_rating)
+```
+
+Voltando a função `select()`, é importante observar que a ordem na qual as colunas vão aparecer será a mesma que foi indicada dentro da função. Veja o resultado do seguinte código que seleciona as mesmas variáveis anteriores, apenas mudando a ordem na qual são indicadas dentro da função `select()`:
+
+```{r}
+#| eval: false
+# modificando a ordem das variáveis em nosso banco de dados
+filmes |> 
+  select(genre, mpaa_rating, movie, release_date)
+```
+
+### Salvando nossa seleção de colunas
+
+Um coisa muito importante, no código anterior, as variáveis que foram selecionadas de nosso banco de dados filmes, não foram salvas no R, ou seja, elas foram apenas executadas uma única vez no Console. Para que elas fiquem salvas para serem utilizadas em outras funções, precisamos criar um *objeto*, uma segunda base de dados, que será evidentemente menor do que a original que foi importada. Para fazer isso, vamos novamente utilizar aquele operados `<-`, como indicado na próxima linha de códigos:
+
+```{r}
+#| eval: false
+# salvando nossas quatro variáveis em um novo objeto
+filmes2 <- 
+  filmes |> 
+  select(genre, mpaa_rating, movie, release_date)
+```
+
+Os novos dados, chamados de `filmes2`, foram agora salvos e estão disponíveis dentro do Environmet do R para serem utilizados[^03.colunas_linhas-6].
+
+[^03.colunas_linhas-6]: Utilize a função `view(filmes2)` para inspecionar esse objeto criado.
+
+Uma observação também precisa ser feita aqui: *no geral, nunca salve um objeto com o nome de outro que já exista*. Por exemplo, caso tivesse criado a nova base de dados com o mesmo nome da original, você teria perdido as informações contidas na base de dados `filmes`. Observe que ao indicar outro nome, as duas bases permanecem disponíveis, `filmes`, a que foi primero baixada com todas as variáveis, e a segunda, `filmes2`, com apenas algumas colunas da base originalmente baixada[^03.colunas_linhas-7].
+
+[^03.colunas_linhas-7]: Quando digo que os dados foram salvas, quero dizer que eles estão disponíveis para serem utilizados enquanto o R estiver aberto. Veremos em momento oportuno que é possível também salvar nossos dados de maneira física, ou seja, no próprio computador em um fomato como o `.xlsx`. Porém, para nossos própositos, isso ainda não é necessário!
+
+### Selecionando algumas colunas 2
+
+Outra maneira de selecionarmos quais vairáveis de um banco de dados queremos é indicando com o sinal de `-` quais delas deverão ser descartadas. Por exemplo, digamos que em nossas análises futuras não precisamos das variáveis `release_date` e `distributor`, bastaria dentro da função `select()` indicar essas duas variáveis com o sinal de menos na frente, com mostrado na linha de código seguinte.
+
+```{r}
+#| eval: false
+# eliminando as duas colunas indicadas abaixo
+filmes |>  
+  select(-release_date, -distributor)
+```
+
+Ainda poderíamos ter escrito o código acima fazendo o uso da função `c()`, sendo uma maneira alternativa ao código acima:
+
+```{r}
+#| eval: false
+# eliminando as duas colunas indicadas abaixo
+filmes |>  
+  select(-c(release_date, distributor))
+```
+
+No codigo acima, o resultado é o mesmo, apenas estamos dizendo que não queremos todas as colunas descritas dentro de `c()`. Isso é muito útil quando temos varias colunas a serem eliminadas e queremos economizar no uso do `-`.
+
+### Selecionando algumas colunas 3
+
+Por fim, podemos ainda utilizar as posições das variáveis em nosso banco de dados, indicadas por um valor numérico, dentro da função `select()`, tanto para manter variáveis, quanto para excluir variáveis.
+
+Digamos que queiramos manter as mesmas variáveis anteriormente trabalhadas, `movie`, `genre`, `release_date` e `mpaa_rating`. Essas variáveis ocupam as seguintes colunas da base de dados `filmes`: *2, 3, 8 e 9*. Se indicarmos esses números na função `select()`, teremos o mesmo resultado obtido anteriormente:
+
+```{r}
+#| eval: false
+# selecionando por meio de posições das variáveis na base de dados
+filmes |> 
+  select(2,3,8,9)
+```
+
+Evidentemente, a ordem em que o valor numérico for indicado na função `select()` vai definir como as variáveis serão posicionadas.
+
+Nessa maneira de selecionarmos variáveis, será util utilizar o simbolo `:` para indicar que queremos selecionar intervalos de colunas, por exemplo, se quisermos selecionar as quatro primeiras variáveis do nosso banco de dados, ao inves de dentro da função `select()` indicamor *1,2,3,4*, podemos indicar *1:4*, como mostra o código abaixo:
+
+```{r}
+#| eval: false
+# selecionando por meio de posições das variáveis na base de dados
+filmes |> 
+  select(1:4)
+```
+
+A maneira numérica ainda é util quando queremos elimar uma variável que não tem uma informação útil, e que apresente um nome problemático, como é a primeira coluna de nossos dados. Podemos facilmente eliminarmos tal variável indicando *-1* dentro da função `select()`:
+
+```{r}
+#| eval: false
+# eliminando variáveis por meio da sua posição numérica
+filmes |> 
+  select(-1)
+```
+
+Nesse último caso, poderíamos ter salvo o resultado utilizando o próprio nome original filmes, dado que a seleção não implicou perda de informação útil de nosso banco de dados. Se fossemos fazer isso, poderíamos utilizar o código abaixo[^03.colunas_linhas-8]. *Mas lembre-se, tome cuidado ao fazer isso e certifique-se de que não está perdendo informação útil!!*
+
+[^03.colunas_linhas-8]: Em outras partes desse material veremos como se livrar de variáveis inúteis no próprio momento que fazemos a importação dos dados, algo que vamos aprender quando estudarmos os argumentos possíveis da função `read_csv2()`.
+
+```{r}
+#| eval: false
+#| output: false
+# filmes será o 'novo' banco de dados
+filmes <- 
+  filmes |> # criado a partir do select aplicado em filmes
+  select(-1) 
+```
+
+## Modificando o nome das colunas
+
+É possível modificarmos o nome das colunas de nosso banco de dados de duas maneiras, ou melhor, com o uso de duas funções do nosso pacote `tidyverse`. Vamos começar pela função `rename()` cujo nome já é bastante intuitivo.
+
+Contudo, antes de proceguir vale mencionar as regras para um bom nome de uma variável:
+
+1.  Todos os nomes em letra minúscula, curtos e descritivos;
+2.  Nunca deixar espaços em branco em um nome, separe os nomes compostos com `_`;
+3.  Nunca utilize *acentos* ou letras típicas do português, como `ç`. Prefira escrever com `c`!
+
+Na função `rename()` vamos indicar sempre o *novo nome* que queremos e o *nome original* da variável que será modificado. Digamos que nosso objetivo seja o de modificar o nome da variável `release_date` para `data_de_lancamento`, para isso bastaria aplicar o seguinte código:
+
+```{r}
+#| eval: false
+filmes |> 
+  rename(data_de_lancamento = release_date)
+```
+
+É possível também modificar o nome de uma variável por meio de sua posição, como mostra o próximo exemplo:
+
+```{r}
+#| eval: false
+filmes |> 
+  rename(
+    data_de_lancamento = release_date, 
+    arrecadacao_mundial = 6    ) |> 
+  select(data_de_lancamento, arrecadacao_mundial)
+```
+
+A outra maneira de modificarmos o nome da variável é quando utilizamos a função `select()`. Para isso, basta no momento de selecionarmos as colunas de nosso interesse já fazer a modificação do nome da variável. Vejamos o exemplo:
+
+```{r}
+#| eval: false
+filmes |> 
+  select(filme = movie, arrecadacao_mundial = 6)
+```
+
+Qualquer uma das maneiras fará com que o nome de uma coluna de nossa base de dados seja modificado[^03.colunas_linhas-9].
+
+[^03.colunas_linhas-9]: Veremos ser possível modificar o nome da variável no momento em que fazemos a importação do dado, por meio de algum argumento na função `read_csv()`.
+
+## Pedindo ajuda para o **chatGPT**
+
+Essa parte vai ser destinada para que possamos aprender a utilizar o chatGPT para construir nossos códigos, Isso vai ajudar a termos um tutor que vá nos ajudando na tarefa de dominar a linguagem do R, de seus pacotes e nos ajudando a ficar mais confiantes em nosso avanço, reduzindo o custo de entrado no mundo do R, e de qualquer linguagem de programação.
+
+Para que o ChatGPT possa nos ajudar, o que precisamos fazer é basicamente dar uma descrição bastante detalhada do que estamos precisando fazer no R. Por exemplo, podemos utilizar a função `select()` e `rename()`, que já aprendemos, e pedir para ele nos ajudar como se estivessemos ainda aprendendo. Por exemplo, poderíamos indicar o seguinte prompt mostrado por meio da @fig-ajuda_gpt:
+
+![Pedindo ajuda ao ChatGPT](/imagens_apostila/ajuda_chat1.png){#fig-ajuda_gpt}
+
+Outra ajuda que poderíamos procurar obter poderia ser para nos ajudar com o conceito do operador pipe `|>`, o que poderíamos pedir para que ele utilizasse o contexto da conversa anterior, na qual pedimos para ajudar com `select()`, @fig-ajuda_chat2.
+
+![Aprendendo sobre o pipe no ChatGPT](/imagens_apostila/ajuda_chat2.png){#fig-ajuda_chat2}
+
+Utilizar o recurso do ChatGPT é um recurso valioso que podemos ter nos dias atuais, principalmente quando estamos começando na liguagem R, na qual ficarmos travados em algum ponto pode ser frustante, e infelizmente, um motivo de desistência para muitos iniciantes na linguagem.
+
+## Função `arrange()`, `slice()` e suas derivações
+
+É possível dentro das funções do pacote `tidyverse` também fazer a seleção de linhas de nossa base de dados e não apenas colunas. Para isso, podemos utilizar a função `slice()` com argumentos que vão determinar o numero de linhas que deve ser retornado. Além disso, podemos facilmente fazer a classificação da nossa base de dados a partir de uma variável, tanto em ordem crescente quanto em ordem decrescente com o uso da função `arrange()`.
+
+### Selecionando linhas 1
+
+A maneira que selecionamos as linhas de um base de dado é um processo bastante simples. Por exemplo, indicando as linhas de *1:10* dentro da função `slice()`, vai nos retonar as dez primeiras linhas do nosso banco de dados, como mostra o código abaixo.
+
+```{r}
+#| output: false
+# selecionando as dez primeiras linhas
+filmes |> 
+  slice(1:10)
+
+```
+
+Como é possível perceber, a base de dados `filmes` agora mostra apenas as dez primeiras linhas, com todas as suas variáveis. Caso nosso código tivesse sido indicado como `slice(10)`, teríamos apenas como resposta a décima linha do nosso banco de dados, como indicado no código abaixo.
+
+```{r}
+#| output: false
+# selecionando as dez primeiras linhas
+filmes |> 
+  slice(10)
+```
+
+Da mesma forma que `select()` pode ser utilizado com um sinal de menos indicando quais colunas queremos excluir, a função `slice()` vai excluir todas as linhas que forem indicadas com sinal de `-`, como mostra o código abaixo pedindo para eliminar a linha *10*:
+
+```{r}
+#| output: false
+# selecionando as dez primeiras linhas
+filmes |> 
+  slice(-10)
+```
+
+Podemos ainda selecionar linhas que não estejam interligadas, para isso, podemos utilizar a seguinte syntaxe:
+
+```{r}
+#| output: false
+# selecionando as dez primeiras linhas
+filmes |> 
+  slice(1:5, 10, 30:40)
+```
+
+### Ordenando os dados
+
+Em nossa base de dados `filmes`, temos ao todo `{r} nrow(filmes)` e dentro das variáveis temos uma que indica as receitas mundiais do respectivo filme chamada `worldwide_gross`. Digamos que nosso objetivo seja o de ordenar aqueles filmes que possuem a maior receita, para isso, podemos utilizar a função `arrange()` como mostrado no código abaixo:
+
+```{r}
+#| output: false
+filmes |> 
+  arrange(worldwide_gross)
+```
+
+Uma coisa estranha aconteceu, como resultado, a base de dados agora mostra o filme do *Aquamen* como o primeiro, mas ele não possui receita mundial, apenas zero! O *'problema'* com o código acima é que ele por *default* classifica uma variável em ordem crescente, ou seja, do menor valor para o maior. Para que os dados sejam classificados em ordem decrescente, do maior para o menor valor, precisamos aplicar a função `desc()` dentro da função `arrange()`, como mostra nosso próximo código:
+
+```{r}
+#| output: false
+filmes |> 
+  arrange(desc(worldwide_gross))
+```
+
+Agora podemos perceber que o valor retornado foi o correto. Inclusive podemos para melhorar nossa visibilidade no Console do R, aplicarmos um pouco daquilo que já aprendemos. Por exemplo, se só nos interessa saber quais são os filmes com maior bilheteria no mundo, vamos selecionar apenas as variáveis que precisamos, como mostrado na sequência:
+
+```{r}
+#| output: false
+# quero utilizar a base de dados filmes nas próximas etapas
+filmes |> 
+  # sendo que quero selecionar as seguintes colunas:
+  select(movie, worldwide_gross) |> 
+  # das quais quero que sejam classificadas em ordem decrescente
+  arrange(desc(worldwide_gross))
+
+```
+
+Um resultado bem mais limpo de ver[^03.colunas_linhas-10]! Vale mencionar no código anterior as etapas que foram feitas, sendo que todas elas indicam uma operação sendo feita à direita do *pipe*, por exemplo, na primeira linha precisamos indicar de onde virão os dados, no caso, `filmes`; na segunda, indicamos que queremos selecionar as colunas `movie` e `worldwide`, que vieram dos dados que estão à esquerda do *pipe*; e por último, queremos *ordenar/classificar* nossos dados a partir da variável `worldwide_gross`, cujos dados nessa etapa já foram reduzidos para apenas duas colunas devido ao *pipe* anterior que foi feito.
+
+[^03.colunas_linhas-10]: Uma dica importante que dou é você fazer uso de comentários nas linhas de código, como as que foram feitas nesse exemplo. Isso vai ajudar você a aprender mais rápido quando voltar a utilizar o mesmo script ou deixar seu trabalho mais organizado, dados que você pode ir indicando as etapas que está fazendo.
+
+Poderíamos na etapa anterior pedir para ficarmos com apenas as cinco maiores bilheterias mundias, para isso, poderíamos utilizar a função `slice(1:5)`.
+
+```{r}
+#| output: false
+# quero utilizar a base de dados filmes nas próximas etapas
+filmes |> 
+  # sendo que quero selecionar as seguintes colunas:
+  select(movie, worldwide_gross) |> 
+  # das quais quero que sejam classificadas em ordem decrescente
+  arrange(desc(worldwide_gross)) |> 
+  # selecionado as cinco maiores bilheterias
+  slice(1:5)
+```
+
+É possível também fazer a classificação de variáveis nominais, cuja classificação será feita por ordem alfabética. Digamos que queremos classificar os filmes segundo seu gênero, poderíamos aplicar o seguinte código:
+
+```{r}
+#| output: false
+#| eval: false
+filmes |> 
+  select(movie, genre) |> 
+  arrange(genre)
+```
+
+No código executado, o padrão para variáveis qualitativas também é o de mostrar do menor valor para o maior quando não indicado a função auxiliar `desc()`, no caso mostrando da letra A até a letra Z. Aqui vale ressaltar novamente que os ordenamentos feitos não alteram a base de dados original. Essas alterações só ficarão salvas se criarmos um novo *objeto*.
+
+### Selecionando linhas 2
+
+Nas etapas onde ordenamos os dados com a função `arrange()`, em um dos casos nos pedimos para retornar as cinco primeiras linhas que correspondiam aos filmes com as maiores bilheterias. Esse é um procedimento bastante comum que podemos reduzir etapas se fizermos uso de variantes da função `slice()`, no caso a função `slice_max()` e `slice_min()`[^03.colunas_linhas-11]. Por exemplo, podemos pedir para que seja retornado o maior valor de bilheteria mundial com o seguinte código:
+
+[^03.colunas_linhas-11]: Ainda vão existir outras variações da função `slice()` que podem ser utilizadas, cada uma com algum proposito específico.
+
+```{r}
+#| output: false
+#| eval: false
+filmes |> 
+  slice_max(order_by = worldwide_gross)
+```
+
+O resultado será o retorno de uma linha, já que estamos utilizando a função `slice()`, mas que retorna a linha que contém o maior valor da variável `worldwide_gross`, por isso aqui `slice_max()`.
+
+Importante destacar que dentro da função `slice_max()`, para fazermos o ordenamento utilizamos o termos `order_by = worldwide_gross`. Como já sabemos, `worldwide_gross` é o nome de uma das colunas de nosso banco de dados, mas o termo `order_by` ganha um nome especial, pois ele é um **parâmetro** da função `slice_max()`, no presente caso, aquele que precisa ser indicado para a função `slice_max()` saber sobre qual coluna ela deve buscar o valor máximo!
+
+Quase todas as funções vão possuir parâmetros, a própria função `slice_max()` possui mais parâmetros, como por exemplo o parâmetro `n` que é onde nós indicamos o número de linhas que devem ser retornadas, como mostra o próximo exemplo[^03.colunas_linhas-12]:
+
+[^03.colunas_linhas-12]: Neste exemplo, a maneira como organizei as linhas de código foi no sentido de deixar em cada linha separada um argumento da função slice_max(). Isso não é uma obrigação, mas deixa o código mais limpo, principalmente se precisamos utilizar muitos argumentos. Além disso, a dica segue muito útil, comente as etapas que estiver construindo no seu código!
+
+```{r}
+#| output: false
+#| eval: false
+filmes |> 
+  slice_max(
+    # indicando a variável que a função deve classificar
+    order_by = worldwide_gross, 
+    # o numero de linhas que ela deve retornar
+    n = 5)
+```
+
+Como podemos saber o numero de parâmetros de uma função? O mais indicado, embora um pouco mais avançado seria procurar a documentação da função onde existe uma descrição da função que estamos utilizando construida por que criou o pacote. Podemos pedir ajuda por exemplo indicando o seguinte código:
+
+```{r}
+#| eval: false
+?slice_max
+```
+
+O código vai abrir a janela chamada *Help*, mostrando a documentação da função, com os argumentos possíveis como mostra a @fig-ajuda.
+
+![Ajuda para identificar parâmetros de uma função](/imagens_apostila/help.png){#fig-ajuda fig-align="center"}
+
+Além do código `?slice_max`, poderíamos ter entrado diretamente na aba *Help* e digitado na busca `slice_max`, ou o nome de qualquer outra função que queremos conhecer melhor. Importante destacar que não devemos utilizar os parênteses `()` quando queremos pedir ajuda!
+
+Outra maneira útil de pedir ajuda como vimos é com o ChatGPT. Por exemplo, se criarmos um prompt como mostrado na @fig-slice_max_ajuda, poderemos ter uma excelente ajuda para sabermos quais são os parâmetros que a função `slice_max()` possui, bem como qualquer outra que gostaríamos.
+
+![Pedindo ao ChatGPT para descrever os parâmetros de `slice_max()`](/imagens_apostila/chatgpt_slice_max_1.png){#fig-slice_max_ajuda fig-align="center"}
+
+Se nossa necessidade é o de obter os menores valores para uma variável na base de dados, podemos então utilizar a função `slice_min()`, cujos parâmetros são os mesmos da função `slice_max()`. No exemplo mostrado no código abaixo, vamos pedir para retornar os filmes que tiveram o menor faturamento mundial:
+
+```{r}
+#| output: false
+#| eval: false
+filmes |> 
+  slice_min(
+    order_by = worldwide_gross, 
+    n = 10
+  )
+```
+
+Outra possibilidade no uso das funções acima é o de apenas indicar os parâmetros, sem a indicação de `order_by` ou `n`. Contudo, isso pode ser fonte de erro e dúvidas em quem está começando a utilizar essas funções, embora em pessoas mais avançadas na linguagem o comum é que não se observe essa descrição mais detalhada. Sendo assim, os códigos seriam executados se tivessem sido escritos como:
+
+```{r}
+#| eval: false
+filmes |> 
+  slice_max(worldwide_gross, 10)
+
+filmes |> 
+  slice_min(worldwide_gross, 10)
+```
+
+A única advertência é a de que os valores dos parâmetros sejam colocados na sua ordem certa, a ordem na qual a função `slice_` exige. *Se invertessemos, colocando antes o 10, teríamos um erro! Além disso, existem parâmetros que serão obrigatórios e outros que são opcionais, por exemplo, order_by será sempre um parâmetro obrigatório, dado que sem ele a função* `slice_` *não saberá o que retornar.*
+
+Para concluir, nessa parte aprendemos como selecionar linhas de nossa base de dados com a função `slice()`, ou com suas variações que nos permitiram maior flexibilização na seleção das linhas a partir de critérios. Contudo, veremos que podemos utilizar a função `filter()` para também selecionar linhas, mas com um grau de sofisticação muito maior em termos de busca que podemos aplicar.
+
+## Função `filter()`
+
+Começamos aqui o uso da função `filter()` cujo resultado será também eliminar linhas a partir de critérios escolhidos por nós. Nessa parte vamos fazer um intenso uso de critérios lógicos que permitirão que possamos selecionar linhas com critérios de colunas diferentes.
+
+Vamos começar com um exemplo simples, ainda aplicado somente a uma das colunas, pedindo para que sejam retornados todos os filmes com classificação igual a *R* de nossa variável `mpaa_rating`[^03.colunas_linhas-13], como mostra o próximo código:
+
+[^03.colunas_linhas-13]: `mpaa_rating` é a variável que indica a classificação do filme criada pela *Motion Picture Association* de acordo com faixas, onde **R**, por exemplo, indica filmes que possuem algum tipo de restrição ao acesso.
+
+```{r}
+#| eval: false
+filmes |> 
+  filter(mpaa_rating == "R")
+```
+
+Como podemos perceber, o nosso filtro retornou um total de `{r} nrow(filmes |> filter(mpaa_rating == "R"))` linhas, que correspondem ao total de filmes que atenderam ao critério buscado dentro da função `filter()`.
+
+O critério passado dentro da função `filter()` é bastante intuitivo, ela nos diz para que a coluna que contém a variável `mpaa_rating` retorne todos os *critérios/valores* iguais a `R`, de nossa base de dados `filmes`, que como sabemos, está à esquerda do operador *pipe*.
+
+Duas observações aqui são importantes: 1. Quando queremos selecionar algo que seja exatamente igual a um critério, devemos utilizar `==`. Caso a busca for feita com apenas `=`, teremos uma mensagem de erro!! Segundo, todos os critérios que forem valores de uma variável qualitativa, devem vir entre aspas, como foi `"R"`, caso contrário também teremos um erro em nossa execução!!
+
+Os operadores possíveis são:
+
+1.  ==, que como vimos retornar algo que seja exatamente igual ao critério pedido;
+2.  \>, que retorna algo que seja *estritamente maior* do que o critério pedido;
+3.  \>=, que retorna algo que seja maior ou igual ao critério pedido;
+4.  \<, que retorna algo que seja *estritamente menor* do que o critério pedido;
+5.  \<=, que retorna algo que seja menor ou igual ao critério pedido;
+6.  !=, que retorna algo que não seja igual ao critério pedido;
+
+Alguns exemplos podem ser vistos nos códigos abaixo:
+
+```{r}
+#| eval: false
+# selecionando filmes com faturamento mundial maior do que 500 milhões
+filmes |> 
+  filter(worldwide_gross > 500000000)
+
+# selecionando todos os filmes que não sejam iguais a R
+filmes |> 
+  filter(mpaa_rating != "R")
+
+# selecionando filmes com orçamento abaixo ou igual a 1 milhão
+filmes |> 
+  filter(production_budget <= 1000000) 
+```
+
+### Filtrando linhas com o uso do `&`
+
+Podemos utilizar duas variáveis para especificar critérios de busca, como por exemplo, filmes com classificação indicativa R e cujo orçamento de produção foi maior ou igual do que 200 milhões, como mostra o seguinte código:
+
+```{r}
+#| eval: false
+filmes |> 
+  filter(mpaa_rating == "R" & production_budget >= 200000000)
+```
+
+Como podemos ver pelo resultado, na busca não tivemos nenhum resultado encontrado, isso porque nenhum filme com a classificação R teve orçamento de produção tão alto, agora se refazermos o critério para buscar filmes com orçamento de 150 milhões, podemos ver que o resultado é uma lista com `{r} nrow(filmes |> filter(mpaa_rating == "R" & production_budget >= 150000000))` filmes.
+
+```{r}
+#| eval: false
+filmes |> 
+  filter(mpaa_rating == "R" & production_budget >= 150000000) |> 
+  select(movie, mpaa_rating, production_budget)
+```
+
+Poderíamos ainda buscar por filmes que são de comédia e cuja classificação foi *PG* como no código abaixo:
+
+```{r}
+#| eval: false
+filmes |> 
+  filter(mpaa_rating == "PG" & genre == "Comedy")
+```
+
+Em todos os códigos acima que buscaram comparar duas colunas diferentes, fizemos o uso do termos `&`. É ele o responsável por comparar as duas colunas e retornar apenas aquelas que atendem aos dois critérios pedidos.
+
+### Filtrando valores com `between()`
+
+Na próxima situação vamos buscar comparar os filmes que tiveram um orçamento entre dois valores, por exemplo, entre 5 e 10 milhões. Poderíamos ter feito isso com base no que já aprendemos aqui como será mostrado no código a seguir:
+
+```{r}
+#| eval: false
+filmes |> 
+  filter(production_budget >= 5000000 & production_budget <= 10000000)
+```
+
+Esse tipo de filtro pode ser feito com uma função auxiliar chamada `between()` muito interessante, que reduz a duplicação em nosso código. Vejamos sua aplicação:
+
+```{r}
+#| eval: false
+ 
+filmes |> 
+  filter(
+    between(production_budget, 5000000, 10000000)
+    )
+```
+
+A função `between()` vai possuir três argumentos que devem ser fornecidos, o primeiro deles é a variável na qual queremos obter o intervalo de valores, depois o limite inferior de nosso intervalo e posteriormente o limite superior. Lembrando que nessa função, ela sempre vai incluir os intervalos indicados!
+
+### Filtrando valores com `|` e `%in%`
+
+Outra situação muito comum de quem utiliza a função `filter()` é o de filtrar por mais de um valor. Digamos que nosso objetivo seja o de selecionar apenas os filmes que foram distribuídos pelas seguintes empresas: *Warner Bros.*, *Sony Pictures* e *MGM*. Poderíamos aplicar o seguinte filtro sobre a variável `distributor`:
+
+```{r}
+#| eval: false
+filmes |> 
+  filter(distributor == "MGM" | distributor == "Lionsgate" | distributor == "Universal")
+
+```
+
+No código acima a barra vertical `|` indica que queremos que o filtro aplicado sobre a vairável `distributor` retorne MGM **ou** Lionsgate **ou** Universal. Mesmo se uma das condições não é atendida, ele vai retornar as demais quando utilizamos o `|`, diferente do `&` na qual as condições precisam ser todas verdadeiras. Contudo, existe uma maneira mais simples de obter os resultados acima, para isso podemos utilizar a seguinte expressão:
+
+```{r}
+#| eval: false
+filmes |> 
+  filter(distributor %in% c("MGM", "Lionsgate", "Universal") )
+```
+
+Com o uso do `%in%` basta especificarmos os valores que queremos filtrar para uma variável dentro do nosso vetor construído com `c()`, deixando o código muito mais simples e limpo.
+
+No próximo capítulo vamos trabalhar com mais funções do pacote `tidyverse` em nosso processo de aprendizado de como manipular bases de dados com o R. Contudo, antes de irmos para o próximo capítulo, deixo a mensagem de que pode ser muito útil no processo de entendimento das funções estudadas aqui, e de seu aprofundamento, contar com a ajuda do ChatGPT, seja para nos explicar os argumentos das funções, seja para nos fornecer exemplos. Se for utilizar essa ferramenta fantástica, procure deixar o mais claro possível o que está tentando realizar no R e que não conseguiu.
