@@ -99,4 +99,4 @@ meus_dados <- tibble(
 meus_dados
 ```
 
-Sertamente essas pequenas demostrações não esgotam as possibilidades de uso do R para importação de dados, mas servem como um primeiro passo. Existem muitos outros pacotes que trabalham com os mais variados tipos de dados, de acordo com as necessidades de cada pesquisador.
+Certamente essas pequenas demostrações não esgotam as possibilidades de uso do R para importação de dados, mas servem como um primeiro passo. Existem muitos outros pacotes que trabalham com os mais variados tipos de dados, de acordo com as necessidades de cada pesquisador.
