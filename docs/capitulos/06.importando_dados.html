@@ -276,15 +276,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Na grande maior de nossos trabalhos com dados, o comum é que tenhamos realizado o download da base para nosso computador primeiro, para alguma pasta de trabalho que definimos que reunirá as informações do projeto no qual estamos trabalhando. Quando esse é caso, pouco vai mudar em nossa maneira de utilizar a função que vai importar os dados, a única diferença que teremos será ao invés de indicar uma URL, como foi o caso até aqui, vamos especificar o endereço da pasta de trabalho onde está nosso arquivo.</p>
 <p>Digamos que nosso arquivo contendo os dados esteja em uma pasta chamada <em>meus_dados</em> no nosso computador, com o seguinte nome <code>movie_profit.csv</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, ou seja, é um arquivo que está na extensão <em>.csv</em>. Quando esse é o caso, existem duas funções possíveis de serem utilizadas, <code>read_csv()</code> e <code>read_csv2()</code>, cuja diferença está no separador utilizado no arquivo.</p>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;<a href="https://raw.githubusercontent.com/felipemadruga/workshop/refs/heads/main/bases_dados/movie_profit.csv" download="movie_profit.csv">Baixe os dados aqui!</a></p></div></div><p>Quando nossos arquivos são de textos, como são os arquivos .csv, o mais comum é que eles separem cada variável na base por meio de uma “<code>,</code>”, mas em outras situações, como no Brasil, o comum é também existirem arquivos separado por “<code>;</code>”. Quando estamos diante de um arquivo que tem seus valores separados por <em>vírgula</em>, devemos utilizar a função <code>read_csv()</code>, mas se o arquivo utiliza o separador <em>ponto-vírgula</em>, utilizamos <code>read_csv2()</code>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;<a href="https://dl.dropboxusercontent.com/scl/fi/zy31bdsf2emvcc0v27tad/movie_profit.csv?rlkey=2bcdmlem455w06xc3s3hen1ib&amp;st=ntba6c8v&amp;dl=0" download="">Baixe aqui o arquivo!</a></p><a href="https://dl.dropboxusercontent.com/scl/fi/zy31bdsf2emvcc0v27tad/movie_profit.csv?rlkey=2bcdmlem455w06xc3s3hen1ib&amp;st=ntba6c8v&amp;dl=0" download="">
+</a><p><a href="https://dl.dropboxusercontent.com/scl/fi/zy31bdsf2emvcc0v27tad/movie_profit.csv?rlkey=2bcdmlem455w06xc3s3hen1ib&amp;st=ntba6c8v&amp;dl=0" download=""></a></p></div></div><p>Adicionar a imagem aqui</p>
+<p>Quando nossos arquivos são de textos, como são os arquivos .csv, o mais comum é que eles separem cada variável na base por meio de uma “<code>,</code>”, mas em outras situações, como no Brasil, o comum é também existirem arquivos separado por “<code>;</code>”. Quando estamos diante de um arquivo que tem seus valores separados por <em>vírgula</em>, devemos utilizar a função <code>read_csv()</code>, mas se o arquivo utiliza o separador <em>ponto-vírgula</em>, utilizamos <code>read_csv2()</code>.</p>
+<p>Colocar uma imagem com a diferença entre os dois tipos de separador</p>
+<p>Para que o arquivo seja importado para o RStudio vamos precisar dentro da função <code>read_csv()</code> indicar o caminho completo da pasta onde o arquivo está localizado<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. No meu computador, o caminho completo quando copiamos fica como: <code>"C:\Users\Felipe\Documents\meus_dados\movie_profit.csv"</code>. Adicionando na função <code>read_csv()</code> o caminho, teríamos o seguinte código:</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;Uma das maneiras mais simples de fazer isso é clicar com o botão direito do mouse sobre o arquivo, verificar a lista de opções que será mostrada e clicar em <em>“copiar como caminho”</em>.</p></div></div><div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"C:\Users\Felipe\Documents\meus_dados\movie_profit.csv"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Contudo, se esse código for executado resultará em um erro! Isso é o resultado das barras que estão sendo utilizadas no caminho do diretório, <code>"\"</code>. Para contornar esse problema temos duas opções: utilizamos barras duplas <code>"\\"</code>; ou utilizamos a barra <em>invertida</em> <code>"/"</code>. Vejamos os códigos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Primeira forma</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">Felipe</span><span class="sc">\\</span><span class="st">Documents</span><span class="sc">\\</span><span class="st">meus_dados</span><span class="sc">\\</span><span class="st">movie_profit.csv"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Segunda forma</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>dados_1 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"C:/Users/Felipe/Documents/meus_dados/movie_profit.csv"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>As funções <code>read_csv()</code> vão possuir alguns argumentos adicionais, como por exemplo, a possibilidade de selecinarmos apenas determinadas colunas de nossa base de dados, alterarmos os nomes, modificar seus tipos. Além disso, a base que importamos não apresentava necessidade de realizar qualquer tratamento prévio, o que na prática não vai acontecer. Nessas situações, vai exigir habilidade para trabalhar com esses argumentos adicionais, o que foge ao objetivo do workshop.</p>
 </section>
-<section id="importando-planilhas-de-excel" class="level2" data-number="6.2">
+<section id="importando-planilhas-de-excel" class="level2 page-columns page-full" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="importando-planilhas-de-excel"><span class="header-section-number">6.2</span> Importando Planilhas de Excel</h2>
-<p>Aqui mostrar que podemos carregar as planilhas do excel com o pacote <code>readxl</code>.</p>
+<p>Quando temos planilhas, como as tradicionais planilhas de excel, elas também poderão ser carregadas para o R, contudo, vamos precisar de um outro pacote para fazer isso, o pacote <code>readxl</code>. Vamos trabalhar como uma mesma versão de nossa base de dados, só que agora a mesma vai estar em uma planilha de excel<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, além disso, vamos precisar fazer primeiro a importação do pacote <code>readxl</code><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;<a href="https://dl.dropboxusercontent.com/scl/fi/343k28k6nkxn5kzrvpevg/movie_profit.xlsx?rlkey=prxpdwa9ct0pey3ke4p1x0zfr&amp;st=wv1sy8rb&amp;dl=0" download="">Baixe aqui o arquivo!</a></p><a href="https://dl.dropboxusercontent.com/scl/fi/343k28k6nkxn5kzrvpevg/movie_profit.xlsx?rlkey=prxpdwa9ct0pey3ke4p1x0zfr&amp;st=wv1sy8rb&amp;dl=0" download="">
+</a><p><a href="https://dl.dropboxusercontent.com/scl/fi/343k28k6nkxn5kzrvpevg/movie_profit.xlsx?rlkey=prxpdwa9ct0pey3ke4p1x0zfr&amp;st=wv1sy8rb&amp;dl=0" download=""></a></p></div><div id="fn4"><p><sup>4</sup>&nbsp;<code>install.packages("readxl")</code></p></div></div><p>Depois de termos carregado nosso pacote <code>readxl</code>, vamos utilizar a função <code>read_xlsx()</code> para ler arquivos em excel cuja extensão seja <em>.xlsx</em> seguindo as mesmas recomendações do caso onde nosso arquivo era <em>.csv</em>, como podemos ver pelo código abaixo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl) <span class="co"># carregando nosso pacote</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Segunda forma</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>dados_1 <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"C:/Users/Felipe/Documents/meus_dados/movie_profit.xlsx"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Em alguns casos será interessante utilizar a função <code>read_xls()</code> que faz a leitura de arquivos em excel de versões mais antigas. Além disso, as funções do pacote <code>readxl</code> também possuem diversos argumentos para serem utilizados, principalmente em arquivos em excel que não estão bem organizados como foi o caso do exemplo.</p>
 </section>
 <section id="função-tibble" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="função-tibble"><span class="header-section-number">6.3</span> Função <code>tibble()</code></h2>
-<p>Mostrar como podemos em muitos casos construir uma pequena base de dados com essa função.</p>
+<p>Até aqui trabalhamos com base de dados que foram importadas, sejam elas vindas de uma URL ou do nosso computador. Em muitas situações pode ser necessário construir pequenas bases de dados, como por exemplo, alguma base de dado que esteja em algum livro de estatística. Nessas situações, podemos contar com a função <code>tibble()</code>.</p>
+<p>Cada variável dessa base de dados será construida com o uso da função <code>c()</code>, da seguinte maneira: primeiro definiremos o nome de nossa variável, por exemplo <code>variavel_1</code>, depois inserimos seus valores dentro da função <code>c()</code>. Vejamos um exemplo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">variavel_1 =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">15</span>, <span class="dv">40</span>, <span class="dv">18</span>, <span class="dv">6</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 1
+  variavel_1
+       &lt;dbl&gt;
+1         20
+2         15
+3         40
+4         18
+5          6</code></pre>
+</div>
+</div>
+<p>Podemos criar quantas variáveis forem de nosso interesse:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>meus_dados <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">nome =</span> <span class="fu">c</span>(<span class="st">"João"</span>, <span class="st">"Maria"</span>, <span class="st">"Carlos"</span>), </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">nota =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="dv">4</span>, <span class="dv">8</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>meus_dados</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  nome    nota
+  &lt;chr&gt;  &lt;dbl&gt;
+1 João     0.5
+2 Maria    4  
+3 Carlos   8  </code></pre>
+</div>
+</div>
+<p>Essa função, embora simples, é muito utilizada a medida que avançamos em nosso conhecimento da linguagem R.</p>
 
 
 </section>

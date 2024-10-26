@@ -16,14 +16,87 @@ Na grande maior de nossos trabalhos com dados, o comum é que tenhamos realizado
 
 Digamos que nosso arquivo contendo os dados esteja em uma pasta chamada *meus_dados* no nosso computador, com o seguinte nome `movie_profit.csv`[^06.importando_dados-1], ou seja, é um arquivo que está na extensão *.csv*. Quando esse é o caso, existem duas funções possíveis de serem utilizadas, `read_csv()` e `read_csv2()`, cuja diferença está no separador utilizado no arquivo.
 
-[^06.importando_dados-1]: <a href="https://raw.githubusercontent.com/felipemadruga/workshop/refs/heads/main/bases_dados/movie_profit.csv" download="movie_profit.csv">Baixe os dados aqui!</a>
+[^06.importando_dados-1]: <a href="https://dl.dropboxusercontent.com/scl/fi/zy31bdsf2emvcc0v27tad/movie_profit.csv?rlkey=2bcdmlem455w06xc3s3hen1ib&st=ntba6c8v&dl=0" download>Baixe aqui o arquivo!
+
+    </a>
+
+Adicionar a imagem aqui
 
 Quando nossos arquivos são de textos, como são os arquivos .csv, o mais comum é que eles separem cada variável na base por meio de uma "`,`", mas em outras situações, como no Brasil, o comum é também existirem arquivos separado por "`;`". Quando estamos diante de um arquivo que tem seus valores separados por *vírgula*, devemos utilizar a função `read_csv()`, mas se o arquivo utiliza o separador *ponto-vírgula*, utilizamos `read_csv2()`.
 
+Colocar uma imagem com a diferença entre os dois tipos de separador
+
+Para que o arquivo seja importado para o RStudio vamos precisar dentro da função `read_csv()` indicar o caminho completo da pasta onde o arquivo está localizado[^06.importando_dados-2]. No meu computador, o caminho completo quando copiamos fica como: `"C:\Users\Felipe\Documents\meus_dados\movie_profit.csv"`. Adicionando na função `read_csv()` o caminho, teríamos o seguinte código:
+
+[^06.importando_dados-2]: Uma das maneiras mais simples de fazer isso é clicar com o botão direito do mouse sobre o arquivo, verificar a lista de opções que será mostrada e clicar em *"copiar como caminho"*.
+
+```{r}
+#| eval: false
+dados <- read_csv("C:\Users\Felipe\Documents\meus_dados\movie_profit.csv")
+```
+
+Contudo, se esse código for executado resultará em um erro! Isso é o resultado das barras que estão sendo utilizadas no caminho do diretório, `"\"`. Para contornar esse problema temos duas opções: utilizamos barras duplas `"\\"`; ou utilizamos a barra *invertida* `"/"`. Vejamos os códigos:
+
+```{r}
+#| eval: false
+# Primeira forma
+dados <- read_csv("C:\\Users\\Felipe\\Documents\\meus_dados\\movie_profit.csv")
+```
+
+```{r}
+#| eval: false
+# Segunda forma
+dados_1 <- read_csv("C:/Users/Felipe/Documents/meus_dados/movie_profit.csv")
+```
+
+As funções `read_csv()` vão possuir alguns argumentos adicionais, como por exemplo, a possibilidade de selecinarmos apenas determinadas colunas de nossa base de dados, alterarmos os nomes, modificar seus tipos. Além disso, a base que importamos não apresentava necessidade de realizar qualquer tratamento prévio, o que na prática não vai acontecer. Nessas situações, vai exigir habilidade para trabalhar com esses argumentos adicionais, o que foge ao objetivo do workshop.
+
 ## Importando Planilhas de Excel
 
-Aqui mostrar que podemos carregar as planilhas do excel com o pacote `readxl`.
+Quando temos planilhas, como as tradicionais planilhas de excel, elas também poderão ser carregadas para o R, contudo, vamos precisar de um outro pacote para fazer isso, o pacote `readxl`. Vamos trabalhar como uma mesma versão de nossa base de dados, só que agora a mesma vai estar em uma planilha de excel[^06.importando_dados-3], além disso, vamos precisar fazer primeiro a importação do pacote `readxl`[^06.importando_dados-4].
+
+[^06.importando_dados-3]: <a href="https://dl.dropboxusercontent.com/scl/fi/343k28k6nkxn5kzrvpevg/movie_profit.xlsx?rlkey=prxpdwa9ct0pey3ke4p1x0zfr&st=wv1sy8rb&dl=0" download>Baixe aqui o arquivo!
+
+    </a>
+
+[^06.importando_dados-4]: `install.packages("readxl")`
+
+Depois de termos carregado nosso pacote `readxl`, vamos utilizar a função `read_xlsx()` para ler arquivos em excel cuja extensão seja *.xlsx* seguindo as mesmas recomendações do caso onde nosso arquivo era *.csv*, como podemos ver pelo código abaixo:
+
+```{r}
+#| eval: false
+library(readxl) # carregando nosso pacote
+# Segunda forma
+dados_1 <- read_xlsx("C:/Users/Felipe/Documents/meus_dados/movie_profit.xlsx")
+```
+
+Em alguns casos será interessante utilizar a função `read_xls()` que faz a leitura de arquivos em excel de versões mais antigas. Além disso, as funções do pacote `readxl` também possuem diversos argumentos para serem utilizados, principalmente em arquivos em excel que não estão bem organizados como foi o caso do exemplo.
 
 ## Função `tibble()`
 
-Mostrar como podemos em muitos casos construir uma pequena base de dados com essa função.
+Até aqui trabalhamos com base de dados que foram importadas, sejam elas vindas de uma URL ou do nosso computador. Em muitas situações pode ser necessário construir pequenas bases de dados, como por exemplo, alguma base de dado que esteja em algum livro de estatística. Nessas situações, podemos contar com a função `tibble()`.
+
+Cada variável dessa base de dados será construida com o uso da função `c()`, da seguinte maneira: primeiro definiremos o nome de nossa variável, por exemplo `variavel_1`, depois inserimos seus valores dentro da função `c()`. Vejamos um exemplo:
+
+```{r}
+#| include: false
+library(tidyverse)
+```
+
+```{r}
+tibble(variavel_1 = c(20, 15, 40, 18, 6))
+
+```
+
+Podemos criar quantas variáveis forem de nosso interesse:
+
+```{r}
+meus_dados <- tibble(
+  nome = c("João", "Maria", "Carlos"), 
+  nota = c(0.5, 4, 8)
+)
+
+meus_dados
+```
+
+Sertamente essas pequenas demostrações não esgotam as possibilidades de uso do R para importação de dados, mas servem como um primeiro passo. Existem muitos outros pacotes que trabalham com os mais variados tipos de dados, de acordo com as necessidades de cada pesquisador.

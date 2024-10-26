@@ -22,11 +22,11 @@ book:
       - capitulos/03.colunas_linhas.qmd
       - capitulos/04.resumindo_dados.qmd
       - capitulos/05.adicionando_colunas.qmd
-  - part: "PARTE 3"    
-    chapters:
+#  - part: "PARTE 3"    
+#    chapters:
       - capitulos/06.importando_dados.qmd
 #      - capitulos/07.unindo_base_de_dados.qmd
-      - capitulos/09.handson.qmd
+#      - capitulos/09.handson.qmd
 #  - part: "PARTE 4"
 #    chapters:
 #      - capitulos/10.graficos.qmd
