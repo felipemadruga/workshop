@@ -16,8 +16,7 @@ Na grande maior de nossos trabalhos com dados, o comum é que tenhamos realizado
 
 Digamos que nosso arquivo contendo os dados esteja em uma pasta chamada *meus_dados* no nosso computador, com o seguinte nome `movie_profit.csv`[^06.importando_dados-1], ou seja, é um arquivo que está na extensão *.csv*. Quando esse é o caso, existem duas funções possíveis de serem utilizadas, `read_csv()` e `read_csv2()`, cuja diferença está no separador utilizado no arquivo.
 
-[^06.importando_dados-1]: <a href="bases_dados/movie_profit.csv" download>Baixe os dados aqui!</a>
-.
+[^06.importando_dados-1]: <a href="https://raw.githubusercontent.com/felipemadruga/workshop/refs/heads/main/bases_dados/movie_profit.csv" download="movie_profit.csv">Baixe os dados aqui!</a>
 
 Quando nossos arquivos são de textos, como são os arquivos .csv, o mais comum é que eles separem cada variável na base por meio de uma "`,`", mas em outras situações, como no Brasil, o comum é também existirem arquivos separado por "`;`". Quando estamos diante de um arquivo que tem seus valores separados por *vírgula*, devemos utilizar a função `read_csv()`, mas se o arquivo utiliza o separador *ponto-vírgula*, utilizamos `read_csv2()`.
 
