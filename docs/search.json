@@ -14,7 +14,7 @@
     "href": "capitulos/01.instalacao.html",
     "title": "1  Instalações Necessárias",
     "section": "",
-    "text": "Nessa primeira parte vamos fazer a instalação dos programas necessários para rodar o R e fazer as análises que serão vistas nas demais sessões desse material. Serão dois programas necessários: o primeiro é o próprio programa R, que embora não seja utilizado diretamente, será preciso tê-lo instalado; o segundo é o RStudio, que representa uma interface na qual vamos executar os códigos que o R vai interpretar.\nPara fazer a instalação de cada um desses programas podemos entrar no site da Posit para sermos direcionados ao download de cada um dos programas necessários, como indica a Figura 1.1.\n\n\n\nFigura 1.1: Baixando os softwares necessários\n\n\n\n\n\n\nPrecisamos começar por baixar o próprio programa R, clicando no botão Download and Install R, Figura 1.1, que vai nos direcionar para o site onde é disponibilizado o R para fazermos o seu download, Figura 1.2, onde vamos precisar escolher baixar o R de acordo com o sistema operacioal compatível com nosso computador.\n\n\n\nFigura 1.2: Site para baixar o R\n\n\n\n\n\n\nUma vez escolhido o sistema operacional, seremos direcionados para uma nova página, Figura 1.3, onde precisamos clicar em install R for the first time, fazendo com que na próxima página possamos pedir para baixar o arquivo executável em nosso computador, Figura 1.4. Devemos executar esse arquivo e seguir as recomendações padrões sugeridas por ele, e então o R estará instalado em nossa máquina.\n\n\n\nFigura 1.3: Baixando o arquivo executável\n\n\n\n\n\n\n\n\n\nFigura 1.4: Baixando o arquivo executável (cont)\n\n\n\n\n\n\nO último passo é baixarmos o RStudio, onde como indica a Figura 1.1, precisamos clicar em Download RStudio Desktop for Windowns, na qual baixará um arquivo executável para nosso computador, e onde vamos apenas seguir as orientações padrões sugeridas por ele.\nSe tudo ocorreu como esperado, deveremos ter um novo ícone do RStudio em nosso computador, no qual ao clicarmos uma tela muito próxima a da que está sendo mostrada na Figura 1.5 deverá estar sendo mostrada. Será nela que vamos inserir funções responsáveis por manipular banco de dados, fazendo com que possamos realizar análises desses dados, algo que faremos nas próximas sessões.\n\n\n\nFigura 1.5: Janela do RStudio\n\n\n\n\n\n\n\n\n\nFigura 1.1: Baixando os softwares necessários\nFigura 1.2: Site para baixar o R\nFigura 1.3: Baixando o arquivo executável\nFigura 1.4: Baixando o arquivo executável (cont)\nFigura 1.5: Janela do RStudio",
+    "text": "Nessa primeira parte vamos fazer a instalação dos programas necessários para rodar o R e fazer as análises que serão vistas nas demais sessões desse material. Serão dois programas necessários: o primeiro é o próprio programa R, que embora não seja utilizado diretamente, será preciso tê-lo instalado; o segundo é o RStudio, que representa uma interface na qual vamos executar os códigos que o R vai interpretar.\nPara fazer a instalação de cada um desses programas podemos entrar no site da Posit para sermos direcionados ao download de cada um dos programas necessários, como indica a Figura 1.1.\n\n\n\nFigura 1.1: Baixando os softwares necessários\n\n\n\n\n\n\nPrecisamos começar por baixar o próprio programa R, clicando no botão Download and Install R, Figura 1.1, que vai nos direcionar para o site onde é disponibilizado o R para fazermos o seu download, Figura 1.2, onde vamos precisar escolher baixar o R de acordo com o sistema operacioal compatível com nosso computador.\n\n\n\nFigura 1.2: Site para baixar o R\n\n\n\n\n\n\nUma vez escolhido o sistema operacional, seremos direcionados para uma nova página, Figura 1.3, onde precisamos clicar em install R for the first time, fazendo com que na próxima página possamos pedir para baixar o arquivo executável em nosso computador, Figura 1.4. Devemos executar esse arquivo e seguir as recomendações padrões sugeridas por ele, e então o R estará instalado em nossa máquina.\n\n\n\nFigura 1.3: Baixando o arquivo executável\n\n\n\n\n\n\n\n\n\nFigura 1.4: Baixando o arquivo executável (cont)\n\n\n\n\n\n\nO último passo é baixarmos o RStudio, onde como indica a Figura 1.1, precisamos clicar em Download RStudio Desktop for Windowns, na qual baixará um arquivo executável para nosso computador, e onde vamos apenas seguir as orientações padrões sugeridas por ele.\nSe tudo ocorreu como esperado, deveremos ter um novo ícone do RStudio em nosso computador, no qual ao clicarmos uma tela muito próxima a da que está sendo mostrada na Figura 1.5 deverá estar sendo mostrada. Será nela que vamos inserir funções responsáveis por manipular banco de dados, fazendo com que possamos realizar análises desses dados, algo que faremos nas próximas sessões.\n\n\n\nFigura 1.5: Janela do RStudio",
     "crumbs": [
       "PARTE 1",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Instalações Necessárias</span>"
@@ -80,7 +80,7 @@
     "href": "capitulos/02.nocoes_iniciais.html#salvando-nosso-script",
     "title": "2  Noções Iniciais",
     "section": "2.5 Salvando nosso script",
-    "text": "2.5 Salvando nosso script\nApós termos feito nossa análises, em nosso caso ter carregado um pacote e feito a importação de uma base de dados, o próximo passo é darmos segurança ao nosso trabalho e salvarmos o script que criamos e que colocamos nossos primeiros códigos. Para isso, podemos fazer como mostrado na Figura 2.14.\n\n\n\nFigura 2.14: Salvando um script em nosso computador\n\n\n\n\n\n\nDepois que fecharmos o script, podemos novamente abrir por meio dos passos descritos na Figura 2.15. Dessa maneira nosso material será novamente aberto para que possamos acrescentar mais linhas de códigos e sempre que terminarmos de adicionar algo útil, podemos novamente salvar ao clicar no ícone descrito na Figura 2.14.\n\n\n\nFigura 2.15: Abrindo nosso script\n\n\n\n\n\n\nAgora que sabemos carregar um pacote, uma base de dados, salvar nosso script e abri-lo novamente, já podemos partir para voos mais altos e começarmos a modificar essa nossa base de dados para criarmos algum tipo de análise. Essa será nosso foco na segunda parte desse material, onde vamos mais a fundo conhecer as muitas funções que estão presentes no pacote tidyverse.\n\n\n\nFigura 2.1: Executando nosso primeiro código no R\nFigura 2.2: Criando nosso Script\nFigura 2.3: Segunda maneira de criarmos nosso script\nFigura 2.4: Nosso primeiro script dentro do RStudio\nFigura 2.5: Executando o código em nosso script\nFigura 2.6: Instalando nosso primeiro pacote\nFigura 2.7: Instalando um pacote via aba “Packages”\nFigura 2.8: Carregando nosso pacote\nFigura 2.9: Carregando nossa primeira base de dados\nFigura 2.10: Acessando nossos dados\nFigura 2.11: Nossos dados em uma nova aba\nFigura 2.12: Mostrando os dados em uma nova janela\nFigura 2.13: Tipos das variáveis\nFigura 2.14: Salvando um script em nosso computador\nFigura 2.15: Abrindo nosso script",
+    "text": "2.5 Salvando nosso script\nApós termos feito nossa análises, em nosso caso ter carregado um pacote e feito a importação de uma base de dados, o próximo passo é darmos segurança ao nosso trabalho e salvarmos o script que criamos e que colocamos nossos primeiros códigos. Para isso, podemos fazer como mostrado na Figura 2.14.\n\n\n\nFigura 2.14: Salvando um script em nosso computador\n\n\n\n\n\n\nDepois que fecharmos o script, podemos novamente abrir por meio dos passos descritos na Figura 2.15. Dessa maneira nosso material será novamente aberto para que possamos acrescentar mais linhas de códigos e sempre que terminarmos de adicionar algo útil, podemos novamente salvar ao clicar no ícone descrito na Figura 2.14.\n\n\n\nFigura 2.15: Abrindo nosso script\n\n\n\n\n\n\nAgora que sabemos carregar um pacote, uma base de dados, salvar nosso script e abri-lo novamente, já podemos partir para voos mais altos e começarmos a modificar essa nossa base de dados para criarmos algum tipo de análise. Essa será nosso foco na segunda parte desse material, onde vamos mais a fundo conhecer as muitas funções que estão presentes no pacote tidyverse.",
     "crumbs": [
       "PARTE 1",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Noções Iniciais</span>"
@@ -157,7 +157,7 @@
     "href": "capitulos/03.colunas_linhas.html#função-filter",
     "title": "3  Manipulando Colunas e Linhas",
     "section": "3.6 Função filter()",
-    "text": "3.6 Função filter()\nComeçamos aqui o uso da função filter() cujo resultado será também eliminar linhas a partir de critérios escolhidos por nós. Nessa parte vamos fazer um intenso uso de critérios lógicos que permitirão que possamos selecionar linhas com critérios de colunas diferentes.\nVamos começar com um exemplo simples, ainda aplicado somente a uma das colunas, pedindo para que sejam retornados todos os filmes com classificação igual a R de nossa variável mpaa_rating13, como mostra o próximo código:\n13 mpaa_rating é a variável que indica a classificação do filme criada pela Motion Picture Association de acordo com faixas, onde R, por exemplo, indica filmes que possuem algum tipo de restrição ao acesso.\nfilmes |&gt; \n  filter(mpaa_rating == \"R\")\n\nComo podemos perceber, o nosso filtro retornou um total de 1514 linhas, que correspondem ao total de filmes que atenderam ao critério buscado dentro da função filter().\nO critério passado dentro da função filter() é bastante intuitivo, ela nos diz para que a coluna que contém a variável mpaa_rating retorne todos os critérios/valores iguais a R, de nossa base de dados filmes, que como sabemos, está à esquerda do operador pipe.\nDuas observações aqui são importantes: 1. Quando queremos selecionar algo que seja exatamente igual a um critério, devemos utilizar ==. Caso a busca for feita com apenas =, teremos uma mensagem de erro!! Segundo, todos os critérios que forem valores de uma variável qualitativa, devem vir entre aspas, como foi \"R\", caso contrário também teremos um erro em nossa execução!!\nOs operadores possíveis são:\n\n==, que como vimos retornar algo que seja exatamente igual ao critério pedido;\n&gt;, que retorna algo que seja estritamente maior do que o critério pedido;\n&gt;=, que retorna algo que seja maior ou igual ao critério pedido;\n&lt;, que retorna algo que seja estritamente menor do que o critério pedido;\n&lt;=, que retorna algo que seja menor ou igual ao critério pedido;\n!=, que retorna algo que não seja igual ao critério pedido;\n\nAlguns exemplos podem ser vistos nos códigos abaixo:\n\n# selecionando filmes com faturamento mundial maior do que 500 milhões\nfilmes |&gt; \n  filter(worldwide_gross &gt; 500000000)\n\n# selecionando todos os filmes que não sejam iguais a R\nfilmes |&gt; \n  filter(mpaa_rating != \"R\")\n\n# selecionando filmes com orçamento abaixo ou igual a 1 milhão\nfilmes |&gt; \n  filter(production_budget &lt;= 1000000) \n\n\n3.6.1 Filtrando linhas com o uso do &\nPodemos utilizar duas variáveis para especificar critérios de busca, como por exemplo, filmes com classificação indicativa R e cujo orçamento de produção foi maior ou igual do que 200 milhões, como mostra o seguinte código:\n\nfilmes |&gt; \n  filter(mpaa_rating == \"R\" & production_budget &gt;= 200000000)\n\nComo podemos ver pelo resultado, na busca não tivemos nenhum resultado encontrado, isso porque nenhum filme com a classificação R teve orçamento de produção tão alto, agora se refazermos o critério para buscar filmes com orçamento de 150 milhões, podemos ver que o resultado é uma lista com 7 filmes.\n\nfilmes |&gt; \n  filter(mpaa_rating == \"R\" & production_budget &gt;= 150000000) |&gt; \n  select(movie, mpaa_rating, production_budget)\n\nPoderíamos ainda buscar por filmes que são de comédia e cuja classificação foi PG como no código abaixo:\n\nfilmes |&gt; \n  filter(mpaa_rating == \"PG\" & genre == \"Comedy\")\n\nEm todos os códigos acima que buscaram comparar duas colunas diferentes, fizemos o uso do termos &. É ele o responsável por comparar as duas colunas e retornar apenas aquelas que atendem aos dois critérios pedidos.\n\n\n3.6.2 Filtrando valores com between()\nNa próxima situação vamos buscar comparar os filmes que tiveram um orçamento entre dois valores, por exemplo, entre 5 e 10 milhões. Poderíamos ter feito isso com base no que já aprendemos aqui como será mostrado no código a seguir:\n\nfilmes |&gt; \n  filter(production_budget &gt;= 5000000 & production_budget &lt;= 10000000)\n\nEsse tipo de filtro pode ser feito com uma função auxiliar chamada between() muito interessante, que reduz a duplicação em nosso código. Vejamos sua aplicação:\n\nfilmes |&gt; \n  filter(\n    between(production_budget, 5000000, 10000000)\n    )\n\nA função between() vai possuir três argumentos que devem ser fornecidos, o primeiro deles é a variável na qual queremos obter o intervalo de valores, depois o limite inferior de nosso intervalo e posteriormente o limite superior. Lembrando que nessa função, ela sempre vai incluir os intervalos indicados!\n\n\n3.6.3 Filtrando valores com | e %in%\nOutra situação muito comum de quem utiliza a função filter() é o de filtrar por mais de um valor. Digamos que nosso objetivo seja o de selecionar apenas os filmes que foram distribuídos pelas seguintes empresas: Warner Bros., Sony Pictures e MGM. Poderíamos aplicar o seguinte filtro sobre a variável distributor:\n\nfilmes |&gt; \n  filter(distributor == \"MGM\" | distributor == \"Lionsgate\" | distributor == \"Universal\")\n\nNo código acima a barra vertical | indica que queremos que o filtro aplicado sobre a vairável distributor retorne MGM ou Lionsgate ou Universal. Mesmo se uma das condições não é atendida, ele vai retornar as demais quando utilizamos o |, diferente do & na qual as condições precisam ser todas verdadeiras. Contudo, existe uma maneira mais simples de obter os resultados acima, para isso podemos utilizar a seguinte expressão:\n\nfilmes |&gt; \n  filter(distributor %in% c(\"MGM\", \"Lionsgate\", \"Universal\") )\n\nCom o uso do %in% basta especificarmos os valores que queremos filtrar para uma variável dentro do nosso vetor construído com c(), deixando o código muito mais simples e limpo.\nNo próximo capítulo vamos trabalhar com mais funções do pacote tidyverse em nosso processo de aprendizado de como manipular bases de dados com o R. Contudo, antes de irmos para o próximo capítulo, deixo a mensagem de que pode ser muito útil no processo de entendimento das funções estudadas aqui, e de seu aprofundamento, contar com a ajuda do ChatGPT, seja para nos explicar os argumentos das funções, seja para nos fornecer exemplos. Se for utilizar essa ferramenta fantástica, procure deixar o mais claro possível o que está tentando realizar no R e que não conseguiu.\n\n\n\nFigura 3.1: Pedindo ajuda ao ChatGPT\nFigura 3.2: Aprendendo sobre o pipe no ChatGPT\nFigura 3.3: Ajuda para identificar parâmetros de uma função\nFigura 3.4: Pedindo ao ChatGPT para descrever os parâmetros de slice_max()",
+    "text": "3.6 Função filter()\nComeçamos aqui o uso da função filter() cujo resultado será também eliminar linhas a partir de critérios escolhidos por nós. Nessa parte vamos fazer um intenso uso de critérios lógicos que permitirão que possamos selecionar linhas com critérios de colunas diferentes.\nVamos começar com um exemplo simples, ainda aplicado somente a uma das colunas, pedindo para que sejam retornados todos os filmes com classificação igual a R de nossa variável mpaa_rating13, como mostra o próximo código:\n13 mpaa_rating é a variável que indica a classificação do filme criada pela Motion Picture Association de acordo com faixas, onde R, por exemplo, indica filmes que possuem algum tipo de restrição ao acesso.\nfilmes |&gt; \n  filter(mpaa_rating == \"R\")\n\nComo podemos perceber, o nosso filtro retornou um total de 1514 linhas, que correspondem ao total de filmes que atenderam ao critério buscado dentro da função filter().\nO critério passado dentro da função filter() é bastante intuitivo, ela nos diz para que a coluna que contém a variável mpaa_rating retorne todos os critérios/valores iguais a R, de nossa base de dados filmes, que como sabemos, está à esquerda do operador pipe.\nDuas observações aqui são importantes: 1. Quando queremos selecionar algo que seja exatamente igual a um critério, devemos utilizar ==. Caso a busca for feita com apenas =, teremos uma mensagem de erro!! Segundo, todos os critérios que forem valores de uma variável qualitativa, devem vir entre aspas, como foi \"R\", caso contrário também teremos um erro em nossa execução!!\nOs operadores possíveis são:\n\n==, que como vimos retornar algo que seja exatamente igual ao critério pedido;\n&gt;, que retorna algo que seja estritamente maior do que o critério pedido;\n&gt;=, que retorna algo que seja maior ou igual ao critério pedido;\n&lt;, que retorna algo que seja estritamente menor do que o critério pedido;\n&lt;=, que retorna algo que seja menor ou igual ao critério pedido;\n!=, que retorna algo que não seja igual ao critério pedido;\n\nAlguns exemplos podem ser vistos nos códigos abaixo:\n\n# selecionando filmes com faturamento mundial maior do que 500 milhões\nfilmes |&gt; \n  filter(worldwide_gross &gt; 500000000)\n\n# selecionando todos os filmes que não sejam iguais a R\nfilmes |&gt; \n  filter(mpaa_rating != \"R\")\n\n# selecionando filmes com orçamento abaixo ou igual a 1 milhão\nfilmes |&gt; \n  filter(production_budget &lt;= 1000000) \n\n\n3.6.1 Filtrando linhas com o uso do &\nPodemos utilizar duas variáveis para especificar critérios de busca, como por exemplo, filmes com classificação indicativa R e cujo orçamento de produção foi maior ou igual do que 200 milhões, como mostra o seguinte código:\n\nfilmes |&gt; \n  filter(mpaa_rating == \"R\" & production_budget &gt;= 200000000)\n\nComo podemos ver pelo resultado, na busca não tivemos nenhum resultado encontrado, isso porque nenhum filme com a classificação R teve orçamento de produção tão alto, agora se refazermos o critério para buscar filmes com orçamento de 150 milhões, podemos ver que o resultado é uma lista com 7 filmes.\n\nfilmes |&gt; \n  filter(mpaa_rating == \"R\" & production_budget &gt;= 150000000) |&gt; \n  select(movie, mpaa_rating, production_budget)\n\nPoderíamos ainda buscar por filmes que são de comédia e cuja classificação foi PG como no código abaixo:\n\nfilmes |&gt; \n  filter(mpaa_rating == \"PG\" & genre == \"Comedy\")\n\nEm todos os códigos acima que buscaram comparar duas colunas diferentes, fizemos o uso do termos &. É ele o responsável por comparar as duas colunas e retornar apenas aquelas que atendem aos dois critérios pedidos.\n\n\n3.6.2 Filtrando valores com between()\nNa próxima situação vamos buscar comparar os filmes que tiveram um orçamento entre dois valores, por exemplo, entre 5 e 10 milhões. Poderíamos ter feito isso com base no que já aprendemos aqui como será mostrado no código a seguir:\n\nfilmes |&gt; \n  filter(production_budget &gt;= 5000000 & production_budget &lt;= 10000000)\n\nEsse tipo de filtro pode ser feito com uma função auxiliar chamada between() muito interessante, que reduz a duplicação em nosso código. Vejamos sua aplicação:\n\nfilmes |&gt; \n  filter(\n    between(production_budget, 5000000, 10000000)\n    )\n\nA função between() vai possuir três argumentos que devem ser fornecidos, o primeiro deles é a variável na qual queremos obter o intervalo de valores, depois o limite inferior de nosso intervalo e posteriormente o limite superior. Lembrando que nessa função, ela sempre vai incluir os intervalos indicados!\n\n\n3.6.3 Filtrando valores com | e %in%\nOutra situação muito comum de quem utiliza a função filter() é o de filtrar por mais de um valor. Digamos que nosso objetivo seja o de selecionar apenas os filmes que foram distribuídos pelas seguintes empresas: Warner Bros., Sony Pictures e MGM. Poderíamos aplicar o seguinte filtro sobre a variável distributor:\n\nfilmes |&gt; \n  filter(distributor == \"MGM\" | distributor == \"Lionsgate\" | distributor == \"Universal\")\n\nNo código acima a barra vertical | indica que queremos que o filtro aplicado sobre a vairável distributor retorne MGM ou Lionsgate ou Universal. Mesmo se uma das condições não é atendida, ele vai retornar as demais quando utilizamos o |, diferente do & na qual as condições precisam ser todas verdadeiras. Contudo, existe uma maneira mais simples de obter os resultados acima, para isso podemos utilizar a seguinte expressão:\n\nfilmes |&gt; \n  filter(distributor %in% c(\"MGM\", \"Lionsgate\", \"Universal\") )\n\nCom o uso do %in% basta especificarmos os valores que queremos filtrar para uma variável dentro do nosso vetor construído com c(), deixando o código muito mais simples e limpo.\nNo próximo capítulo vamos trabalhar com mais funções do pacote tidyverse em nosso processo de aprendizado de como manipular bases de dados com o R. Contudo, antes de irmos para o próximo capítulo, deixo a mensagem de que pode ser muito útil no processo de entendimento das funções estudadas aqui, e de seu aprofundamento, contar com a ajuda do ChatGPT, seja para nos explicar os argumentos das funções, seja para nos fornecer exemplos. Se for utilizar essa ferramenta fantástica, procure deixar o mais claro possível o que está tentando realizar no R e que não conseguiu.",
     "crumbs": [
       "PARTE 2",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Manipulando Colunas e Linhas</span>"
@@ -274,149 +274,6 @@
     ]
   },
   {
-    "objectID": "capitulos/08.pipeline.html",
-    "href": "capitulos/08.pipeline.html",
-    "title": "6  Criando um Projeto e Importando Dados",
-    "section": "",
-    "text": "6.1 Criando um Projeto no RStudio\nAqui vai ser a parte reservada para criação de um projeto para deixar os dados organizados.",
-    "crumbs": [
-      "PARTE 3",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Criando um Projeto e Importando Dados</span>"
-    ]
-  },
-  {
-    "objectID": "capitulos/08.pipeline.html#importando-dados-em-.csv",
-    "href": "capitulos/08.pipeline.html#importando-dados-em-.csv",
-    "title": "6  Criando um Projeto e Importando Dados",
-    "section": "6.2 Importando Dados em .csv",
-    "text": "6.2 Importando Dados em .csv\nAqui mostrar quais funções são as responsáveis por importarmos os dados com essa extensão, e quais argumentos podemos utilizar dentro das funções.",
-    "crumbs": [
-      "PARTE 3",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Criando um Projeto e Importando Dados</span>"
-    ]
-  },
-  {
-    "objectID": "capitulos/08.pipeline.html#importando-planilhas-de-excel",
-    "href": "capitulos/08.pipeline.html#importando-planilhas-de-excel",
-    "title": "6  Criando um Projeto e Importando Dados",
-    "section": "6.3 Importando Planilhas de Excel",
-    "text": "6.3 Importando Planilhas de Excel\nAqui mostrar que podemos carregar as planilhas do excel com o pacote readxl.",
-    "crumbs": [
-      "PARTE 3",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Criando um Projeto e Importando Dados</span>"
-    ]
-  },
-  {
-    "objectID": "capitulos/08.pipeline.html#importando-planilhas-do-googlesheets",
-    "href": "capitulos/08.pipeline.html#importando-planilhas-do-googlesheets",
-    "title": "6  Criando um Projeto e Importando Dados",
-    "section": "6.4 Importando Planilhas do googlesheets",
-    "text": "6.4 Importando Planilhas do googlesheets\nMostrar o pacote que permite que possamos importar uma planilha na nuvem do google.",
-    "crumbs": [
-      "PARTE 3",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Criando um Projeto e Importando Dados</span>"
-    ]
-  },
-  {
-    "objectID": "capitulos/08.pipeline.html#função-tibble",
-    "href": "capitulos/08.pipeline.html#função-tibble",
-    "title": "6  Criando um Projeto e Importando Dados",
-    "section": "6.5 Função tibble()",
-    "text": "6.5 Função tibble()\nMostrar como podemos em muitos casos construir uma pequena base de dados com essa função.",
-    "crumbs": [
-      "PARTE 3",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Criando um Projeto e Importando Dados</span>"
-    ]
-  },
-  {
-    "objectID": "capitulos/07.unindo_base_de_dados.html",
-    "href": "capitulos/07.unindo_base_de_dados.html",
-    "title": "7  União de Bases de Dados",
-    "section": "",
-    "text": "Nesta parte vamos aprender a unir duas bases de dados distintas por meio de funções como left_join(), bind_rows() e bind_cols().",
-    "crumbs": [
-      "PARTE 3",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>União de Bases de Dados</span>"
-    ]
-  },
-  {
-    "objectID": "capitulos/09.handson.html",
-    "href": "capitulos/09.handson.html",
-    "title": "8  Atividade Prática",
-    "section": "",
-    "text": "Nessa parte vamos buscar utilizar as funções anteriormente aprendidas por meio de exemplos práticos em algumas bases de dados.\nAqui, vai ser interessante criar a possibilidade para que o aluno possa baixar as bases a partir de algum link do googledrive.",
-    "crumbs": [
-      "PARTE 3",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Atividade Prática</span>"
-    ]
-  },
-  {
-    "objectID": "capitulos/10.graficos.html",
-    "href": "capitulos/10.graficos.html",
-    "title": "9  Construindo Gráficos",
-    "section": "",
-    "text": "Esta parte é reservada para rapidamente indicar como seria a criação de gráficos no R. A princípio, para que não ocupe muito tempo, apenas apresentar as funções e deixar um exercício no próprio arquivo para que o aluno possa tentar realizar.",
-    "crumbs": [
-      "PARTE 4",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Construindo Gráficos</span>"
-    ]
-  },
-  {
-    "objectID": "capitulos/11.tabelas.html",
-    "href": "capitulos/11.tabelas.html",
-    "title": "10  Gerando Tabelas",
-    "section": "",
-    "text": "Esta parte é para apresentar as funções contidas no pacote gt() que servem para construir tabelas de maneira rápida e organizadas. Aqui também deverá ser um conteúdo explicado apenas no slide e deixando um exercício para ser feito ao final do respectivo capítulo.",
-    "crumbs": [
-      "PARTE 4",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Gerando Tabelas</span>"
-    ]
-  },
-  {
-    "objectID": "capitulos/12.regressao.html",
-    "href": "capitulos/12.regressao.html",
-    "title": "11  Análise de Regressão",
-    "section": "",
-    "text": "Essa parte vai servir para apresentar rapidamente como poderíamos representar um modelo de análise de regressão simples, mostrando a possível relação primeiro a partir de um gráfico de dispersão, depois aplicando a fórmula para rodar a regressão, depois resumindo tudo por meio de uma tabela formatada a partir dos resultados.\nA ideia aqui é mostrar que o R foi pensado primeiramente como um software estatístico.",
-    "crumbs": [
-      "PARTE 4",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Análise de Regressão</span>"
-    ]
-  },
-  {
-    "objectID": "capitulos/13.apis.html",
-    "href": "capitulos/13.apis.html",
-    "title": "12  Utilizando APIs",
-    "section": "",
-    "text": "Capítulo para mostrar o que são APIs e como utilizar essa maneira de obter dados da internet.",
-    "crumbs": [
-      "PARTE 4",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Utilizando APIs</span>"
-    ]
-  },
-  {
-    "objectID": "capitulos/14.vamos_pro_quarto.html",
-    "href": "capitulos/14.vamos_pro_quarto.html",
-    "title": "13  Vamos Mudar para o Quarto",
-    "section": "",
-    "text": "Capítulo no qual vai mostrar as possibilidade do Quarto para criação de relatórios.",
-    "crumbs": [
-      "PARTE 4",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Vamos Mudar para o Quarto</span>"
-    ]
-  },
-  {
-    "objectID": "capitulos/15.e_agora.html",
-    "href": "capitulos/15.e_agora.html",
-    "title": "14  E agora?",
-    "section": "",
-    "text": "Esta parte é dedicada a indicar possíveis canais para que quem tenha se interessado pelo R possa começar a aprofundar os conceitos apresentados aqui.\nAqui devo indicar alguns ebooks, workshops onlines entre outras coisas que me ajudaram a aprender um pouco mais.",
-    "crumbs": [
-      "PARTE 4",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>E agora?</span>"
-    ]
-  },
-  {
     "objectID": "capitulos/06.importando_dados.html",
     "href": "capitulos/06.importando_dados.html",
     "title": "6  Importando Dados do PC",
@@ -432,7 +289,7 @@
     "href": "capitulos/06.importando_dados.html#importando-um-arquivo-.csv",
     "title": "6  Importando Dados do PC",
     "section": "",
-    "text": "1 Baixar arquivo CSV .",
+    "text": "1 Baixe os dados aqui! .",
     "crumbs": [
       "PARTE 3",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Importando Dados do PC</span>"
@@ -458,6 +315,17 @@
     "crumbs": [
       "PARTE 3",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Importando Dados do PC</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/09.handson.html",
+    "href": "capitulos/09.handson.html",
+    "title": "7  Atividade Prática",
+    "section": "",
+    "text": "Nessa parte vamos buscar utilizar as funções anteriormente aprendidas por meio de exemplos práticos em algumas bases de dados.\nAqui, vai ser interessante criar a possibilidade para que o aluno possa baixar as bases a partir de algum link do googledrive.",
+    "crumbs": [
+      "PARTE 3",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Atividade Prática</span>"
     ]
   }
 ]

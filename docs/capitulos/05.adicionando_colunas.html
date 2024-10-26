@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Workshop em R - 5&nbsp; Adicionando Colunas</title>
+<title>5&nbsp; Adicionando Colunas – Workshop em R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../capitulos/08.pipeline.html" rel="next">
+<link href="../capitulos/06.importando_dados.html" rel="next">
 <link href="../capitulos/04.resumindo_dados.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -103,7 +103,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -141,13 +141,13 @@ window.Quarto = {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../capitulos/03.colunas_linhas.html">PARTE 2</a></li><li class="breadcrumb-item"><a href="../capitulos/05.adicionando_colunas.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Adicionando Colunas</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -184,9 +184,9 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">PARTE 1</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Alternar seção">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar seção">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -207,9 +207,9 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">PARTE 2</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Alternar seção">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar seção">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -236,76 +236,23 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">PARTE 3</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Alternar seção">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar seção">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../capitulos/08.pipeline.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Criando um Projeto e Importando Dados</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../capitulos/07.unindo_base_de_dados.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">União de Bases de Dados</span></span></a>
+  <a href="../capitulos/06.importando_dados.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Importando Dados do PC</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/09.handson.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Atividade Prática</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">PARTE 4</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Alternar seção">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../capitulos/10.graficos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Construindo Gráficos</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../capitulos/11.tabelas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Gerando Tabelas</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../capitulos/12.regressao.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Análise de Regressão</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../capitulos/13.apis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Utilizando APIs</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../capitulos/14.vamos_pro_quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Vamos Mudar para o Quarto</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../capitulos/15.e_agora.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">E agora?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Atividade Prática</span></span></a>
   </div>
 </li>
       </ul>
@@ -360,23 +307,23 @@ window.Quarto = {
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div id="rdarwsocwa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rdarwsocwa table {
+<div id="ujggsjpuwt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ujggsjpuwt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rdarwsocwa thead, #rdarwsocwa tbody, #rdarwsocwa tfoot, #rdarwsocwa tr, #rdarwsocwa td, #rdarwsocwa th {
+#ujggsjpuwt thead, #ujggsjpuwt tbody, #ujggsjpuwt tfoot, #ujggsjpuwt tr, #ujggsjpuwt td, #ujggsjpuwt th {
   border-style: none;
 }
 
-#rdarwsocwa p {
+#ujggsjpuwt p {
   margin: 0;
   padding: 0;
 }
 
-#rdarwsocwa .gt_table {
+#ujggsjpuwt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -402,12 +349,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#rdarwsocwa .gt_caption {
+#ujggsjpuwt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rdarwsocwa .gt_title {
+#ujggsjpuwt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -419,7 +366,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#rdarwsocwa .gt_subtitle {
+#ujggsjpuwt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -431,7 +378,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#rdarwsocwa .gt_heading {
+#ujggsjpuwt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -443,13 +390,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rdarwsocwa .gt_bottom_border {
+#ujggsjpuwt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rdarwsocwa .gt_col_headings {
+#ujggsjpuwt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -464,7 +411,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rdarwsocwa .gt_col_heading {
+#ujggsjpuwt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -484,7 +431,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#rdarwsocwa .gt_column_spanner_outer {
+#ujggsjpuwt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -496,15 +443,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#rdarwsocwa .gt_column_spanner_outer:first-child {
+#ujggsjpuwt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rdarwsocwa .gt_column_spanner_outer:last-child {
+#ujggsjpuwt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rdarwsocwa .gt_column_spanner {
+#ujggsjpuwt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -516,11 +463,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#rdarwsocwa .gt_spanner_row {
+#ujggsjpuwt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rdarwsocwa .gt_group_heading {
+#ujggsjpuwt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -546,7 +493,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#rdarwsocwa .gt_empty_group_heading {
+#ujggsjpuwt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -561,15 +508,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#rdarwsocwa .gt_from_md > :first-child {
+#ujggsjpuwt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rdarwsocwa .gt_from_md > :last-child {
+#ujggsjpuwt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rdarwsocwa .gt_row {
+#ujggsjpuwt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -588,7 +535,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#rdarwsocwa .gt_stub {
+#ujggsjpuwt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -601,7 +548,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rdarwsocwa .gt_stub_row_group {
+#ujggsjpuwt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -615,15 +562,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#rdarwsocwa .gt_row_group_first td {
+#ujggsjpuwt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rdarwsocwa .gt_row_group_first th {
+#ujggsjpuwt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rdarwsocwa .gt_summary_row {
+#ujggsjpuwt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -633,16 +580,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rdarwsocwa .gt_first_summary_row {
+#ujggsjpuwt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rdarwsocwa .gt_first_summary_row.thick {
+#ujggsjpuwt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rdarwsocwa .gt_last_summary_row {
+#ujggsjpuwt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -652,7 +599,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#rdarwsocwa .gt_grand_summary_row {
+#ujggsjpuwt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -662,7 +609,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rdarwsocwa .gt_first_grand_summary_row {
+#ujggsjpuwt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -672,7 +619,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#rdarwsocwa .gt_last_grand_summary_row_top {
+#ujggsjpuwt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -682,11 +629,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#rdarwsocwa .gt_striped {
+#ujggsjpuwt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rdarwsocwa .gt_table_body {
+#ujggsjpuwt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -695,7 +642,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#rdarwsocwa .gt_footnotes {
+#ujggsjpuwt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -709,7 +656,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rdarwsocwa .gt_footnote {
+#ujggsjpuwt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -718,7 +665,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rdarwsocwa .gt_sourcenotes {
+#ujggsjpuwt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -732,7 +679,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#rdarwsocwa .gt_sourcenote {
+#ujggsjpuwt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -740,72 +687,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#rdarwsocwa .gt_left {
+#ujggsjpuwt .gt_left {
   text-align: left;
 }
 
-#rdarwsocwa .gt_center {
+#ujggsjpuwt .gt_center {
   text-align: center;
 }
 
-#rdarwsocwa .gt_right {
+#ujggsjpuwt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rdarwsocwa .gt_font_normal {
+#ujggsjpuwt .gt_font_normal {
   font-weight: normal;
 }
 
-#rdarwsocwa .gt_font_bold {
+#ujggsjpuwt .gt_font_bold {
   font-weight: bold;
 }
 
-#rdarwsocwa .gt_font_italic {
+#ujggsjpuwt .gt_font_italic {
   font-style: italic;
 }
 
-#rdarwsocwa .gt_super {
+#ujggsjpuwt .gt_super {
   font-size: 65%;
 }
 
-#rdarwsocwa .gt_footnote_marks {
+#ujggsjpuwt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rdarwsocwa .gt_asterisk {
+#ujggsjpuwt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rdarwsocwa .gt_indent_1 {
+#ujggsjpuwt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rdarwsocwa .gt_indent_2 {
+#ujggsjpuwt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rdarwsocwa .gt_indent_3 {
+#ujggsjpuwt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rdarwsocwa .gt_indent_4 {
+#ujggsjpuwt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rdarwsocwa .gt_indent_5 {
+#ujggsjpuwt .gt_indent_5 {
   text-indent: 25px;
 }
 
-#rdarwsocwa .katex-display {
+#ujggsjpuwt .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#rdarwsocwa div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ujggsjpuwt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1167,18 +1114,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1210,7 +1146,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -1218,7 +1176,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -1418,8 +1376,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../capitulos/08.pipeline.html" class="pagination-link" aria-label="Criando um Projeto e Importando Dados">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Criando um Projeto e Importando Dados</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../capitulos/06.importando_dados.html" class="pagination-link" aria-label="Importando Dados do PC">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Importando Dados do PC</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

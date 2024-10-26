@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Workshop em R - 2&nbsp; Noções Iniciais</title>
+<title>2&nbsp; Noções Iniciais – Workshop em R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -115,13 +115,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../capitulos/01.instalacao.html">PARTE 1</a></li><li class="breadcrumb-item"><a href="../capitulos/02.nocoes_iniciais.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Noções Iniciais</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -158,9 +158,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">PARTE 1</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Alternar seção">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar seção">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -181,9 +181,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">PARTE 2</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Alternar seção">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar seção">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -210,76 +210,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">PARTE 3</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Alternar seção">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar seção">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../capitulos/08.pipeline.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Criando um Projeto e Importando Dados</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../capitulos/07.unindo_base_de_dados.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">União de Bases de Dados</span></span></a>
+  <a href="../capitulos/06.importando_dados.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Importando Dados do PC</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/09.handson.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Atividade Prática</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">PARTE 4</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Alternar seção">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../capitulos/10.graficos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Construindo Gráficos</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../capitulos/11.tabelas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Gerando Tabelas</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../capitulos/12.regressao.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Análise de Regressão</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../capitulos/13.apis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Utilizando APIs</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../capitulos/14.vamos_pro_quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Vamos Mudar para o Quarto</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../capitulos/15.e_agora.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">E agora?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Atividade Prática</span></span></a>
   </div>
 </li>
       </ul>
@@ -333,13 +280,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="criando-um-script" class="level2 page-columns page-full" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="criando-um-script"><span class="header-section-number">2.1</span> Criando um <strong>script</strong></h2>
 <p>No <strong>RStudio</strong>, todo comando que precisamos executar é feito via <em>Console</em>, por exemplo, se quisermos fazer uma simples soma, <code>1 + 1</code>, basta digitar esse comando na aba <em>Console</em> e clicarmos em <strong>Enter</strong>, como mostrado na <a href="#fig-primeiro_codigo" class="quarto-xref">Figura&nbsp;<span>2.1</span></a>.</p>
-<div id="fig-primeiro_codigo" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<div id="fig-primeiro_codigo" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-primeiro_codigo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;2.1: Executando nosso primeiro código no R
 </figcaption>
 <div aria-describedby="fig-primeiro_codigo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="..\imagens_apostila/imagens_criada_material8.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1"><img src="..\imagens_apostila/imagens_criada_material8.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+<a href="..\imagens_apostila/imagens_criada_material8.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figura&nbsp;2.1: Executando nosso primeiro código no R"><img src="..\imagens_apostila/imagens_criada_material8.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
 </div>
 </figure>
 </div>
@@ -347,48 +294,48 @@ Figura&nbsp;2.1: Executando nosso primeiro código no R
 <p>Para criarmos um script podemos seguir um dos seguintes métodos:</p>
 <ol type="1">
 <li><p>Na barra de navegação principal siga <code>File &gt; New File &gt; R Script</code> , como mostra a <a href="#fig-script1" class="quarto-xref">Figura&nbsp;<span>2.2</span></a>.</p>
-<div id="fig-script1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-script1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-script1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;2.2: Criando nosso Script
 </figcaption>
 <div aria-describedby="fig-script1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="..\imagens_apostila/imagens_criada_material5.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2"><img src="..\imagens_apostila/imagens_criada_material5.png" class="img-fluid figure-img"></a>
+<a href="..\imagens_apostila/imagens_criada_material5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figura&nbsp;2.2: Criando nosso Script"><img src="..\imagens_apostila/imagens_criada_material5.png" class="img-fluid figure-img"></a>
 </div>
 </figure>
 </div></li>
 <li><p>Clicando no seguinte ícone mostrado na <a href="#fig-script2" class="quarto-xref">Figura&nbsp;<span>2.3</span></a>:</p>
-<div id="fig-script2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-script2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-script2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;2.3: Segunda maneira de criarmos nosso script
 </figcaption>
 <div aria-describedby="fig-script2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="..\imagens_apostila/imagens_criada_material6.png" class="lightbox" data-glightbox="description: .lightbox-desc-3" data-gallery="quarto-lightbox-gallery-3"><img src="..\imagens_apostila/imagens_criada_material6.png" class="img-fluid figure-img"></a>
+<a href="..\imagens_apostila/imagens_criada_material6.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figura&nbsp;2.3: Segunda maneira de criarmos nosso script"><img src="..\imagens_apostila/imagens_criada_material6.png" class="img-fluid figure-img"></a>
 </div>
 </figure>
 </div></li>
 <li><p>Utilizando um atalho no teclado: <code>Ctrl + Shift + N</code></p></li>
 </ol>
 <p>Quando criamos um Script, ele automaticamente adiciona um novo painel ao RStudio, <a href="#fig-scriptfinal" class="quarto-xref">Figura&nbsp;<span>2.4</span></a>.</p>
-<div id="fig-scriptfinal" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<div id="fig-scriptfinal" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-scriptfinal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;2.4: Nosso primeiro script dentro do RStudio
 </figcaption>
 <div aria-describedby="fig-scriptfinal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="..\imagens_apostila/imagens_criada_material7.png" class="lightbox" data-glightbox="description: .lightbox-desc-4" data-gallery="quarto-lightbox-gallery-4"><img src="..\imagens_apostila/imagens_criada_material7.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+<a href="..\imagens_apostila/imagens_criada_material7.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figura&nbsp;2.4: Nosso primeiro script dentro do RStudio"><img src="..\imagens_apostila/imagens_criada_material7.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
 </div>
 </figure>
 </div>
 <p>Após termos nosso script criado, podemos realizar todos os nossos cálculos dentro do R escrevendo nesse script as linhas de código que serão executadas no Console, <a href="#fig-codigo_script" class="quarto-xref">Figura&nbsp;<span>2.5</span></a>. Lembrando que para que o nosso código seja executado quando ele está no script temos duas opções: ou clicamos no ícone <code>Run</code> dentro do nosso script; podemos utilizar um atalho <code>CTRL + Enter</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Esse atalho para executar um código que está em nosso script é um dos atalhos que vale a penas gravar!!</p></div></div><div id="fig-codigo_script" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Esse atalho para executar um código que está em nosso script é um dos atalhos que vale a penas gravar!!</p></div></div><div id="fig-codigo_script" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-codigo_script-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;2.5: Executando o código em nosso script
 </figcaption>
 <div aria-describedby="fig-codigo_script-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="..\imagens_apostila/imagens_criada_material9.png" class="lightbox" data-glightbox="description: .lightbox-desc-5" data-gallery="quarto-lightbox-gallery-5"><img src="..\imagens_apostila/imagens_criada_material9.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+<a href="..\imagens_apostila/imagens_criada_material9.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figura&nbsp;2.5: Executando o código em nosso script"><img src="..\imagens_apostila/imagens_criada_material9.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
 </div>
 </figure>
 </div>
@@ -496,24 +443,24 @@ Figura&nbsp;2.5: Executando o código em nosso script
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>O processo de instalação de qualquer pacote vai sempre produzir algumas menssagens no Console do R, , <a href="#fig-primeira_instalacao" class="quarto-xref">Figura&nbsp;<span>2.6</span></a>, indicando por exemplo, as etapas que o pacote está realizando para poder operar sem erro, ou se está realizando a instalação de pacotes adicionais que ele precisa. No geral é um processo pouco complexo, sendo difícil apresentar algum problema nessa etapa.</p>
-<div id="fig-primeira_instalacao" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<div id="fig-primeira_instalacao" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-primeira_instalacao-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;2.6: Instalando nosso primeiro pacote
 </figcaption>
 <div aria-describedby="fig-primeira_instalacao-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="..\imagens_apostila/imagens_criada_material2.png" class="lightbox" data-glightbox="description: .lightbox-desc-6" data-gallery="quarto-lightbox-gallery-6"><img src="..\imagens_apostila/imagens_criada_material2.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+<a href="..\imagens_apostila/imagens_criada_material2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figura&nbsp;2.6: Instalando nosso primeiro pacote"><img src="..\imagens_apostila/imagens_criada_material2.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
 </div>
 </figure>
 </div>
 <p>Alternativamente, principalmente nas primeiras vezes que você estiver utilizando o R, pode ser possível instalar os pacotes indo na aba “Packages”, <a href="#fig-pacotes_alternativo" class="quarto-xref">Figura&nbsp;<span>2.7</span></a>, clicando em <em>Install,</em> que faz aparecer uma nova janela na tela do RStudio onde podemos indicar o pacote a ser instalado.</p>
-<div id="fig-pacotes_alternativo" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-pacotes_alternativo" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-pacotes_alternativo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;2.7: Instalando um pacote via aba “Packages”
 </figcaption>
 <div aria-describedby="fig-pacotes_alternativo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="..\imagens_apostila/imagens_criada_material3.png" class="lightbox" data-glightbox="description: .lightbox-desc-7" data-gallery="quarto-lightbox-gallery-7"><img src="..\imagens_apostila/imagens_criada_material3.png" class="img-fluid figure-img"></a>
+<a href="..\imagens_apostila/imagens_criada_material3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figura&nbsp;2.7: Instalando um pacote via aba “Packages”"><img src="..\imagens_apostila/imagens_criada_material3.png" class="img-fluid figure-img"></a>
 </div>
 </figure>
 </div>
@@ -531,13 +478,13 @@ Figura&nbsp;2.7: Instalando um pacote via aba “Packages”
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># carregando nosso pacote tidyverse</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="fig-carregando_pacote" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<div id="fig-carregando_pacote" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-carregando_pacote-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;2.8: Carregando nosso pacote
 </figcaption>
 <div aria-describedby="fig-carregando_pacote-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="..\imagens_apostila/imagens_criada_material4.png" class="lightbox" data-glightbox="description: .lightbox-desc-8" data-gallery="quarto-lightbox-gallery-8"><img src="..\imagens_apostila/imagens_criada_material4.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+<a href="..\imagens_apostila/imagens_criada_material4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figura&nbsp;2.8: Carregando nosso pacote"><img src="..\imagens_apostila/imagens_criada_material4.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
 </div>
 </figure>
 </div>
@@ -553,13 +500,13 @@ Figura&nbsp;2.8: Carregando nosso pacote
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># baixando nossa primeira base de dados</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>filmes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-10-23/movie_profit.csv"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="fig-primeira_base" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<div id="fig-primeira_base" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-primeira_base-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;2.9: Carregando nossa primeira base de dados
 </figcaption>
 <div aria-describedby="fig-primeira_base-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="..\imagens_apostila/imagens_criada_material.png" class="lightbox" data-glightbox="description: .lightbox-desc-9" data-gallery="quarto-lightbox-gallery-9"><img src="..\imagens_apostila/imagens_criada_material.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+<a href="..\imagens_apostila/imagens_criada_material.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Figura&nbsp;2.9: Carregando nossa primeira base de dados"><img src="..\imagens_apostila/imagens_criada_material.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
 </div>
 </figure>
 </div>
@@ -578,13 +525,13 @@ Figura&nbsp;2.9: Carregando nossa primeira base de dados
 <p>Aqui vamos aprender a retirar informações iniciais de nossa base de dados, começando por acessar a mesma<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a>. Para isso, podemos fazer de duas maneiras:</p>
 <div class="no-row-height column-margin column-container"><div id="fn10"><p><sup>10</sup>&nbsp;Nosso objetivo aqui é meramente o de conhecer a nossa base de dados depois de ela ter sido importada. Uma análise dos dados no sentido mais completa será feita depois que tivermos conhecimento de outras funções presente no pacote <code>tidyverse</code>.</p></div></div><ol type="1">
 <li><p>ao clicar com o mouse no ícone que aparece junto com a base dos dados na aba <em>Environment</em>, como mostrado na <a href="#fig-acessando_dados1" class="quarto-xref">Figura&nbsp;<span>2.10</span></a>, fazendo com que uma nova aba com os dados surja ao lado de nosso <em>script</em> <a href="#fig-acessando_dados_2" class="quarto-xref">Figura&nbsp;<span>2.11</span></a>;</p>
-<div id="fig-acessando_dados1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-acessando_dados1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-acessando_dados1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;2.10: Acessando nossos dados
 </figcaption>
 <div aria-describedby="fig-acessando_dados1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="..\imagens_apostila/imagens_criada_material10.png" class="lightbox" data-glightbox="description: .lightbox-desc-10" data-gallery="quarto-lightbox-gallery-10"><img src="..\imagens_apostila/imagens_criada_material10.png" class="img-fluid figure-img"></a>
+<a href="..\imagens_apostila/imagens_criada_material10.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Figura&nbsp;2.10: Acessando nossos dados"><img src="..\imagens_apostila/imagens_criada_material10.png" class="img-fluid figure-img"></a>
 </div>
 </figure>
 </div></li>
@@ -594,24 +541,24 @@ Figura&nbsp;2.10: Acessando nossos dados
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># verificando nossa base de dado</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(filmes)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="fig-acessando_dados_2" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<div id="fig-acessando_dados_2" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-acessando_dados_2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;2.11: Nossos dados em uma nova aba
 </figcaption>
 <div aria-describedby="fig-acessando_dados_2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="..\imagens_apostila/imagens_criada_material11.png" class="lightbox" data-glightbox="description: .lightbox-desc-11" data-gallery="quarto-lightbox-gallery-11"><img src="..\imagens_apostila/imagens_criada_material11.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+<a href="..\imagens_apostila/imagens_criada_material11.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Figura&nbsp;2.11: Nossos dados em uma nova aba"><img src="..\imagens_apostila/imagens_criada_material11.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
 </div>
 </figure>
 </div>
 <p>É possível ainda ter a opção de destacar os dados em uma nova janela no PC. Para isso, basta clicarmos no ícone mostrado na <a href="#fig-acessando_dados_2" class="quarto-xref">Figura&nbsp;<span>2.11</span></a> fazendo com que os dados possam ser verificados em nova janela, <a href="#fig-dados_janela" class="quarto-xref">Figura&nbsp;<span>2.12</span></a>.</p>
-<div id="fig-dados_janela" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<div id="fig-dados_janela" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-dados_janela-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;2.12: Mostrando os dados em uma nova janela
 </figcaption>
 <div aria-describedby="fig-dados_janela-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="..\imagens_apostila/imagens_criada_material12.png" class="lightbox" data-glightbox="description: .lightbox-desc-12" data-gallery="quarto-lightbox-gallery-12"><img src="..\imagens_apostila/imagens_criada_material12.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+<a href="..\imagens_apostila/imagens_criada_material12.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Figura&nbsp;2.12: Mostrando os dados em uma nova janela"><img src="..\imagens_apostila/imagens_criada_material12.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
 </div>
 </figure>
 </div>
@@ -656,13 +603,13 @@ Figura&nbsp;2.12: Mostrando os dados em uma nova janela
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(filmes)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="fig-tipos_variaveis" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<div id="fig-tipos_variaveis" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-tipos_variaveis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;2.13: Tipos das variáveis
 </figcaption>
 <div aria-describedby="fig-tipos_variaveis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="..\imagens_apostila/imagens_criada_material13.png" class="lightbox" data-glightbox="description: .lightbox-desc-13" data-gallery="quarto-lightbox-gallery-13"><img src="..\imagens_apostila/imagens_criada_material13.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+<a href="..\imagens_apostila/imagens_criada_material13.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Figura&nbsp;2.13: Tipos das variáveis"><img src="..\imagens_apostila/imagens_criada_material13.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
 </div>
 </figure>
 </div>
@@ -671,47 +618,30 @@ Figura&nbsp;2.13: Tipos das variáveis
 <section id="salvando-nosso-script" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="salvando-nosso-script"><span class="header-section-number">2.5</span> Salvando nosso <strong>script</strong></h2>
 <p>Após termos feito nossa análises, em nosso caso ter carregado um pacote e feito a importação de uma base de dados, o próximo passo é darmos segurança ao nosso trabalho e salvarmos o script que criamos e que colocamos nossos primeiros códigos. Para isso, podemos fazer como mostrado na <a href="#fig-salvando_script" class="quarto-xref">Figura&nbsp;<span>2.14</span></a>.</p>
-<div id="fig-salvando_script" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<div id="fig-salvando_script" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-salvando_script-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;2.14: Salvando um script em nosso computador
 </figcaption>
 <div aria-describedby="fig-salvando_script-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="..\imagens_apostila/salvando_script.png" class="lightbox" data-glightbox="description: .lightbox-desc-14" data-gallery="quarto-lightbox-gallery-14"><img src="..\imagens_apostila/salvando_script.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
+<a href="..\imagens_apostila/salvando_script.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Figura&nbsp;2.14: Salvando um script em nosso computador"><img src="..\imagens_apostila/salvando_script.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a>
 </div>
 </figure>
 </div>
 <p>Depois que fecharmos o script, podemos novamente abrir por meio dos passos descritos na <a href="#fig-abrir_script" class="quarto-xref">Figura&nbsp;<span>2.15</span></a>. Dessa maneira nosso material será novamente aberto para que possamos acrescentar mais linhas de códigos e sempre que terminarmos de adicionar algo útil, podemos novamente salvar ao clicar no ícone descrito na <a href="#fig-salvando_script" class="quarto-xref">Figura&nbsp;<span>2.14</span></a>.</p>
-<div id="fig-abrir_script" class="quarto-figure quarto-figure-right quarto-float anchored" data-fig-align="right">
+<div id="fig-abrir_script" class="quarto-float quarto-figure quarto-figure-right anchored" data-fig-align="right">
 <figure class="quarto-float quarto-float-fig figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-abrir_script-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;2.15: Abrindo nosso script
 </figcaption>
 <div aria-describedby="fig-abrir_script-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="..\imagens_apostila/abrir_script.png" class="lightbox" data-glightbox="description: .lightbox-desc-15" data-gallery="quarto-lightbox-gallery-15"><img src="..\imagens_apostila/abrir_script.png" class="img-fluid quarto-figure quarto-figure-right figure-img"></a>
+<a href="..\imagens_apostila/abrir_script.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Figura&nbsp;2.15: Abrindo nosso script"><img src="..\imagens_apostila/abrir_script.png" class="img-fluid quarto-figure quarto-figure-right figure-img"></a>
 </div>
 </figure>
 </div>
 <p>Agora que sabemos carregar um pacote, uma base de dados, salvar nosso script e abri-lo novamente, já podemos partir para voos mais altos e começarmos a modificar essa nossa base de dados para criarmos algum tipo de análise. Essa será nosso foco na segunda parte desse material, onde vamos mais a fundo conhecer as muitas funções que estão presentes no pacote <code>tidyverse</code>.</p>
 
 
-<div class="hidden" aria-hidden="true">
-<span class="glightbox-desc lightbox-desc-1">Figura&nbsp;2.1: Executando nosso primeiro código no R</span>
-<span class="glightbox-desc lightbox-desc-2">Figura&nbsp;2.2: Criando nosso Script</span>
-<span class="glightbox-desc lightbox-desc-3">Figura&nbsp;2.3: Segunda maneira de criarmos nosso script</span>
-<span class="glightbox-desc lightbox-desc-4">Figura&nbsp;2.4: Nosso primeiro script dentro do RStudio</span>
-<span class="glightbox-desc lightbox-desc-5">Figura&nbsp;2.5: Executando o código em nosso script</span>
-<span class="glightbox-desc lightbox-desc-6">Figura&nbsp;2.6: Instalando nosso primeiro pacote</span>
-<span class="glightbox-desc lightbox-desc-7">Figura&nbsp;2.7: Instalando um pacote via aba “Packages”</span>
-<span class="glightbox-desc lightbox-desc-8">Figura&nbsp;2.8: Carregando nosso pacote</span>
-<span class="glightbox-desc lightbox-desc-9">Figura&nbsp;2.9: Carregando nossa primeira base de dados</span>
-<span class="glightbox-desc lightbox-desc-10">Figura&nbsp;2.10: Acessando nossos dados</span>
-<span class="glightbox-desc lightbox-desc-11">Figura&nbsp;2.11: Nossos dados em uma nova aba</span>
-<span class="glightbox-desc lightbox-desc-12">Figura&nbsp;2.12: Mostrando os dados em uma nova janela</span>
-<span class="glightbox-desc lightbox-desc-13">Figura&nbsp;2.13: Tipos das variáveis</span>
-<span class="glightbox-desc lightbox-desc-14">Figura&nbsp;2.14: Salvando um script em nosso computador</span>
-<span class="glightbox-desc lightbox-desc-15">Figura&nbsp;2.15: Abrindo nosso script</span>
-</div>
 </section>
 
 
@@ -751,18 +681,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -794,7 +713,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -802,7 +743,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -1008,30 +949,37 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});
-window.onload = () => {
-  lightboxQuarto.on('slide_before_load', (data) => {
-    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-    const href = trigger.getAttribute('href');
-    if (href !== null) {
-      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-      if (imgEl !== null) {
-        const srcAttr = imgEl.getAttribute("src");
-        if (srcAttr && srcAttr.startsWith("data:")) {
-          slideConfig.href = srcAttr;
-        }
-      }
-    } 
-  });
-
-  lightboxQuarto.on('slide_after_load', (data) => {
-    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-    if (window.Quarto?.typesetMath) {
-      window.Quarto.typesetMath(slideNode);
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","loop":false,"selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
     }
-  });
-
-};
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
           </script>
 
 
