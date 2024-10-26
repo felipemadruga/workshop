@@ -280,7 +280,7 @@
     "section": "",
     "text": "6.1 Importando um arquivo .csv\nNossa primeira base de dados que vinhamos trabalhando até aqui, filmes, foi importada para dentro do R por meio da função read_csv(). Como a própria função deixa bastante intuitivo, ela é utilizada para fazer a importação de arquivos cuja extensão seja .csv, como era o caso do nossa arquivo. Esse arquivo de dados não estava originalmente em nossa máquina, em alguma pasta, mas estava em um link que informamos dentro da própria função, como é possível recordar pelo código abaixo.\n# baixando nossa primeira base de dados\nfilmes &lt;- read_csv(\"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-10-23/movie_profit.csv\")\nNa grande maior de nossos trabalhos com dados, o comum é que tenhamos realizado o download da base para nosso computador primeiro, para alguma pasta de trabalho que definimos que reunirá as informações do projeto no qual estamos trabalhando. Quando esse é caso, pouco vai mudar em nossa maneira de utilizar a função que vai importar os dados, a única diferença que teremos será ao invés de indicar uma URL, como foi o caso até aqui, vamos especificar o endereço da pasta de trabalho onde está nosso arquivo.\nDigamos que nosso arquivo contendo os dados esteja em uma pasta chamada meus_dados no nosso computador, com o seguinte nome movie_profit.csv1, ou seja, é um arquivo que está na extensão .csv. Quando esse é o caso, existem duas funções possíveis de serem utilizadas, read_csv() e read_csv2(), cuja diferença está no separador utilizado no arquivo.\nAdicionar a imagem aqui\nQuando nossos arquivos são de textos, como são os arquivos .csv, o mais comum é que eles separem cada variável na base por meio de uma “,”, mas em outras situações, como no Brasil, o comum é também existirem arquivos separado por “;”. Quando estamos diante de um arquivo que tem seus valores separados por vírgula, devemos utilizar a função read_csv(), mas se o arquivo utiliza o separador ponto-vírgula, utilizamos read_csv2().\nColocar uma imagem com a diferença entre os dois tipos de separador\nPara que o arquivo seja importado para o RStudio vamos precisar dentro da função read_csv() indicar o caminho completo da pasta onde o arquivo está localizado2. No meu computador, o caminho completo quando copiamos fica como: \"C:\\Users\\Felipe\\Documents\\meus_dados\\movie_profit.csv\". Adicionando na função read_csv() o caminho, teríamos o seguinte código:\ndados &lt;- read_csv(\"C:\\Users\\Felipe\\Documents\\meus_dados\\movie_profit.csv\")\nContudo, se esse código for executado resultará em um erro! Isso é o resultado das barras que estão sendo utilizadas no caminho do diretório, \"\\\". Para contornar esse problema temos duas opções: utilizamos barras duplas \"\\\\\"; ou utilizamos a barra invertida \"/\". Vejamos os códigos:\n# Primeira forma\ndados &lt;- read_csv(\"C:\\\\Users\\\\Felipe\\\\Documents\\\\meus_dados\\\\movie_profit.csv\")\n# Segunda forma\ndados_1 &lt;- read_csv(\"C:/Users/Felipe/Documents/meus_dados/movie_profit.csv\")\nAs funções read_csv() vão possuir alguns argumentos adicionais, como por exemplo, a possibilidade de selecinarmos apenas determinadas colunas de nossa base de dados, alterarmos os nomes, modificar seus tipos. Além disso, a base que importamos não apresentava necessidade de realizar qualquer tratamento prévio, o que na prática não vai acontecer. Nessas situações, vai exigir habilidade para trabalhar com esses argumentos adicionais, o que foge ao objetivo do workshop.",
     "crumbs": [
-      "PARTE 3",
+      "PARTE 2",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Importando Dados do PC</span>"
     ]
   },
@@ -291,7 +291,7 @@
     "section": "",
     "text": "1 Baixe aqui o arquivo!\n\n\n\n\n2 Uma das maneiras mais simples de fazer isso é clicar com o botão direito do mouse sobre o arquivo, verificar a lista de opções que será mostrada e clicar em “copiar como caminho”.",
     "crumbs": [
-      "PARTE 3",
+      "PARTE 2",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Importando Dados do PC</span>"
     ]
   },
@@ -302,7 +302,7 @@
     "section": "6.2 Importando Planilhas de Excel",
     "text": "6.2 Importando Planilhas de Excel\nQuando temos planilhas, como as tradicionais planilhas de excel, elas também poderão ser carregadas para o R, contudo, vamos precisar de um outro pacote para fazer isso, o pacote readxl. Vamos trabalhar como uma mesma versão de nossa base de dados, só que agora a mesma vai estar em uma planilha de excel3, além disso, vamos precisar fazer primeiro a importação do pacote readxl4.\n3 Baixe aqui o arquivo!\n4 install.packages(\"readxl\")Depois de termos carregado nosso pacote readxl, vamos utilizar a função read_xlsx() para ler arquivos em excel cuja extensão seja .xlsx seguindo as mesmas recomendações do caso onde nosso arquivo era .csv, como podemos ver pelo código abaixo:\n\nlibrary(readxl) # carregando nosso pacote\n# Segunda forma\ndados_1 &lt;- read_xlsx(\"C:/Users/Felipe/Documents/meus_dados/movie_profit.xlsx\")\n\nEm alguns casos será interessante utilizar a função read_xls() que faz a leitura de arquivos em excel de versões mais antigas. Além disso, as funções do pacote readxl também possuem diversos argumentos para serem utilizados, principalmente em arquivos em excel que não estão bem organizados como foi o caso do exemplo.",
     "crumbs": [
-      "PARTE 3",
+      "PARTE 2",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Importando Dados do PC</span>"
     ]
   },
@@ -311,21 +311,10 @@
     "href": "capitulos/06.importando_dados.html#função-tibble",
     "title": "6  Importando Dados do PC",
     "section": "6.3 Função tibble()",
-    "text": "6.3 Função tibble()\nAté aqui trabalhamos com base de dados que foram importadas, sejam elas vindas de uma URL ou do nosso computador. Em muitas situações pode ser necessário construir pequenas bases de dados, como por exemplo, alguma base de dado que esteja em algum livro de estatística. Nessas situações, podemos contar com a função tibble().\nCada variável dessa base de dados será construida com o uso da função c(), da seguinte maneira: primeiro definiremos o nome de nossa variável, por exemplo variavel_1, depois inserimos seus valores dentro da função c(). Vejamos um exemplo:\n\ntibble(variavel_1 = c(20, 15, 40, 18, 6))\n\n# A tibble: 5 × 1\n  variavel_1\n       &lt;dbl&gt;\n1         20\n2         15\n3         40\n4         18\n5          6\n\n\nPodemos criar quantas variáveis forem de nosso interesse:\n\nmeus_dados &lt;- tibble(\n  nome = c(\"João\", \"Maria\", \"Carlos\"), \n  nota = c(0.5, 4, 8)\n)\n\nmeus_dados\n\n# A tibble: 3 × 2\n  nome    nota\n  &lt;chr&gt;  &lt;dbl&gt;\n1 João     0.5\n2 Maria    4  \n3 Carlos   8  \n\n\nEssa função, embora simples, é muito utilizada a medida que avançamos em nosso conhecimento da linguagem R.",
+    "text": "6.3 Função tibble()\nAté aqui trabalhamos com base de dados que foram importadas, sejam elas vindas de uma URL ou do nosso computador. Em muitas situações pode ser necessário construir pequenas bases de dados, como por exemplo, alguma base de dado que esteja em algum livro de estatística. Nessas situações, podemos contar com a função tibble().\nCada variável dessa base de dados será construida com o uso da função c(), da seguinte maneira: primeiro definiremos o nome de nossa variável, por exemplo variavel_1, depois inserimos seus valores dentro da função c(). Vejamos um exemplo:\n\ntibble(variavel_1 = c(20, 15, 40, 18, 6))\n\n# A tibble: 5 × 1\n  variavel_1\n       &lt;dbl&gt;\n1         20\n2         15\n3         40\n4         18\n5          6\n\n\nPodemos criar quantas variáveis forem de nosso interesse:\n\nmeus_dados &lt;- tibble(\n  nome = c(\"João\", \"Maria\", \"Carlos\"), \n  nota = c(0.5, 4, 8)\n)\n\nmeus_dados\n\n# A tibble: 3 × 2\n  nome    nota\n  &lt;chr&gt;  &lt;dbl&gt;\n1 João     0.5\n2 Maria    4  \n3 Carlos   8  \n\n\nSertamente essas pequenas demostrações não esgotam as possibilidades de uso do R para importação de dados, mas servem como um primeiro passo. Existem muitos outros pacotes que trabalham com os mais variados tipos de dados, de acordo com as necessidades de cada pesquisador.",
     "crumbs": [
-      "PARTE 3",
+      "PARTE 2",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Importando Dados do PC</span>"
-    ]
-  },
-  {
-    "objectID": "capitulos/09.handson.html",
-    "href": "capitulos/09.handson.html",
-    "title": "7  Atividade Prática",
-    "section": "",
-    "text": "Nessa parte vamos buscar utilizar as funções anteriormente aprendidas por meio de exemplos práticos em algumas bases de dados.\nAqui, vai ser interessante criar a possibilidade para que o aluno possa baixar as bases a partir de algum link do googledrive.",
-    "crumbs": [
-      "PARTE 3",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Atividade Prática</span>"
     ]
   }
 ]
