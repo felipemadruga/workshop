@@ -2,5 +2,5 @@
 
 Este é um pequeno manual escrito com o objetivo de ajudar você com seus primeiros passos dentro da linguagem `R`. Ele foi escrito para que seja um acompanhamento aos conceitos apresentados ao longo do workshop, embora você possa voltar a ele quando quiser para revisar algum conceito.
 
-A divisão do manual foi pensada a partir da experiência do autor na sua própria jornada de aprendizado do `R`. Dado que aprender uma nova linguagem apresenta desafios, e uma curva de aprendizado íngrime, expero que a organização proposta possa reduzir o seu custo de entrada nessa fantástica ferramenta de análise de dados!
+A divisão do manual foi pensada a partir da experiência do autor na sua própria jornada de aprendizado do `R`. Dado que aprender uma nova linguagem apresenta desafios, e uma curva de aprendizado íngrime, espero que a organização proposta possa reduzir o seu custo de entrada nessa fantástica ferramenta de análise de dados!
 
