@@ -24,17 +24,17 @@ book:
       - capitulos/05.adicionando_colunas.qmd
   - part: "PARTE 3"    
     chapters:
-      - capitulos/08.pipeline.qmd
-      - capitulos/07.unindo_base_de_dados.qmd
+      - capitulos/06.importando_dados.qmd
+#      - capitulos/07.unindo_base_de_dados.qmd
       - capitulos/09.handson.qmd
-  - part: "PARTE 4"
-    chapters:
-      - capitulos/10.graficos.qmd
-      - capitulos/11.tabelas.qmd
-      - capitulos/12.regressao.qmd
-      - capitulos/13.apis.qmd
-      - capitulos/14.vamos_pro_quarto.qmd
-      - capitulos/15.e_agora.qmd
+#  - part: "PARTE 4"
+#    chapters:
+#      - capitulos/10.graficos.qmd
+#      - capitulos/11.tabelas.qmd
+#      - capitulos/12.regressao.qmd
+#     - capitulos/13.apis.qmd
+#      - capitulos/14.vamos_pro_quarto.qmd
+#      - capitulos/15.e_agora.qmd
 
 bibliography: references.bib
 

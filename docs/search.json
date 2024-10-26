@@ -415,5 +415,49 @@
       "PARTE 4",
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>E agora?</span>"
     ]
+  },
+  {
+    "objectID": "capitulos/06.importando_dados.html",
+    "href": "capitulos/06.importando_dados.html",
+    "title": "6  Importando Dados do PC",
+    "section": "",
+    "text": "6.1 Importando um arquivo .csv\nNossa primeira base de dados que vinhamos trabalhando até aqui, filmes, foi importada para dentro do R por meio da função read_csv(). Como a própria função deixa bastante intuitivo, ela é utilizada para fazer a importação de arquivos cuja extensão seja .csv, como era o caso do nossa arquivo. Esse arquivo de dados não estava originalmente em nossa máquina, em alguma pasta, mas estava em um link que informamos dentro da própria função, como é possível recordar pelo código abaixo.\n# baixando nossa primeira base de dados\nfilmes &lt;- read_csv(\"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-10-23/movie_profit.csv\")\nNa grande maior de nossos trabalhos com dados, o comum é que tenhamos realizado o download da base para nosso computador primeiro, para alguma pasta de trabalho que definimos que reunirá as informações do projeto no qual estamos trabalhando. Quando esse é caso, pouco vai mudar em nossa maneira de utilizar a função que vai importar os dados, a única diferença que teremos será ao invés de indicar uma URL, como foi o caso até aqui, vamos especificar o endereço da pasta de trabalho onde está nosso arquivo.\nDigamos que nosso arquivo contendo os dados esteja em uma pasta chamada meus_dados no nosso computador, com o seguinte nome movie_profit.csv1, ou seja, é um arquivo que está na extensão .csv. Quando esse é o caso, existem duas funções possíveis de serem utilizadas, read_csv() e read_csv2(), cuja diferença está no separador utilizado no arquivo.\nQuando nossos arquivos são de textos, como são os arquivos .csv, o mais comum é que eles separem cada variável na base por meio de uma “,”, mas em outras situações, como no Brasil, o comum é também existirem arquivos separado por “;”. Quando estamos diante de um arquivo que tem seus valores separados por vírgula, devemos utilizar a função read_csv(), mas se o arquivo utiliza o separador ponto-vírgula, utilizamos read_csv2().",
+    "crumbs": [
+      "PARTE 3",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Importando Dados do PC</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/06.importando_dados.html#importando-um-arquivo-.csv",
+    "href": "capitulos/06.importando_dados.html#importando-um-arquivo-.csv",
+    "title": "6  Importando Dados do PC",
+    "section": "",
+    "text": "1 Baixar arquivo CSV .",
+    "crumbs": [
+      "PARTE 3",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Importando Dados do PC</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/06.importando_dados.html#importando-planilhas-de-excel",
+    "href": "capitulos/06.importando_dados.html#importando-planilhas-de-excel",
+    "title": "6  Importando Dados do PC",
+    "section": "6.2 Importando Planilhas de Excel",
+    "text": "6.2 Importando Planilhas de Excel\nAqui mostrar que podemos carregar as planilhas do excel com o pacote readxl.",
+    "crumbs": [
+      "PARTE 3",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Importando Dados do PC</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/06.importando_dados.html#função-tibble",
+    "href": "capitulos/06.importando_dados.html#função-tibble",
+    "title": "6  Importando Dados do PC",
+    "section": "6.3 Função tibble()",
+    "text": "6.3 Função tibble()\nMostrar como podemos em muitos casos construir uma pequena base de dados com essa função.",
+    "crumbs": [
+      "PARTE 3",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Importando Dados do PC</span>"
+    ]
   }
 ]

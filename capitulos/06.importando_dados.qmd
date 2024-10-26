@@ -1,0 +1,30 @@
+# Importando Dados do PC
+
+Até aqui, a única base de dados que utilizamos foi importada para o R indicando o endereço eletrônico de onde ela estava hospedada. Contudo, é comum que nossas bases de dados estarem localizadas em alguma pasta de nosso computador. Nessa parte, o foco será o de entender o que é preciso para carregar um arquivo que está localizado em algum diretório de nosso computador, em especial, um arquivo que esteja na extensão *.xslx*, nossas populares planilhas de excel. Além disso, ao final vamos aprender a como criar um pequeno banco de dados no próprio R com a função `tibble()`.
+
+## Importando um arquivo .csv
+
+Nossa primeira base de dados que vinhamos trabalhando até aqui, `filmes`, foi importada para dentro do R por meio da função `read_csv()`. Como a própria função deixa bastante intuitivo, ela é utilizada para fazer a importação de arquivos cuja extensão seja **.csv**, como era o caso do nossa arquivo. Esse arquivo de dados não estava originalmente em nossa máquina, em alguma pasta, mas estava em um link que informamos dentro da própria função, como é possível recordar pelo código abaixo.
+
+```{r}
+#| eval: false
+# baixando nossa primeira base de dados
+filmes <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-10-23/movie_profit.csv")
+```
+
+Na grande maior de nossos trabalhos com dados, o comum é que tenhamos realizado o download da base para nosso computador primeiro, para alguma pasta de trabalho que definimos que reunirá as informações do projeto no qual estamos trabalhando. Quando esse é caso, pouco vai mudar em nossa maneira de utilizar a função que vai importar os dados, a única diferença que teremos será ao invés de indicar uma URL, como foi o caso até aqui, vamos especificar o endereço da pasta de trabalho onde está nosso arquivo.
+
+Digamos que nosso arquivo contendo os dados esteja em uma pasta chamada *meus_dados* no nosso computador, com o seguinte nome `movie_profit.csv`[^06.importando_dados-1], ou seja, é um arquivo que está na extensão *.csv*. Quando esse é o caso, existem duas funções possíveis de serem utilizadas, `read_csv()` e `read_csv2()`, cuja diferença está no separador utilizado no arquivo.
+
+[^06.importando_dados-1]: <a href="bases_dados/movie_profit.csv" download>Baixe os dados aqui!</a>
+.
+
+Quando nossos arquivos são de textos, como são os arquivos .csv, o mais comum é que eles separem cada variável na base por meio de uma "`,`", mas em outras situações, como no Brasil, o comum é também existirem arquivos separado por "`;`". Quando estamos diante de um arquivo que tem seus valores separados por *vírgula*, devemos utilizar a função `read_csv()`, mas se o arquivo utiliza o separador *ponto-vírgula*, utilizamos `read_csv2()`.
+
+## Importando Planilhas de Excel
+
+Aqui mostrar que podemos carregar as planilhas do excel com o pacote `readxl`.
+
+## Função `tibble()`
+
+Mostrar como podemos em muitos casos construir uma pequena base de dados com essa função.
