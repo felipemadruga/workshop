@@ -20,11 +20,7 @@ Digamos que nosso arquivo contendo os dados esteja em uma pasta chamada *meus_da
 
     </a>
 
-Adicionar a imagem aqui
-
 Quando nossos arquivos são de textos, como são os arquivos .csv, o mais comum é que eles separem cada variável na base por meio de uma "`,`", mas em outras situações, como no Brasil, o comum é também existirem arquivos separado por "`;`". Quando estamos diante de um arquivo que tem seus valores separados por *vírgula*, devemos utilizar a função `read_csv()`, mas se o arquivo utiliza o separador *ponto-vírgula*, utilizamos `read_csv2()`.
-
-Colocar uma imagem com a diferença entre os dois tipos de separador
 
 Para que o arquivo seja importado para o RStudio vamos precisar dentro da função `read_csv()` indicar o caminho completo da pasta onde o arquivo está localizado[^06.importando_dados-2]. No meu computador, o caminho completo quando copiamos fica como: `"C:\Users\Felipe\Documents\meus_dados\movie_profit.csv"`. Adicionando na função `read_csv()` o caminho, teríamos o seguinte código:
 
